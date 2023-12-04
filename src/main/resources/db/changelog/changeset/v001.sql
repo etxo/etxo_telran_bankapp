@@ -1,4 +1,5 @@
-
+create schema if not exists db_bank;
+set schema db_bank;
 create table manager (
                         id int primary key auto_increment not null,
                         first_name varchar(50) not null,
