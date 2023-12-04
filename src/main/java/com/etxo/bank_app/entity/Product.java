@@ -2,6 +2,7 @@ package com.etxo.bank_app.entity;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Entity
@@ -20,8 +21,8 @@ public class Product {
     private int currencyCode;
     @Column(name = "interest_rate")
     private int interestRate;
-
-    //credit_limit int,
+    @Column(name = "credit_limit")
+    private BigDecimal creditLimit;
     @Column(name = "created_at")
     private Timestamp createdAt;
     @Column(name = "updated_at")
