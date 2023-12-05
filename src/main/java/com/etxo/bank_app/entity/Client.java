@@ -25,7 +25,7 @@ public class Client {
     @NotNull
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    private ClientStatus status;
+    private Status status;
 
     @NotNull
     @Column(name = "tax_code")

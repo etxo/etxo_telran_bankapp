@@ -16,7 +16,7 @@ public class Product {
     @Column(name = "name")
     private String name;
     @Column(name = "status")
-    private ProductStatus status;
+    private Status status;
     @Column(name = "currency_code")
     private int currencyCode;
     @Column(name = "interest_rate")

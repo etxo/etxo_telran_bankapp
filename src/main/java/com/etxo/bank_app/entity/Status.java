@@ -1,5 +1,5 @@
 package com.etxo.bank_app.entity;
 
-public enum ProductStatus {
+public enum Status {
     ACTIVE, INACTIVE, BLOCKED
 }

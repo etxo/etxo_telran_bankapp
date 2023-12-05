@@ -32,7 +32,7 @@ public class Manager {
 
     @Column(name = "status")
     @Enumerated
-    private ManagerStatus status;
+    private Status status;
 
     @Column(name = "created_at")
     private Timestamp createdAt;

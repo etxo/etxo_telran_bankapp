@@ -2,8 +2,9 @@ package com.etxo.bank_app.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
-import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -11,7 +12,8 @@ import java.util.List;
 
 @Entity(name = "account")
 @Table(name = "account")
-@AllArgsConstructor
+@Setter
+@Getter
 @NoArgsConstructor
 public class Account {
     @Id
@@ -26,7 +28,7 @@ public class Account {
     private AccountType type;
 
     @Column(name = "status")
-    private AccountStatus status;
+    private Status status;
 
     @Column(name = "balance")
     private BigDecimal balance;

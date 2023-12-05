@@ -1,7 +1,6 @@
 package com.etxo.bank_app.dto;
 
 import com.etxo.bank_app.entity.Manager;
-import com.etxo.bank_app.entity.ManagerStatus;
 
 import java.sql.Timestamp;
 
