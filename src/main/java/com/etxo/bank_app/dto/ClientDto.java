@@ -2,18 +2,18 @@ package com.etxo.bank_app.dto;
 
 import com.etxo.bank_app.entity.Account;
 import com.etxo.bank_app.entity.Address;
+import com.etxo.bank_app.entity.Status;
 import lombok.*;
 
 import java.sql.Timestamp;
 import java.util.List;
 
 @Setter @Getter
-@AllArgsConstructor
 @NoArgsConstructor
 public class ClientDto {
 
     private Long id;
-    private ClientStatus status;
+    private Status status;
     private String taxCode;
     private String firstName;
     private String lastName;
