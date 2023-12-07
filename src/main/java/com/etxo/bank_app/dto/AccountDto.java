@@ -3,14 +3,12 @@ package com.etxo.bank_app.dto;
 
 import com.etxo.bank_app.entity.Status;
 import com.etxo.bank_app.entity.AccountType;
-import com.etxo.bank_app.entity.Agreement;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.List;
 
 @Setter
 @Getter
@@ -26,5 +24,4 @@ public class AccountDto {
     private String currencyCode;
     private Timestamp createdAt;
     private Timestamp updatedAt;
-    private List<Agreement> agreements;
 }

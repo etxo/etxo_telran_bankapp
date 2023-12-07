@@ -32,8 +32,7 @@ public class AccountService {
         account.setClient(client);
         account.setIban(dto.getIban());
         account.setBic(dto.getBic());
-        account.setType(AccountType.DEBIT);
-
+        account.setAccountType(AccountType.DEBIT);
         account.setStatus(Status.ACTIVE);
         account.setBalance(new BigDecimal(0));
         account.setCurrencyCode(dto.getCurrencyCode());

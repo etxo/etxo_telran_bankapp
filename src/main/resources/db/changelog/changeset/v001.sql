@@ -35,8 +35,9 @@ create table product (
 create table account (
                          id bigint primary key auto_increment not null,
                          client_id bigint not null references client(id),
-                         name varchar(75),
-                         type int(1),
+                         iban varchar(45),
+                         bic varchar(9),
+                         account_type int(1),
                          status int(1),
                          balance decimal(12, 2),
                          currency_code varchar(2),

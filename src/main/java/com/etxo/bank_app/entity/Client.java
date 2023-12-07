@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "client")
@@ -44,8 +44,9 @@ public class Client {
     @Pattern(regexp = "^[\\w+_.-]+@(.+)$")
     private String email;
 
-    @Column(name = "address")
-    private String address;
+    @OneToOne
+    @JoinColumn(name = "address")
+    private Address address;
 
     @Column(name = "phone")
     private String phone;
@@ -56,11 +57,11 @@ public class Client {
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "manager_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "manager_id")
     private Manager manager;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
-    private List<Account> accounts;
+    private Set<Account> accounts;
 
 }

@@ -18,7 +18,7 @@ public class ClientMapping {
         dto.setPhone(entity.getPhone());
         dto.setCreatedAt(entity.getCreatedAt());
         dto.setUpdatedAt(entity.getUpdatedAt());
-        dto.setManagerId(Math.toIntExact(entity.getManager().getId()));
+        dto.setManager(entity.getManager());
 
         //dto.setAccounts(entity.getAccounts().stream().map());
 

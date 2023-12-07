@@ -21,8 +21,8 @@ public class Account {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "client_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id")
     private Client client;
 
     @Column(name = "iban", nullable = false)
@@ -31,8 +31,8 @@ public class Account {
     @Column(name = "bic", nullable = false)
     private String bic;
 
-    @Column(name = "type")
-    private AccountType type;
+    @Column(name = "account_type")
+    private AccountType accountType;
 
     @Column(name = "status")
     private Status status;
@@ -49,8 +49,4 @@ public class Account {
 
     @Column(name = "updated_at")
     private Timestamp updatedAt;
-
-    @OneToMany(mappedBy = "account")
-    @JoinColumn(name = "account_id")
-    private List<Agreement> agreements;
 }

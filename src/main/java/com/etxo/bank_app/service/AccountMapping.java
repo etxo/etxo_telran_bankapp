@@ -8,7 +8,7 @@ public class AccountMapping {
         AccountDto dto = new AccountDto();
         dto.setId(entity.getId());
         dto.setIban(entity.getIban());
-        dto.setType(entity.getType());
+        dto.setType(entity.getAccountType());
         dto.setStatus(entity.getStatus());
         dto.setBalance(entity.getBalance());
         dto.setCreatedAt(entity.getCreatedAt());

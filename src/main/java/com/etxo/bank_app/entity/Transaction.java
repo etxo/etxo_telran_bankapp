@@ -3,6 +3,7 @@ package com.etxo.bank_app.entity;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "transaction")
@@ -11,8 +12,15 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private BigDecimal amount;
-    private String description;
+    @ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "account_id")
+    private Account account;
 
+    @Column(name = "amount")
+    private BigDecimal amount;
+    @Column(name = "description")
+    private String description;
+    @Column(name = "created_at")
+    private Timestamp createdAt;
 
 }
