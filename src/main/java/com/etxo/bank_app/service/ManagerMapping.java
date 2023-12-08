@@ -2,6 +2,7 @@ package com.etxo.bank_app.service;
 
 import com.etxo.bank_app.dto.ManagerDto;
 import com.etxo.bank_app.entity.Manager;
+import com.etxo.bank_app.entity.enums.Status;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,7 +16,7 @@ public class ManagerMapping {
         entity.setEmail(dto.getEmail());
         //manager.setAddress(dto.getAddress());
         entity.setPhone(dto.getPhone());
-        entity.setStatus(dto.getStatus());
+        entity.setStatus(Status.ACTIVE);
 
         return entity;
     }

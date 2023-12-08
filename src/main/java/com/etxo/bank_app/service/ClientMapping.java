@@ -29,13 +29,14 @@ public class ClientMapping {
     }
     public static Client mapToEntityNew(ClientDto dto){
         Client client = new Client();
-        client.setStatus(dto.getStatus());
+        client.setStatus(Status.ACTIVE);
         client.setFirstName(dto.getFirstName());
         client.setLastName(dto.getLastName());
         client.setEmail(dto.getEmail());
         client.setAddress(dto.getAddress());
         client.setPhone(dto.getPhone());
-        client.setManager(ManagerMapping.mapToEntity(dto.getManager()));
+
+        //client.setManager(ManagerMapping.mapToEntity(dto.getManager()));
         client.setAccounts(new HashSet<>(dto.getAccounts().stream()
                 .map(AccountMapping::mapToEntity)
                 .toList()));
