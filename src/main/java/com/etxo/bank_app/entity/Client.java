@@ -7,6 +7,10 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import java.sql.Timestamp;
 import java.util.Set;
@@ -25,37 +29,35 @@ public class Client {
 
     @NotNull
     @Column(name = "status")
-    @Enumerated(EnumType.STRING)
     private Status status;
 
-    @NotNull
-    @Column(name = "tax_code")
-    private String taxCode;
-
-    @NotNull
+    @NotNull@Length(min = 2, max = 22)
     @Column(name = "first_name")
     private String firstName;
 
-    @NotNull
+    @NotNull@Length(min = 2, max = 32)
     @Column(name = "last_name")
     private String lastName;
 
     @NotNull
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     @Pattern(regexp = "^[\\w+_.-]+@(.+)$")
     private String email;
 
-    @OneToOne
-    @JoinColumn(name = "address")
+    @ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "address_id")
     private Address address;
 
     @Column(name = "phone")
+    @Length(min = 7, max = 15)
     private String phone;
 
     @Column(name = "created_at")
+    @CreationTimestamp
     private Timestamp createdAt;
 
     @Column(name = "updated_at")
+    @UpdateTimestamp
     private Timestamp updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)

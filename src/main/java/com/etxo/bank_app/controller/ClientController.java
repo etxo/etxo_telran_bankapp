@@ -1,6 +1,7 @@
 package com.etxo.bank_app.controller;
 
 import com.etxo.bank_app.dto.ClientDto;
+import com.etxo.bank_app.entity.Address;
 import com.etxo.bank_app.entity.Client;
 import com.etxo.bank_app.service.AccountService;
 import com.etxo.bank_app.service.ClientService;
@@ -31,13 +32,14 @@ public class ClientController {
     }
 
     @PostMapping
-    public void create(ClientDto clientDto){
-
+    public ResponseEntity<ClientDto> create(@RequestBody ClientDto client){
+        return ResponseEntity.ok(service.create(client));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ClientDto> update(@RequestBody ClientDto client){
-        ClientDto updatedClient = new ClientDto();
-        return ResponseEntity.ok(service.save(updatedClient));
+    @PutMapping("/{email}")
+    public ResponseEntity<ClientDto> update(@PathVariable String email,
+                                            @RequestBody Address address){
+
+        return ResponseEntity.ok(service.updateAddress(email, address));
     }
 }

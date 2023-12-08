@@ -1,6 +1,7 @@
 package com.etxo.bank_app.service;
 
 import com.etxo.bank_app.dto.ClientDto;
+import com.etxo.bank_app.entity.Address;
 import com.etxo.bank_app.entity.Client;
 import com.etxo.bank_app.reposi.ClientRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,16 +26,28 @@ public class ClientService {
     }
 
     public ClientDto getClientById(Long id){
-        Optional<Client> client = repository.findById(id);
-        if(client == null){
-            return null;
-        }
-        return mapping.mapToDto(client.get());
+        Client client = repository.findById(id).orElse(null);
+        return client == null ? null : mapping.mapToDto(client);
     }
 
-    public ClientDto save(ClientDto client){
+    public ClientDto create(ClientDto client){
+        if (repository.existsByEmail(client.getEmail())){
+            throw new RuntimeException("A client with such an email already exists!");
+        }
         ClientDto savedClient = mapping.mapToDto(
-                repository.save(mapping.mapToEntity(client)));
+                repository.save(mapping.mapToEntityNew(client)));
+        return savedClient;
+    }
+
+    public ClientDto updateAddress(String email, Address address){
+
+        Client client = repository.getClientByEmail(email)
+                .orElseThrow(() -> new RuntimeException("there is no client with such an email!"));
+
+        ClientDto savedClient = mapping.mapToDto(client);
+        savedClient.setAddress(address);
+        repository.save(mapping.mapToEntityNew(savedClient));
+
         return savedClient;
     }
 }

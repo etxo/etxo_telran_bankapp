@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.Length;
 
 import java.sql.Timestamp;
 
@@ -30,14 +33,20 @@ public class Manager {
     //@Pattern(regexp = "^[\\w+_.-]+@(.+)$")
     private String email;
 
+    @Column(name = "phone")
+    @Length(min = 7, max = 15)
+    private String phone;
+
     @Column(name = "status")
     @Enumerated
     private Status status;
 
     @Column(name = "created_at")
+    @CreationTimestamp
     private Timestamp createdAt;
 
     @Column(name = "updated_at")
+    @UpdateTimestamp
     private Timestamp updatedAt;
 
 }

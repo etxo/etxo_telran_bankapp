@@ -16,7 +16,6 @@ public class ClientDto {
 
     private Long id;
     private Status status;
-    private String taxCode;
     private String firstName;
     private String lastName;
     private String email;
@@ -25,6 +24,6 @@ public class ClientDto {
     private Timestamp createdAt;
     private Timestamp updatedAt;
     @JsonProperty("manager")
-    private Manager manager;
-    private Set<Account> accounts;
+    private ManagerDto manager;
+    private Set<AccountDto> accounts;
 }

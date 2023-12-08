@@ -23,7 +23,7 @@ public class AccountService {
 
     public Account create(AccountDto dto){
 
-        Client client = clientRepo.findById(dto.getClientId()).orElse(null);
+        Client client = clientRepo.findById(dto.getClient().getId()).orElse(null);
         if(client == null){
 
             client = new Client();
