@@ -1,7 +1,6 @@
 package com.etxo.bank_app.entity;
 
 import jakarta.persistence.*;
-
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 

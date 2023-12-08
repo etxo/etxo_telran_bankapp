@@ -3,12 +3,11 @@ package com.etxo.bank_app.dto;
 import com.etxo.bank_app.entity.Account;
 import com.etxo.bank_app.entity.Address;
 import com.etxo.bank_app.entity.Manager;
-import com.etxo.bank_app.entity.Status;
+import com.etxo.bank_app.entity.enums.Status;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Set;
 
 @Setter @Getter

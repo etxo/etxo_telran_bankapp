@@ -31,4 +31,10 @@ public class ClientService {
         }
         return mapping.mapToDto(client.get());
     }
+
+    public ClientDto save(ClientDto client){
+        ClientDto savedClient = mapping.mapToDto(
+                repository.save(mapping.mapToEntity(client)));
+        return savedClient;
+    }
 }

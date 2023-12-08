@@ -1,8 +1,8 @@
 package com.etxo.bank_app.dto;
 
 
-import com.etxo.bank_app.entity.Status;
-import com.etxo.bank_app.entity.AccountType;
+import com.etxo.bank_app.entity.enums.Status;
+import com.etxo.bank_app.entity.enums.AccountType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

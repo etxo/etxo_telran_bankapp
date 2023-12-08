@@ -25,6 +25,8 @@ public class ClientMapping {
         return dto;
     }
     public static Client mapToEntity(ClientDto dto){
+        Client client = new Client();
+
         return null;
     }
 }

@@ -1,5 +1,6 @@
 package com.etxo.bank_app.entity;
 
+import com.etxo.bank_app.entity.enums.Status;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;

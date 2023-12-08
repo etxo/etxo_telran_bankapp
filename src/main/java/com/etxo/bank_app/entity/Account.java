@@ -1,5 +1,7 @@
 package com.etxo.bank_app.entity;
 
+import com.etxo.bank_app.entity.enums.AccountType;
+import com.etxo.bank_app.entity.enums.Status;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import lombok.Getter;
@@ -8,7 +10,6 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.List;
 
 @Entity(name = "account")
 @Table(name = "account")

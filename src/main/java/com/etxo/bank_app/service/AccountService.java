@@ -2,6 +2,8 @@ package com.etxo.bank_app.service;
 
 import com.etxo.bank_app.dto.AccountDto;
 import com.etxo.bank_app.entity.*;
+import com.etxo.bank_app.entity.enums.AccountType;
+import com.etxo.bank_app.entity.enums.Status;
 import com.etxo.bank_app.reposi.AccountRepository;
 import com.etxo.bank_app.reposi.ClientRepository;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +39,6 @@ public class AccountService {
         account.setBalance(new BigDecimal(0));
         account.setCurrencyCode(dto.getCurrencyCode());
         account.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-        account.setAgreements(new ArrayList());
 
         return repository.save(account);
     }

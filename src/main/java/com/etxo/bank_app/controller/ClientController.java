@@ -6,9 +6,7 @@ import com.etxo.bank_app.service.AccountService;
 import com.etxo.bank_app.service.ClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,5 +22,22 @@ public class ClientController {
     public List<ClientDto> getClients(){
 
         return new ArrayList<>(service.getClients());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ClientDto> getClientById(Long id){
+
+        return ResponseEntity.ok(service.getClientById(id));
+    }
+
+    @PostMapping
+    public void create(ClientDto clientDto){
+
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ClientDto> update(@RequestBody ClientDto client){
+        ClientDto updatedClient = new ClientDto();
+        return ResponseEntity.ok(service.save(updatedClient));
     }
 }
