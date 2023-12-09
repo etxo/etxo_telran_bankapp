@@ -19,7 +19,8 @@ public class ClientDto {
     private String firstName;
     private String lastName;
     private String email;
-    private Address address;
+    @JsonProperty("address")
+    private AddressDto address;
     private String phone;
     private Timestamp createdAt;
     private Timestamp updatedAt;

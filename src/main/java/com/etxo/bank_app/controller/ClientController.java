@@ -1,5 +1,6 @@
 package com.etxo.bank_app.controller;
 
+import com.etxo.bank_app.dto.AddressDto;
 import com.etxo.bank_app.dto.ClientDto;
 import com.etxo.bank_app.entity.Address;
 import com.etxo.bank_app.entity.Client;
@@ -38,7 +39,7 @@ public class ClientController {
 
     @PutMapping("/{email}")
     public ResponseEntity<ClientDto> update(@PathVariable String email,
-                                            @RequestBody Address address){
+                                            @RequestBody AddressDto address){
 
         return ResponseEntity.ok(service.updateAddress(email, address));
     }

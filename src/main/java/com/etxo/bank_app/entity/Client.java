@@ -28,6 +28,7 @@ public class Client {
 
     @NotNull
     @Column(name = "status")
+    @Enumerated
     private Status status;
 
     @NotNull@Length(min = 2, max = 22)

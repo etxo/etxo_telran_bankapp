@@ -18,6 +18,7 @@ public class ClientMapping {
         dto.setFirstName(entity.getFirstName());
         dto.setLastName(entity.getLastName());
         dto.setEmail(entity.getEmail());
+        dto.setAddress(AddressMapping.mapToDto(entity.getAddress()));
         dto.setPhone(entity.getPhone());
         dto.setCreatedAt(entity.getCreatedAt());
         dto.setUpdatedAt(entity.getUpdatedAt());
@@ -33,7 +34,7 @@ public class ClientMapping {
         client.setFirstName(dto.getFirstName());
         client.setLastName(dto.getLastName());
         client.setEmail(dto.getEmail());
-        client.setAddress(dto.getAddress());
+        client.setAddress(AddressMapping.mapToEntity(dto.getAddress()));
         client.setPhone(dto.getPhone());
 
         //client.setManager(ManagerMapping.mapToEntity(dto.getManager()));
@@ -42,5 +43,17 @@ public class ClientMapping {
                 .toList()));
 
         return client;
+    }
+
+    public static Client mapToEntityUpdate(Client entity, ClientDto dto){
+        if(dto.getFirstName() != null) entity.setFirstName(dto.getFirstName());
+        if(dto.getLastName() != null) entity.setLastName(dto.getLastName());
+        if(dto.getEmail() != null) entity.setEmail(dto.getEmail());
+        if(dto.getAddress() != null) entity.setAddress(
+                AddressMapping.mapToEntity(dto.getAddress()));
+        if(dto.getPhone() != null) entity.setPhone(dto.getPhone());
+        if(dto.getManager() != null) entity.setManager(
+                ManagerMapping.mapToEntity(dto.getManager()));
+        return entity;
     }
 }

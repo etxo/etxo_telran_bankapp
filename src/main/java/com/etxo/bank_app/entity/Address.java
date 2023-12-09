@@ -1,10 +1,18 @@
 package com.etxo.bank_app.entity;
 
+import com.etxo.bank_app.entity.enums.CountryCode;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Table(name = "address")
 @RequiredArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,5 +27,5 @@ public class Address {
     @Column(name = "house_nr")
     private String houseNr;
     @Column(name = "country_code")
-    private String countryCode;
+    private CountryCode countryCode;
 }

@@ -1,5 +1,6 @@
 package com.etxo.bank_app.service;
 
+import com.etxo.bank_app.dto.AddressDto;
 import com.etxo.bank_app.dto.ClientDto;
 import com.etxo.bank_app.entity.Address;
 import com.etxo.bank_app.entity.Client;
@@ -38,7 +39,7 @@ public class ClientService {
         return savedClient;
     }
 
-    public ClientDto updateAddress(String email, Address address){
+    public ClientDto updateAddress(String email, AddressDto address){
 
         Client client = repository.getClientByEmail(email)
                 .orElseThrow(() -> new RuntimeException("there is no client with such an email!"));
