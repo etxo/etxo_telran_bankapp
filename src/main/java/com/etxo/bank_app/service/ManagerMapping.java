@@ -16,7 +16,8 @@ public class ManagerMapping {
         entity.setEmail(dto.getEmail());
         //manager.setAddress(dto.getAddress());
         entity.setPhone(dto.getPhone());
-        entity.setStatus(Status.ACTIVE);
+        entity.setStatus(
+                dto.getStatus() == null ? Status.ACTIVE : dto.getStatus());
 
         return entity;
     }
@@ -30,7 +31,21 @@ public class ManagerMapping {
         dto.setStatus(entity.getStatus());
         //dto.setAddress(entity.getAddress());
         dto.setPhone(entity.getPhone());
+        dto.setCreatedAt(entity.getCreatedAt());
+        dto.setUpdatedAt(entity.getUpdatedAt());
 
         return dto;
+    }
+
+    public static Manager mapToEntityUpdate(Manager entity, ManagerDto dto){
+        //entity.setId(dto.getId());
+        if(dto.getFirstName() != null) entity.setFirstName(dto.getFirstName());
+        if(dto.getLastName() != null) entity.setLastName(dto.getLastName());
+        if(dto.getEmail() != null) entity.setEmail(dto.getEmail());
+        if(dto.getStatus() != null) entity.setStatus(dto.getStatus());
+        if(dto.getPhone() != null) entity.setPhone(dto.getPhone());
+        //manager.setAddress(dto.getAddress());
+
+        return entity;
     }
 }
