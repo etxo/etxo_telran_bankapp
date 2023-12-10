@@ -2,6 +2,7 @@ package com.etxo.bank_app.dto;
 
 
 import com.etxo.bank_app.entity.Client;
+import com.etxo.bank_app.entity.enums.Currency;
 import com.etxo.bank_app.entity.enums.Status;
 import com.etxo.bank_app.entity.enums.AccountType;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -24,7 +25,7 @@ public class AccountDto {
     private AccountType type;
     private Status status;
     private BigDecimal balance;
-    private String currencyCode;
+    private Currency currencyCode;
     private Timestamp createdAt;
     private Timestamp updatedAt;
 }

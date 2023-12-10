@@ -1,9 +1,11 @@
 package com.etxo.bank_app.entity;
 
 import com.etxo.bank_app.entity.enums.AccountType;
+import com.etxo.bank_app.entity.enums.Currency;
 import com.etxo.bank_app.entity.enums.Status;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,8 +15,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-@Entity(name = "account")
-@Table(name = "account")
+@Entity
+//@Table(name = "account")
 @Setter
 @Getter
 @NoArgsConstructor
@@ -29,9 +31,11 @@ public class Account {
     private Client client;
 
     @Column(name = "iban", nullable = false)
+    @Pattern(regexp = "[A-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}")
     private String iban;
 
     @Column(name = "bic", nullable = false)
+    @Pattern(regexp = "[A-Z]{6,9}")
     private String bic;
 
     @Column(name = "account_type")
@@ -44,8 +48,7 @@ public class Account {
     private BigDecimal balance;
 
     @Column(name = "currency_code")
-    @Max(2)
-    private String currencyCode;
+    private Currency currencyCode;
 
     @Column(name = "created_at")
     @CreationTimestamp

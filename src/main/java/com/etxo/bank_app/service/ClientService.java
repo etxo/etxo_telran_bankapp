@@ -4,6 +4,7 @@ import com.etxo.bank_app.dto.AddressDto;
 import com.etxo.bank_app.dto.ClientDto;
 import com.etxo.bank_app.entity.Address;
 import com.etxo.bank_app.entity.Client;
+import com.etxo.bank_app.reposi.AddressRepository;
 import com.etxo.bank_app.reposi.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,8 @@ import java.util.List;
 public class ClientService {
 
     private final ClientRepository repository;
-    private final ClientMapping mapping;
+    //private final AddressRepository addrRepository;
+    //private final ClientMapping mapping;
     public List<ClientDto> getClients(){
 
         return new ArrayList<>(repository.findAll()
@@ -27,27 +29,30 @@ public class ClientService {
 
     public ClientDto getClientById(Long id){
         Client client = repository.findById(id).orElse(null);
-        return client == null ? null : mapping.mapToDto(client);
+        return client == null ? null : ClientMapping.mapToDto(client);
     }
 
     public ClientDto create(ClientDto client){
         if (repository.existsByEmail(client.getEmail())){
             throw new RuntimeException("A client with such an email already exists!");
         }
-        ClientDto savedClient = mapping.mapToDto(
-                repository.save(mapping.mapToEntityNew(client)));
+        ClientDto savedClient = ClientMapping.mapToDto(
+                repository.save(ClientMapping.mapToEntityNew(client)));
         return savedClient;
     }
 
-    public ClientDto updateAddress(String email, AddressDto address){
+    public ClientDto updateById(Long id, ClientDto dto){
 
-        Client client = repository.getClientByEmail(email)
-                .orElseThrow(() -> new RuntimeException("there is no client with such an email!"));
+        Client client = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("there is no client with this id!"));
 
-        ClientDto savedClient = mapping.mapToDto(client);
-        savedClient.setAddress(address);
-        repository.save(mapping.mapToEntityNew(savedClient));
+        return ClientMapping.mapToDto(repository.save(ClientMapping.mapToEntityUpdate(client, dto)));
+    }
 
-        return savedClient;
+    public ClientDto updateAddressByClientId(Long id, AddressDto dto){
+        Client client = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("there is no client with this id!"));
+        client.setAddress(AddressMapping.mapToEntity(dto));
+        return ClientMapping.mapToDto(repository.save(client));
     }
 }

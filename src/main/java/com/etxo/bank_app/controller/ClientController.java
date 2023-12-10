@@ -37,10 +37,10 @@ public class ClientController {
         return ResponseEntity.ok(service.create(client));
     }
 
-    @PutMapping("/{email}")
-    public ResponseEntity<ClientDto> update(@PathVariable String email,
-                                            @RequestBody AddressDto address){
+    @PutMapping("/{id}")
+    public ResponseEntity<ClientDto> update(@PathVariable Long id,
+                                            @RequestBody ClientDto dto){
 
-        return ResponseEntity.ok(service.updateAddress(email, address));
+        return ResponseEntity.ok(service.updateById(id, dto));
     }
 }

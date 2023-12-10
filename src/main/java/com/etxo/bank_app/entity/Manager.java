@@ -12,7 +12,7 @@ import org.hibernate.validator.constraints.Length;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "manager")
+//@Table(name = "manager")
 @NoArgsConstructor
 @Getter
 @Setter

@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 import java.util.Set;
 
 @Entity
-@Table(name = "client")
+//@Table(name = "client")
 @NoArgsConstructor
 @Getter
 @Setter
@@ -44,8 +44,8 @@ public class Client {
     @Pattern(regexp = "^[\\w+_.-]+@(.+)$")
     private String email;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "address_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id")
     private Address address;
 
     @Column(name = "phone")
@@ -60,11 +60,13 @@ public class Client {
     @UpdateTimestamp
     private Timestamp updatedAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     //@JoinColumn(name = "manager_id")
     private Manager manager;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
+    @OneToMany(
+            mappedBy = "client",
+            cascade = CascadeType.ALL)
     private Set<Account> accounts;
 
 }
