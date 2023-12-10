@@ -2,9 +2,7 @@ package com.etxo.bank_app.service;
 
 import com.etxo.bank_app.dto.AddressDto;
 import com.etxo.bank_app.dto.ClientDto;
-import com.etxo.bank_app.entity.Address;
 import com.etxo.bank_app.entity.Client;
-import com.etxo.bank_app.reposi.AddressRepository;
 import com.etxo.bank_app.reposi.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
