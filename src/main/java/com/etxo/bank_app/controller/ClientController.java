@@ -27,7 +27,7 @@ public class ClientController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClientDto> getClientById(Long id){
+    public ResponseEntity<ClientDto> getClientById(@PathVariable Long id){
 
         return ResponseEntity.ok(service.getClientById(id));
     }
@@ -42,5 +42,10 @@ public class ClientController {
                                             @RequestBody ClientDto dto){
 
         return ResponseEntity.ok(service.updateById(id, dto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ClientDto> delete(@PathVariable Long id){
+        return ResponseEntity.ok(service.delete(id));
     }
 }

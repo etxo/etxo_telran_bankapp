@@ -14,13 +14,13 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class ManagerDto {
     private Long id;
-    @NotNull(message = "First name shouldn't be null.")
-    @Size(min = 2, max = 25)
+    //@NotNull(message = "First name shouldn't be null.")
+    //@Size(min = 2, max = 25)
     private String firstName;
-    @NotNull(message = "Last name shouldn't be null.")
-    @Size(min = 2, max = 25)
+    //@NotNull(message = "Last name shouldn't be null.")
+    //@Size(min = 2, max = 25)
     private String lastName;
-    @NotNull
+    //@NotNull
     private String email;
     private String phone;
     private Status status;

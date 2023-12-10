@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 @Service
@@ -17,7 +18,7 @@ public class ManagerService {
 
     public ManagerDto create(ManagerDto dto){
         if (repository.existsByEmail(dto.getEmail())){
-            throw new RuntimeException("A client with such an email already exists!");
+            throw new RuntimeException("manager with such an email already exists!");
         }
         ManagerDto savedManager = ManagerMapping.mapToDto(
                 repository.save(ManagerMapping.mapToEntity(dto)));
@@ -40,5 +41,12 @@ public class ManagerService {
         Manager entity = repository.findById(id).orElse(null);
         return ManagerMapping.mapToDto(
                 repository.save(ManagerMapping.mapToEntityUpdate(entity, dto)));
+    }
+
+    public ManagerDto managerTrigger(){
+        Long randomId = 1L + new Random().nextLong(getAll().size());
+        System.out.println(randomId);
+        Manager entity = repository.findById(randomId).orElse(null);
+        return ManagerMapping.mapToDto(entity);
     }
 }

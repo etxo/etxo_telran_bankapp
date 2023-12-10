@@ -4,14 +4,17 @@ import com.etxo.bank_app.dto.AccountDto;
 import com.etxo.bank_app.dto.ClientDto;
 import com.etxo.bank_app.entity.*;
 import com.etxo.bank_app.entity.enums.Status;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 
 @Service
+@RequiredArgsConstructor
 public class ClientMapping {
 
-    public static ClientDto mapToDto(Client entity){
+    private final ManagerService managerService;
+    public ClientDto mapToDto(Client entity){
         ClientDto dto = new ClientDto();
         dto.setId(entity.getId());
         dto.setStatus(entity.getStatus());
@@ -28,19 +31,23 @@ public class ClientMapping {
 
         return dto;
     }
-    public static Client mapToEntityNew(ClientDto dto){
+    public Client mapToEntityNew(ClientDto dto){
         Client client = new Client();
         client.setStatus(Status.ACTIVE);
+        if(dto.getFirstName().isEmpty()) throw new RuntimeException();
         client.setFirstName(dto.getFirstName());
+        if(dto.getLastName().isEmpty()) throw new RuntimeException();
         client.setLastName(dto.getLastName());
+        if(dto.getEmail().isEmpty()) throw new RuntimeException();
         client.setEmail(dto.getEmail());
-        client.setAddress(AddressMapping.mapToEntity(dto.getAddress()));
+        if(dto.getAddress() == null) client.setAddress(null);
+            else client.setAddress(AddressMapping.mapToEntity(dto.getAddress()));
+        if(dto.getPhone().isEmpty()) throw new RuntimeException();
         client.setPhone(dto.getPhone());
-
-        //client.setManager(ManagerMapping.mapToEntity(dto.getManager()));
-        client.setAccounts(new HashSet<>(dto.getAccounts().stream()
-                .map(AccountMapping::mapToEntity)
-                .toList()));
+        System.out.println();
+        client.setManager(ManagerMapping.mapToEntity(
+                managerService.managerTrigger()));
+        client.setAccounts(new HashSet<>());
 
         return client;
     }
