@@ -2,6 +2,7 @@ package com.etxo.bank_app.entity;
 
 import com.etxo.bank_app.entity.enums.Status;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
@@ -41,7 +42,7 @@ public class Client {
 
     @NotNull
     @Column(name = "email", unique = true)
-    @Pattern(regexp = "^[\\w+_.-]+@(.+)$")
+    @Email
     private String email;
 
     @OneToOne(cascade = CascadeType.ALL)

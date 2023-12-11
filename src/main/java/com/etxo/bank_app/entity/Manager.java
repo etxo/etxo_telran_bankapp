@@ -2,6 +2,7 @@ package com.etxo.bank_app.entity;
 
 import com.etxo.bank_app.entity.enums.Status;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,7 +31,7 @@ public class Manager {
     private String lastName;
 
     @Column(name = "email", unique = true)
-    //@Pattern(regexp = "^[\\w+_.-]+@(.+)$")
+    @Email
     private String email;
 
     @Column(name = "phone")

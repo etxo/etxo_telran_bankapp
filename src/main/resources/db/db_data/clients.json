@@ -1,0 +1,42 @@
+[{
+  "firstName": "Artur",
+  "lastName": "Bruckner",
+  "email": "brukner@mail.de",
+  "address":
+  {
+    "postalCode": "10119",
+    "city": "Berlin",
+    "street": "Hauptstrasse",
+    "houseNr": "12B",
+    "countryCode": 7
+  },
+  "phone": "+450034545567"
+},
+{
+  "firstName": "Alice",
+  "lastName": "Hildebrandt",
+  "email": "alicehildebrandt@mail.gb",
+  "address":
+  {
+    "postalCode": "12345",
+    "city": "Berlin",
+    "street": "Lang-Hans-Strasse",
+    "houseNr": "35",
+    "countryCode": "DE"
+  },
+  "phone": "+493056756712"
+},
+  {
+    "firstName": "Jakov",
+    "lastName": "Gustavson",
+    "email": "gusto@mail.com",
+    "address":
+    {
+      "postalCode": "90237",
+      "city": "Lodz",
+      "street": "Jana Matejki",
+      "houseNr": "39",
+      "countryCode": "PL"
+    },
+    "phone": "+48426357833"
+  }]
