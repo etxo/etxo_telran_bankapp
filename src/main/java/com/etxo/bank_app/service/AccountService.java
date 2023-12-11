@@ -1,6 +1,7 @@
 package com.etxo.bank_app.service;
 
 import com.etxo.bank_app.dto.AccountDto;
+import com.etxo.bank_app.dto.ClientDto;
 import com.etxo.bank_app.entity.*;
 import com.etxo.bank_app.entity.enums.AccountType;
 import com.etxo.bank_app.entity.enums.Status;
@@ -9,41 +10,20 @@ import com.etxo.bank_app.reposi.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor // DI over constructor!
 public class AccountService {
 
     private final AccountRepository repository;
-    private final ClientRepository clientRepo;
+    private final AccountMapping mapping;
 
-    public Account create(AccountDto dto){
+    public Set<AccountDto> getAll(){
 
-        Client client = clientRepo.findById(dto.getClient().getId()).orElse(null);
-        if(client == null){
-
-            client = new Client();
-            clientRepo.save(client);
-
-        }
-        Account account = new Account();
-        account.setClient(client);
-        account.setIban(dto.getIban());
-        account.setBic(dto.getBic());
-        account.setAccountType(AccountType.DEBIT);
-        account.setStatus(Status.ACTIVE);
-        account.setBalance(new BigDecimal(0));
-        account.setCurrencyCode(dto.getCurrencyCode());
-        account.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-
-        return repository.save(account);
-    }
-
-    public List<Account> getAll(){
-        return repository.findAll();
+        return new HashSet<>(repository.findAll().stream()
+                .map(mapping::mapToDto)
+                .toList());
     }
 }

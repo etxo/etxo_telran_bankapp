@@ -14,6 +14,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Set;
 
 @Entity
 //@Table(name = "account")
@@ -58,4 +59,6 @@ public class Account {
     @UpdateTimestamp
     private Timestamp updatedAt;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Transaction> transactions;
 }

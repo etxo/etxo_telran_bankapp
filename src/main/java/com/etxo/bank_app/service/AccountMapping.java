@@ -32,14 +32,13 @@ public class AccountMapping {
     }
     public Account mapToEntity(AccountDto dto){
         Account entity = new Account();
-        entity.setClient(clientMapping.mapToEntityNew(dto.getClient()));
+        entity.setClient(clientMapping.mapToEntity(dto.getClient()));
         entity.setIban(dto.getIban());
         entity.setBic(dto.getBic());
         entity.setAccountType(AccountType.DEBIT);
         entity.setStatus(Status.ACTIVE);
         entity.setBalance(new BigDecimal(0));
         entity.setCurrencyCode(dto.getCurrencyCode());
-        //entity.setCreatedAt(new Timestamp(System.currentTimeMillis()));
 
         return entity;
     }

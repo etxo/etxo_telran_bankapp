@@ -1,6 +1,12 @@
-{
+[{
   "firstName": "Anna",
   "lastName": "Karenina",
   "email": "annakar@simplmail.su",
-  "phone": "+4930 23498734"
-}
+  "phone": "+4930 2349873"
+},
+{
+"firstName": "Boris",
+"lastName": "Nasshorn",
+"email": "nosorog@nasa.org",
+"phone": "+4930 5673029"
+}]

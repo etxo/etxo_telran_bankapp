@@ -14,6 +14,7 @@ import java.util.HashSet;
 public class ClientMapping {
 
     private final ManagerService managerService;
+    private final AddressMapping addressMapping;
     public ClientDto mapToDto(Client entity){
         ClientDto dto = new ClientDto();
         dto.setId(entity.getId());
@@ -31,7 +32,7 @@ public class ClientMapping {
 
         return dto;
     }
-    public Client mapToEntityNew(ClientDto dto){
+    public Client mapToEntity(ClientDto dto){
         Client client = new Client();
         client.setStatus(Status.ACTIVE);
         if(dto.getFirstName().isEmpty()) throw new RuntimeException();
@@ -40,11 +41,11 @@ public class ClientMapping {
         client.setLastName(dto.getLastName());
         if(dto.getEmail().isEmpty()) throw new RuntimeException();
         client.setEmail(dto.getEmail());
-        if(dto.getAddress() == null) client.setAddress(null);
-            else client.setAddress(AddressMapping.mapToEntity(dto.getAddress()));
+        if(dto.getAddress() == null) throw new RuntimeException();
+        client.setAddress(AddressMapping.mapToEntity(dto.getAddress()));
         if(dto.getPhone().isEmpty()) throw new RuntimeException();
         client.setPhone(dto.getPhone());
-        System.out.println();
+        //System.out.println();
         client.setManager(ManagerMapping.mapToEntity(
                 managerService.managerTrigger()));
         client.setAccounts(new HashSet<>());
