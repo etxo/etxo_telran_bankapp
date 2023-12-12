@@ -1,4 +1,4 @@
-package com.etxo.bank_app.service;
+package com.etxo.bank_app.mapping;
 
 import com.etxo.bank_app.dto.AccountDto;
 import com.etxo.bank_app.entity.Account;
@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 
 @Service
 @RequiredArgsConstructor

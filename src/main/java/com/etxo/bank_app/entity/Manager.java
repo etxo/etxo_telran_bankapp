@@ -31,11 +31,9 @@ public class Manager {
     private String lastName;
 
     @Column(name = "email", unique = true)
-    @Email
     private String email;
 
     @Column(name = "phone")
-    @Length(min = 7, max = 15)
     private String phone;
 
     @Column(name = "status")

@@ -2,6 +2,7 @@ package com.etxo.bank_app.service;
 
 import com.etxo.bank_app.dto.AccountDto;
 
+import com.etxo.bank_app.mapping.AccountMapping;
 import com.etxo.bank_app.reposi.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,5 +22,9 @@ public class AccountService {
         return new HashSet<>(repository.findAll().stream()
                 .map(mapping::mapToDto)
                 .toList());
+    }
+
+    public AccountDto createById(Long id, AccountDto dto){
+        return null;
     }
 }

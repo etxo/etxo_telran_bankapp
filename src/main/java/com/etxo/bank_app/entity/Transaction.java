@@ -27,7 +27,5 @@ public class Transaction {
     @Column(name = "description")
     private String description;
     @Column(name = "created_at")
-    private Timestamp createdAt;
-
-
+    private Timestamp executedAt;
 }

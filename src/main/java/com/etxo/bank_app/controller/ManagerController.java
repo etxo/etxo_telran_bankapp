@@ -3,6 +3,7 @@ package com.etxo.bank_app.controller;
 
 import com.etxo.bank_app.dto.ManagerDto;
 import com.etxo.bank_app.service.ManagerService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class ManagerController {
     private final ManagerService service;
 
     @PostMapping
-    public ResponseEntity<ManagerDto> create(@RequestBody ManagerDto manager){
+    public ResponseEntity<ManagerDto> create(@RequestBody @Valid ManagerDto manager){
         return ResponseEntity.ok(service.create(manager));
     }
 

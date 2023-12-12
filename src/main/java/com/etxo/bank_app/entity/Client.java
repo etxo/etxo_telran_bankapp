@@ -27,30 +27,29 @@ public class Client {
     @Column(name = "id")
     private Long id;
 
-    @NotNull
     @Column(name = "status")
     @Enumerated
     private Status status;
 
-    @NotNull@Length(min = 2, max = 22)
+
     @Column(name = "first_name")
     private String firstName;
 
-    @NotNull@Length(min = 2, max = 32)
+
     @Column(name = "last_name")
     private String lastName;
 
-    @NotNull
+
     @Column(name = "email", unique = true)
-    @Email
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id")
+    @OneToOne(
+            mappedBy = "client",
+            cascade = CascadeType.ALL
+    )
     private Address address;
 
     @Column(name = "phone")
-    @Length(min = 7, max = 15)
     private String phone;
 
     @Column(name = "created_at")

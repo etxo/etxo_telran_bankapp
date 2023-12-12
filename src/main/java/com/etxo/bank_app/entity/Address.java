@@ -21,22 +21,23 @@ public class Address {
     private Long id;
 
     @Column(name = "postal_code")
-    @Size(min = 4, max = 7)
     private String postalCode;
 
     @Column(name = "city")
-    @Size(min = 2, max = 16)
     private String city;
 
     @Column(name = "street")
-    @NotBlank
     private String street;
 
     @Column(name = "house_nr")
-    @Size(min = 1, max = 4)
     private String houseNr;
 
     @Column(name = "country_code")
-    @NotNull
     private CountryCode countryCode;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(
+            name = "client_id",
+            referencedColumnName = "id")
+    private Client client;
 }

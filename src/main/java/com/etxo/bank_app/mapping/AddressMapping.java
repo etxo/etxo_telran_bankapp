@@ -1,4 +1,4 @@
-package com.etxo.bank_app.service;
+package com.etxo.bank_app.mapping;
 
 import com.etxo.bank_app.dto.AddressDto;
 import com.etxo.bank_app.entity.Address;

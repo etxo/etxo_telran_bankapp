@@ -6,7 +6,12 @@ import com.etxo.bank_app.dto.ClientDto;
 import com.etxo.bank_app.entity.Account;
 import com.etxo.bank_app.entity.Client;
 import com.etxo.bank_app.entity.enums.Status;
+import com.etxo.bank_app.mapping.AccountMapping;
+import com.etxo.bank_app.mapping.AddressMapping;
+import com.etxo.bank_app.mapping.ClientMapping;
+import com.etxo.bank_app.reposi.AddressRepository;
 import com.etxo.bank_app.reposi.ClientRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,33 +23,38 @@ import java.util.Set;
 public class ClientService {
 
     private final ClientRepository repository;
-    private final ClientMapping mapping;
-    private final AccountMapping accountMapping;
+    private final AddressRepository addressRepo;
+    private final AddressMapping addressMapper;
+    private final AccountMapping accountMapper;
+    private final ClientMapping clientMapper;
     public Set<ClientDto> getClients(){
 
         return new HashSet<>(repository.findAll()
                 .stream()
-                .map(mapping::mapToDto)
+                .map(clientMapper::mapToDto)
                 .toList());
     }
 
     public ClientDto getClientById(Long id){
         Client client = repository.findById(id).orElse(null);
-        return client == null ? null : mapping.mapToDto(client);
+        return client == null ? null : clientMapper.mapToDto(client);
     }
 
     public ClientDto getClientByEmail(String email){
         Client client = repository.getClientByEmail(email)
                 .orElseThrow(() -> new RuntimeException("There is no client with such an email!"));
-        return mapping.mapToDto(client);
+        return clientMapper.mapToDto(client);
     }
 
     public ClientDto create(ClientDto client){
         if (repository.existsByEmail(client.getEmail())){
             throw new RuntimeException("A client with such an email already exists!");
         }
-        ClientDto savedClient = mapping.mapToDto(
-                repository.save(mapping.mapToEntity(client)));
+
+        //addressRepo.save(addressMapper.mapToEntity(client.getAddress()));
+
+        ClientDto savedClient = clientMapper.mapToDto(
+                repository.save(clientMapper.mapToEntity(client)));
         return savedClient;
     }
 
@@ -53,7 +63,7 @@ public class ClientService {
         Client client = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("there is no client with this id!"));
 
-        return mapping.mapToDto(repository.save(ClientMapping.mapToEntityUpdate(client, dto)));
+        return clientMapper.mapToDto(repository.save(clientMapper.mapToEntityUpdate(client, dto)));
     }
 
     public ClientDto addAccountByEmail(String email, AccountDto accountDto){
@@ -61,14 +71,14 @@ public class ClientService {
         Client client = repository.getClientByEmail(email)
                 .orElseThrow(() -> new RuntimeException("There is no client with such an email!"));
         Set<Account> accounts = client.getAccounts();
-        accountDto.setClient(mapping.mapToDto(client));
-        accounts.add(accountMapping.mapToEntity(accountDto));
+        accountDto.setClient(clientMapper.mapToDto(client));
+        accounts.add(accountMapper.mapToEntity(accountDto));
         client.setAccounts(accounts);
 
         accounts.stream()
                 .forEach(System.out::println);
 
-        return mapping.mapToDto(repository.save(client));
+        return clientMapper.mapToDto(repository.save(client));
     }
 
     public ClientDto updateAddressByClientId(Long id, AddressDto dto){
@@ -76,7 +86,7 @@ public class ClientService {
                 .orElseThrow(() -> new RuntimeException("there is no client with this id!"));
 
         client.setAddress(AddressMapping.mapToEntity(dto));
-        return mapping.mapToDto(repository.save(client));
+        return clientMapper.mapToDto(repository.save(client));
     }
 
     public ClientDto delete(Long id){
@@ -84,6 +94,6 @@ public class ClientService {
                 .orElseThrow(() -> new RuntimeException("there is no client with this id!"));
         client.setStatus(Status.INACTIVE);
         client = repository.save(client);
-        return mapping.mapToDto(client);
+        return clientMapper.mapToDto(client);
     }
 }
