@@ -26,17 +26,17 @@
   },
   "phone": "+493056756712"
 },
+{
+  "firstName": "Jakov",
+  "lastName": "Gustavson",
+  "email": "gusto@mail.com",
+  "address":
   {
-    "firstName": "Jakov",
-    "lastName": "Gustavson",
-    "email": "gusto@mail.com",
-    "address":
-    {
-      "postalCode": "90237",
-      "city": "Lodz",
-      "street": "Jana Matejki",
-      "houseNr": "39",
-      "countryCode": "PL"
-    },
-    "phone": "+48426357833"
-  }]
+    "postalCode": "90237",
+    "city": "Lodz",
+    "street": "Jana Matejki",
+    "houseNr": "39",
+    "countryCode": "PL"
+  },
+  "phone": "+48426357833"
+}]

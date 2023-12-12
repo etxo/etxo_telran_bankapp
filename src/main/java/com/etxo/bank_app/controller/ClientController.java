@@ -37,15 +37,15 @@ public class ClientController {
         return ResponseEntity.ok(service.create(client));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<ClientDto> update(@PathVariable Long id,
                                             @RequestBody ClientDto dto){
 
         return ResponseEntity.ok(service.updateById(id, dto));
     }
 
-    @PutMapping("/{email}")
-    public ResponseEntity<Set<AccountDto>> createAccountByEmail(@PathVariable String email,
+    @PutMapping("/add_account/{email}")
+    public ResponseEntity<ClientDto> createAccountByEmail(@PathVariable String email,
                                                          @RequestBody AccountDto accountDto){
         return ResponseEntity.ok(service.addAccountByEmail(email, accountDto));
     }

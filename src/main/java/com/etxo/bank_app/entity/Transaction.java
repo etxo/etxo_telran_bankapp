@@ -15,8 +15,12 @@ public class Transaction {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "account_id")
-    private Account account;
+    //@JoinColumn(name = "sender_id")
+    private Account sender;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "receiver_id")
+    private Account receiver;
 
     @Column(name = "amount")
     private BigDecimal amount;
@@ -24,5 +28,6 @@ public class Transaction {
     private String description;
     @Column(name = "created_at")
     private Timestamp createdAt;
+
 
 }
