@@ -23,7 +23,6 @@ import java.util.Set;
 public class ClientService {
 
     private final ClientRepository repository;
-    private final AddressRepository addressRepo;
     private final AddressMapping addressMapper;
     private final AccountMapping accountMapper;
     private final ClientMapping clientMapper;
@@ -85,7 +84,7 @@ public class ClientService {
         Client client = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("there is no client with this id!"));
 
-        client.setAddress(AddressMapping.mapToEntity(dto));
+        client.setAddress(addressMapper.mapToEntity(dto));
         return clientMapper.mapToDto(repository.save(client));
     }
 

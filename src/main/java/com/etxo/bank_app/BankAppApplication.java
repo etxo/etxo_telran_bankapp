@@ -79,17 +79,5 @@ public class BankAppApplication {
             clientService.create(client);
         }
     }
-/*
-        //System.out.println(service.getAll());
-        clientService.getClients().stream()
-                .forEach(x -> {
-                    System.out.print(x.getFirstName() + " ");
-                    System.out.println(x.getLastName());
-                    System.out.println(x.getEmail());
-                    System.out.println(x.getAddress().toString());
-                });
-    }
-
- */
 }
 

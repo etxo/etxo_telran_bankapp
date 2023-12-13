@@ -6,8 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AddressMapping {
-
-    public static AddressDto mapToDto(Address entity){
+    public AddressDto mapToDto(Address entity){
         AddressDto dto = new AddressDto();
         dto.setId(entity.getId());
         dto.setPostalCode(entity.getPostalCode());
@@ -18,7 +17,7 @@ public class AddressMapping {
         return dto;
     }
 
-    public static Address mapToEntity(AddressDto dto){
+    public Address mapToEntity(AddressDto dto){
         Address entity = new Address();
         entity.setPostalCode(dto.getPostalCode());
         entity.setCity(dto.getCity());

@@ -43,10 +43,8 @@ public class Client {
     @Column(name = "email", unique = true)
     private String email;
 
-    @OneToOne(
-            mappedBy = "client",
-            cascade = CascadeType.ALL
-    )
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn//(name = "address_id", referencedColumnName = "id")
     private Address address;
 
     @Column(name = "phone")

@@ -2,9 +2,6 @@ package com.etxo.bank_app.entity;
 
 import com.etxo.bank_app.entity.enums.CountryCode;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,9 +32,6 @@ public class Address {
     @Column(name = "country_code")
     private CountryCode countryCode;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(
-            name = "client_id",
-            referencedColumnName = "id")
+    @OneToOne(mappedBy = "address")
     private Client client;
 }

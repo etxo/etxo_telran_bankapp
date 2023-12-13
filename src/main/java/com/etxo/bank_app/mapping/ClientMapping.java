@@ -23,30 +23,23 @@ public class ClientMapping {
         dto.setFirstName(entity.getFirstName());
         dto.setLastName(entity.getLastName());
         dto.setEmail(entity.getEmail());
-        dto.setAddress(AddressMapping.mapToDto(entity.getAddress()));
+        dto.setAddress(addressMapper.mapToDto(entity.getAddress()));
         dto.setPhone(entity.getPhone());
         dto.setCreatedAt(entity.getCreatedAt());
         dto.setUpdatedAt(entity.getUpdatedAt());
         dto.setManager(managerMapper.mapToDto(entity.getManager()));
 
-        //dto.setAccounts(entity.getAccounts().stream().map());
 
         return dto;
     }
     public Client mapToEntity(ClientDto dto){
         Client client = new Client();
         client.setStatus(Status.ACTIVE);
-        if(dto.getFirstName().isEmpty()) throw new RuntimeException();
         client.setFirstName(dto.getFirstName());
-        if(dto.getLastName().isEmpty()) throw new RuntimeException();
         client.setLastName(dto.getLastName());
-        if(dto.getEmail().isEmpty()) throw new RuntimeException();
         client.setEmail(dto.getEmail());
-        if(dto.getAddress() == null) throw new RuntimeException();
-        client.setAddress(AddressMapping.mapToEntity(dto.getAddress()));
-        if(dto.getPhone().isEmpty()) throw new RuntimeException();
+        client.setAddress(addressMapper.mapToEntity(dto.getAddress()));
         client.setPhone(dto.getPhone());
-        //System.out.println();
         client.setManager(managerMapper.mapToEntity(
                 managerService.managerTrigger()));
         client.setAccounts(new HashSet<>());
@@ -59,7 +52,7 @@ public class ClientMapping {
         if(dto.getLastName() != null) entity.setLastName(dto.getLastName());
         if(dto.getEmail() != null) entity.setEmail(dto.getEmail());
         if(dto.getAddress() != null) entity.setAddress(
-                AddressMapping.mapToEntity(dto.getAddress()));
+                addressMapper.mapToEntity(dto.getAddress()));
         if(dto.getPhone() != null) entity.setPhone(dto.getPhone());
         if(dto.getManager() != null) entity.setManager(
                 managerMapper.mapToEntity(dto.getManager()));
