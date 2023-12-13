@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -15,14 +16,15 @@ import java.util.Set;
 public class AccountController {
 
     private final AccountService service;
-    @GetMapping
-    public ResponseEntity<Set<AccountDto>> getAccountsByClientId(Long clientId){
+    @GetMapping("/client/{clientId}")
+    public ResponseEntity<Set<AccountDto>> getAccountsByClientId(@PathVariable Long clientId){
 
         return ResponseEntity.ok(service.getAccountsByClientId(clientId));
     }
 
     @PostMapping
     public ResponseEntity<AccountDto> create(@RequestBody @Valid AccountDto dto){
+
         return ResponseEntity.ok(service.create(dto));
     }
 

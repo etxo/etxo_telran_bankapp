@@ -13,7 +13,9 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -25,9 +27,9 @@ public class AccountService {
     private final AccountMapping mapping;
 
     public Set<AccountDto> getAccountsByClientId(Long clientId){
-
-        return new HashSet<>(accountRepo.getAccountsByClientId(clientId).stream()
-                .map(mapping::mapToDto).toList());
+        return new HashSet<>(
+                            accountRepo.getAccountsByClientId(clientId).stream()
+                                .map(mapping::mapToDto).toList());
     }
 
     @Transactional

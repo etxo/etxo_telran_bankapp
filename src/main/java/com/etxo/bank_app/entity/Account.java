@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 import java.util.Set;
 
 @Entity
-//@Table(name = "account")
+@Table(name = "account")
 @Data
 public class Account {
     @Id
