@@ -4,11 +4,7 @@ import com.etxo.bank_app.entity.enums.AccountType;
 import com.etxo.bank_app.entity.enums.Currency;
 import com.etxo.bank_app.entity.enums.Status;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Pattern;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -18,9 +14,7 @@ import java.util.Set;
 
 @Entity
 //@Table(name = "account")
-@Setter
-@Getter
-@NoArgsConstructor
+@Data
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,23 +26,24 @@ public class Account {
     private Client client;
 
     @Column(name = "iban", nullable = false)
-    @Pattern(regexp = "[A-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}")
     private String iban;
 
     @Column(name = "bic", nullable = false)
-    @Pattern(regexp = "[A-Z]{6,9}")
     private String bic;
 
     @Column(name = "account_type")
+    @Enumerated(value = EnumType.STRING)
     private AccountType accountType;
 
     @Column(name = "status")
+    @Enumerated(value = EnumType.STRING)
     private Status status;
 
     @Column(name = "balance")
     private BigDecimal balance;
 
     @Column(name = "currency_code")
+    @Enumerated(value = EnumType.STRING)
     private Currency currencyCode;
 
     @Column(name = "created_at")
@@ -59,6 +54,9 @@ public class Account {
     @UpdateTimestamp
     private Timestamp updatedAt;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private Set<Transaction> transactions;
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
+    private Set<Transaction> senderTransactions;
+
+    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
+    private Set<Transaction> receiverTransactions;
 }

@@ -2,11 +2,10 @@ package com.etxo.bank_app.controller;
 
 import com.etxo.bank_app.dto.AccountDto;
 import com.etxo.bank_app.service.AccountService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
@@ -17,8 +16,14 @@ public class AccountController {
 
     private final AccountService service;
     @GetMapping
-    public ResponseEntity<Set<AccountDto>> getAll(){
+    public ResponseEntity<Set<AccountDto>> getAccountsByClientId(Long clientId){
 
-        return ResponseEntity.ok(service.getAll());
+        return ResponseEntity.ok(service.getAccountsByClientId(clientId));
     }
+
+    @PostMapping
+    public ResponseEntity<AccountDto> create(@RequestBody @Valid AccountDto dto){
+        return ResponseEntity.ok(service.create(dto));
+    }
+
 }

@@ -2,15 +2,11 @@ package com.etxo.bank_app.entity;
 
 import com.etxo.bank_app.entity.enums.CountryCode;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 @Entity
 //@Table(name = "address")
-@NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

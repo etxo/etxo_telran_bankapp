@@ -3,6 +3,7 @@ package com.etxo.bank_app.service;
 import com.etxo.bank_app.dto.AddressDto;
 import com.etxo.bank_app.mapping.AddressMapping;
 import com.etxo.bank_app.reposi.AddressRepository;
+import com.etxo.bank_app.reposi.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +11,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AddressService {
     private final AddressRepository repository;
+    private final ClientRepository clientRepo;
     private final AddressMapping mapper;
 
     public AddressDto save(AddressDto dto){
+
 
         return mapper.mapToDto(repository.save(mapper.mapToEntity(dto)));
     }

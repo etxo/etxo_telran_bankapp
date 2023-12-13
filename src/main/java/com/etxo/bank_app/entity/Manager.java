@@ -3,6 +3,7 @@ package com.etxo.bank_app.entity;
 import com.etxo.bank_app.entity.enums.Status;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,9 +15,7 @@ import java.sql.Timestamp;
 
 @Entity
 //@Table(name = "manager")
-@NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class Manager {
 
     @Id

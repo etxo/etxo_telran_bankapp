@@ -28,7 +28,7 @@ public class ClientDto {
     @NotNull@Length(min = 2, max = 32)
     private String lastName;
 
-    @NotNull
+    @NotNull(message = "You need an email to open an account")
     @Email
     private String email;
 
@@ -37,9 +37,12 @@ public class ClientDto {
 
     @Length(min = 7, max = 15)
     private String phone;
+
     private Timestamp createdAt;
     private Timestamp updatedAt;
+
     @JsonProperty("manager")
     private ManagerDto manager;
+
     private Set<AccountDto> accounts;
 }

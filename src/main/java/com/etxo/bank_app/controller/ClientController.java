@@ -3,6 +3,7 @@ package com.etxo.bank_app.controller;
 import com.etxo.bank_app.dto.ClientDto;
 import com.etxo.bank_app.dto.AccountDto;
 import com.etxo.bank_app.service.ClientService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +34,7 @@ public class ClientController {
 
 
     @PostMapping
-    public ResponseEntity<ClientDto> create(@RequestBody ClientDto client){
+    public ResponseEntity<ClientDto> create(@RequestBody @Valid ClientDto client){
         return ResponseEntity.ok(service.create(client));
     }
 
@@ -43,20 +44,6 @@ public class ClientController {
 
         return ResponseEntity.ok(service.updateById(id, dto));
     }
-
-    @PutMapping("/add_account/{email}")
-    public ResponseEntity<ClientDto> createAccountByEmail(@PathVariable String email,
-                                                         @RequestBody AccountDto accountDto){
-        return ResponseEntity.ok(service.addAccountByEmail(email, accountDto));
-    }
-
-    /*
-    @PutMapping("/{id}")
-    public ResponseEntity<Set<AccountDto>> createAccountById(@PathVariable Long id,
-                                                         @RequestBody AccountDto accountDto){
-        return ResponseEntity.ok(service.addAccountById(id, accountDto));
-    }
-     */
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ClientDto> delete(@PathVariable Long id){

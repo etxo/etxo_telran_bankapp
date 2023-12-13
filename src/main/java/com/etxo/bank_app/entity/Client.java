@@ -2,24 +2,17 @@ package com.etxo.bank_app.entity;
 
 import com.etxo.bank_app.entity.enums.Status;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.validator.constraints.Length;
 
 import java.sql.Timestamp;
 import java.util.Set;
 
 @Entity
 //@Table(name = "client")
-@NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class Client {
 
     @Id
@@ -44,7 +37,7 @@ public class Client {
     private String email;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn//(name = "address_id", referencedColumnName = "id")
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
 
     @Column(name = "phone")
@@ -64,7 +57,8 @@ public class Client {
 
     @OneToMany(
             mappedBy = "client",
-            cascade = CascadeType.ALL)
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
     private Set<Account> accounts;
 
 }

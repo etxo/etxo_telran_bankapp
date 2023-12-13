@@ -28,5 +28,4 @@ public class AddressDto {
     private CountryCode countryCode;
     @JsonIgnore
     private ClientDto client;
-
 }
