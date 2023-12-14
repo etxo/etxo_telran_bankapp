@@ -27,10 +27,10 @@ public class Account {
     @JoinColumn(name = "client_id")
     private Client client;
 
-    @Column(name = "iban", nullable = false)
+    @Column(name = "iban")
     private String iban;
 
-    @Column(name = "bic", nullable = false)
+    @Column(name = "bic")
     private String bic;
 
     @Column(name = "account_type")

@@ -2,7 +2,6 @@ package com.etxo.bank_app.service;
 
 import com.etxo.bank_app.dto.AccountDto;
 
-import com.etxo.bank_app.dto.ClientDto;
 import com.etxo.bank_app.entity.Account;
 import com.etxo.bank_app.entity.Client;
 import com.etxo.bank_app.exceptions.ClientNotFoundException;
@@ -24,14 +23,19 @@ public class AccountService {
 
     private final AccountRepository accountRepo;
     private final ClientRepository clientRepo;
-    private final AccountMapping mapping;
+    private final AccountMapping mapper;
 
-    public Set<AccountDto> getAccountsByClientId(Long clientId){
+    /*public Set<AccountDto> getAccountsByClientId(Long clientId){
 
         Set<Account> accounts = accountRepo.getAccountsByClientId(clientId);
         accounts.stream().forEach(System.out::println);// just to test
         return new HashSet<>(accounts.stream()
                 .map(mapping::mapToDto).toList());
+    }*/
+
+    public List<AccountDto> getAccountsByClientId(Long clientId){
+        return accountRepo.getAccountsByClientId(clientId).stream()
+                .map(x -> mapper.mapToDto(x)).toList();
     }
 
     @Transactional
@@ -45,8 +49,8 @@ public class AccountService {
         }
         else throw new ClientNotFoundException("client not found!");
 
-        Account account = mapping.mapToEntity(dto);
+        Account account = mapper.mapToEntity(dto);
         account.setClient(client);
-        return mapping.mapToDto(accountRepo.save(account));
+        return mapper.mapToDto(accountRepo.save(account));
     }
 }

@@ -24,7 +24,6 @@ public class AccountMapping {
         dto.setCurrencyCode(entity.getCurrencyCode());
         dto.setCreatedAt(entity.getCreatedAt());
         dto.setUpdatedAt(entity.getUpdatedAt());
-        //dto.setClient(clientMapping.mapToDto(entity.getClient()));
 
         return dto;
     }

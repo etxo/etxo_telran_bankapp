@@ -50,8 +50,6 @@ public class ClientService {
             throw new RuntimeException("A client with such an email already exists!");
         }
 
-        //addressRepo.save(addressMapper.mapToEntity(client.getAddress()));
-
         ClientDto savedClient = clientMapper.mapToDto(
                 repository.save(clientMapper.mapToEntity(client)));
         return savedClient;

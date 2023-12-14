@@ -16,6 +16,7 @@ public class ClientMapping {
     private final ManagerService managerService;
     private final ManagerMapping managerMapper;
     private final AddressMapping addressMapper;
+
     public ClientDto mapToDto(Client entity){
         ClientDto dto = new ClientDto();
         dto.setId(entity.getId());
@@ -28,7 +29,6 @@ public class ClientMapping {
         dto.setCreatedAt(entity.getCreatedAt());
         dto.setUpdatedAt(entity.getUpdatedAt());
         dto.setManager(managerMapper.mapToDto(entity.getManager()));
-
 
         return dto;
     }

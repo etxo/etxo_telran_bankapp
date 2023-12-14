@@ -27,8 +27,10 @@ public class Transaction {
 
     @Column(name = "amount")
     private BigDecimal amount;
+
     @Column(name = "description")
     private String description;
+
     @Column(name = "executed_at")
     private Timestamp executedAt;
 }

@@ -44,5 +44,5 @@ public class ClientDto {
     @JsonProperty("manager")
     private ManagerDto manager;
 
-    private Set<AccountDto> accounts;
+    //private Set<AccountDto> accounts;
 }
