@@ -3,10 +3,7 @@ package com.etxo.bank_app.entity;
 import com.etxo.bank_app.entity.enums.Status;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Length;
@@ -15,7 +12,9 @@ import java.sql.Timestamp;
 
 @Entity
 //@Table(name = "manager")
-@Data
+@Getter@Setter
+@NoArgsConstructor
+@EqualsAndHashCode
 public class Manager {
 
     @Id
@@ -36,7 +35,7 @@ public class Manager {
     private String phone;
 
     @Column(name = "status")
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     @Column(name = "created_at")

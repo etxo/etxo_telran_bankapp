@@ -2,7 +2,7 @@ package com.etxo.bank_app.entity;
 
 import com.etxo.bank_app.entity.enums.Status;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -12,7 +12,10 @@ import java.util.Set;
 
 @Entity
 //@Table(name = "client")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@EqualsAndHashCode
 public class Client {
 
     @Id
@@ -21,7 +24,7 @@ public class Client {
     private Long id;
 
     @Column(name = "status")
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Status status;
 
 

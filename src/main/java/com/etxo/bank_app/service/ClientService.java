@@ -6,6 +6,7 @@ import com.etxo.bank_app.dto.ClientDto;
 import com.etxo.bank_app.entity.Account;
 import com.etxo.bank_app.entity.Client;
 import com.etxo.bank_app.entity.enums.Status;
+import com.etxo.bank_app.exceptions.ClientNotFoundException;
 import com.etxo.bank_app.mapping.AccountMapping;
 import com.etxo.bank_app.mapping.AddressMapping;
 import com.etxo.bank_app.mapping.ClientMapping;
@@ -24,7 +25,6 @@ public class ClientService {
 
     private final ClientRepository repository;
     private final AddressMapping addressMapper;
-    private final AccountMapping accountMapper;
     private final ClientMapping clientMapper;
     public Set<ClientDto> getClients(){
 
@@ -60,14 +60,14 @@ public class ClientService {
     public ClientDto updateById(Long id, ClientDto dto){
 
         Client client = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("there is no client with this id!"));
+                .orElseThrow(() -> new ClientNotFoundException("there is no client with this id!"));
 
         return clientMapper.mapToDto(repository.save(clientMapper.mapToEntityUpdate(client, dto)));
     }
 
     public ClientDto updateAddressByClientId(Long id, AddressDto dto){
         Client client = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("there is no client with this id!"));
+                .orElseThrow(() -> new ClientNotFoundException("there is no client with this id!"));
 
         client.setAddress(addressMapper.mapToEntity(dto));
         return clientMapper.mapToDto(repository.save(client));

@@ -31,8 +31,6 @@ public class ClientController {
         return ResponseEntity.ok(service.getClientById(id));
     }
 
-
-
     @PostMapping
     public ResponseEntity<ClientDto> create(@RequestBody @Valid ClientDto client){
         return ResponseEntity.ok(service.create(client));

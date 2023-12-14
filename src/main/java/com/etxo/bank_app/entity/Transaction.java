@@ -1,15 +1,16 @@
 package com.etxo.bank_app.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Entity
-//@Table(name = "transaction")
-@Data
+@Table(name = "transaction")
+@Getter@Setter
+@NoArgsConstructor
+@EqualsAndHashCode
 public class Transaction {
 
     @Id

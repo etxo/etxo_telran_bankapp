@@ -16,7 +16,7 @@ import java.util.Set;
 public class AccountController {
 
     private final AccountService service;
-    @GetMapping("/client/{clientId}")
+    @GetMapping("/by_client/{clientId}")
     public ResponseEntity<Set<AccountDto>> getAccountsByClientId(@PathVariable Long clientId){
 
         return ResponseEntity.ok(service.getAccountsByClientId(clientId));

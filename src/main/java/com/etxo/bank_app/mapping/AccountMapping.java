@@ -10,10 +10,9 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 
 @Service
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class AccountMapping {
 
-    private final ClientMapping clientMapping;
     public AccountDto mapToDto(Account entity){
         AccountDto dto = new AccountDto();
         dto.setId(entity.getId());
@@ -26,8 +25,6 @@ public class AccountMapping {
         dto.setCreatedAt(entity.getCreatedAt());
         dto.setUpdatedAt(entity.getUpdatedAt());
         //dto.setClient(clientMapping.mapToDto(entity.getClient()));
-
-        //dto.setAccounts(entity.getAccounts().stream().map());
 
         return dto;
     }

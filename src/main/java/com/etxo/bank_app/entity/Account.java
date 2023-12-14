@@ -4,7 +4,7 @@ import com.etxo.bank_app.entity.enums.AccountType;
 import com.etxo.bank_app.entity.enums.Currency;
 import com.etxo.bank_app.entity.enums.Status;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -14,7 +14,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "account")
-@Data
+@Getter@Setter
+@NoArgsConstructor
+@EqualsAndHashCode
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

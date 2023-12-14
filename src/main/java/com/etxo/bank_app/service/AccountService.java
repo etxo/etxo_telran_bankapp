@@ -27,9 +27,11 @@ public class AccountService {
     private final AccountMapping mapping;
 
     public Set<AccountDto> getAccountsByClientId(Long clientId){
-        return new HashSet<>(
-                            accountRepo.getAccountsByClientId(clientId).stream()
-                                .map(mapping::mapToDto).toList());
+
+        Set<Account> accounts = accountRepo.getAccountsByClientId(clientId);
+        accounts.stream().forEach(System.out::println);// just to test
+        return new HashSet<>(accounts.stream()
+                .map(mapping::mapToDto).toList());
     }
 
     @Transactional
