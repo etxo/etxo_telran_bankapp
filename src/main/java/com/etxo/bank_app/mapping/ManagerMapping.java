@@ -3,9 +3,10 @@ package com.etxo.bank_app.mapping;
 import com.etxo.bank_app.dto.ManagerDto;
 import com.etxo.bank_app.entity.Manager;
 import com.etxo.bank_app.entity.enums.Status;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Service
+@Component
 public class ManagerMapping {
 
     public Manager mapToEntity(ManagerDto dto){

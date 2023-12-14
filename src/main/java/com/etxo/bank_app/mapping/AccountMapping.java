@@ -5,6 +5,7 @@ import com.etxo.bank_app.entity.Account;
 import com.etxo.bank_app.entity.enums.AccountType;
 import com.etxo.bank_app.entity.enums.Status;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
