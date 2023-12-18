@@ -18,14 +18,14 @@ public class TransactionController {
 
     private final TransactionService service;
     @PostMapping
-    public ResponseEntity<TransactionDto> create(
+    public ResponseEntity<TransactionDto> execute(
             @Valid @RequestBody TransactionDto dto) throws AccountNotFoundException {
-        return ResponseEntity.ok(service.create(dto));
+        return ResponseEntity.ok(service.execute(dto));
     }
 
     @GetMapping("/client_id/{id}")
-    public ResponseEntity<List<TransactionDto>> getAllByClientId(
+    public ResponseEntity<List<TransactionDto>> getTransactionsByClientId(
             @PathVariable Long id) throws ClientNotFoundException {
-        return ResponseEntity.ok(service.getAllByClientId(id));
+        return ResponseEntity.ok(service.getTransactionsByClientId(id));
     }
 }
