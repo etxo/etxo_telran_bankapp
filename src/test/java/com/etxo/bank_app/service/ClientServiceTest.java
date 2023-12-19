@@ -24,8 +24,7 @@ import java.sql.Timestamp;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -33,8 +32,8 @@ class ClientServiceTest {
 
     @Mock
     private ClientRepository repository;
-    @Mock
-    private AddressMapping addressMapper;
+    //@Mock
+    //private AddressMapping addressMapper;
    @Mock
     private ClientMapping clientMapper;
     @InjectMocks
@@ -42,6 +41,7 @@ class ClientServiceTest {
 
     private Address expectedAddress;
     private Client expectedClient;
+    private Client expectedClientWithId;
     private Manager manager;
     private ClientDto expectedClientDto;
 
@@ -75,6 +75,14 @@ class ClientServiceTest {
         expectedClient.setPhone(faker.phoneNumber().phoneNumber().toString());
         expectedClient.setStatus(Status.ACTIVE);
 
+        expectedClientWithId = new Client();
+        expectedClientWithId.setId(1L);
+        expectedClientWithId.setFirstName(expectedClient.getFirstName());
+        expectedClientWithId.setLastName(expectedClient.getLastName());
+        expectedClientWithId.setEmail(expectedClient.getEmail());
+        expectedClientWithId.setPhone(expectedClient.getPhone());
+        expectedClientWithId.setStatus(Status.ACTIVE);
+
         expectedClientDto = new ClientDto();
         expectedClientDto.setStatus(Status.ACTIVE);
         expectedClientDto.setFirstName(expectedClient.getFirstName());
@@ -85,15 +93,17 @@ class ClientServiceTest {
     @Test
     void createClientTest() {
 
-        when(addressMapper.mapToEntity(any(AddressDto.class))).thenReturn(expectedAddress);
+        //when(addressMapper.mapToEntity(any(AddressDto.class))).thenReturn(expectedAddress);
         when(clientMapper.mapToEntity(any(ClientDto.class))).thenReturn(expectedClient);
         when(clientMapper.mapToDto(any(Client.class))).thenReturn(expectedClientDto);
-        when(repository.findById(anyLong())).thenReturn(Optional.of(expectedClient));
+        //when(repository.findById(anyLong())).thenReturn(Optional.of(expectedClient));
+        when(repository.existsByEmail(anyString())).thenReturn(false);
+        when(repository.save(any(Client.class))).thenReturn(expectedClientWithId);
 
-        ClientDto clientDto = clientMapper.mapToDto(expectedClient);
+        //ClientDto clientDto = clientMapper.mapToDto(expectedClient);
         //expectClientDto.setId(null);
 
-        ClientDto savedClientDto = clientService.create(clientDto);
+        ClientDto savedClientDto = clientService.create(expectedClientDto);
         assertEquals(expectedClientDto.getEmail(), savedClientDto.getEmail());
     }
     @Test

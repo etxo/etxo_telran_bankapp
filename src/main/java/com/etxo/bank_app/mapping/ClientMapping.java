@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 
-@Component //or @Service ??? not sure
+@Service //or @Service ??? not sure
 @RequiredArgsConstructor
 public class ClientMapping {
 

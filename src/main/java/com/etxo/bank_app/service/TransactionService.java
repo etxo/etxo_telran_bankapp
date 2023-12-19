@@ -6,6 +6,7 @@ import com.etxo.bank_app.exceptions.ClientNotFoundException;
 import com.etxo.bank_app.mapping.TransactionMapping;
 import com.etxo.bank_app.reposi.AccountRepository;
 import com.etxo.bank_app.reposi.TransactionRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,8 @@ public class TransactionService {
     private final TransactionRepository transactionRepository;
     private final AccountRepository accountRepository;
     private final TransactionMapping mapper;
-        public TransactionDto execute(TransactionDto dto) throws AccountNotFoundException {
+    @Transactional
+    public TransactionDto execute(TransactionDto dto) throws AccountNotFoundException {
 
             if(!accountRepository.existsById(dto.getSender().getId()))
                 throw new AccountNotFoundException("this sender account does not exist!");
@@ -28,7 +30,8 @@ public class TransactionService {
                 throw new AccountNotFoundException("this receiver account does not exist!");
 
             //TODO Business logic for executing a transaction.
-            return mapper.mapToDto(transactionRepository.save(mapper.mapToEntity(dto)));
+            TransactionDto savedDto = mapper.mapToDto(transactionRepository.save(mapper.mapToEntity(dto)));
+            return savedDto;
         }
 
         public List<TransactionDto> getTransactionsByClientId(Long clientId) throws ClientNotFoundException {
