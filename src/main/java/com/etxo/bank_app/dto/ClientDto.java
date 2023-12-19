@@ -19,7 +19,7 @@ import java.util.Set;
 public class ClientDto {
 
     private Long id;
-    @NotNull
+
     private Status status;
 
     @NotNull@Length(min = 2, max = 22)

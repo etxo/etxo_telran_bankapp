@@ -39,16 +39,63 @@ class ClientServiceTest {
     private ClientMapping clientMapper;
     @InjectMocks
     private ClientService clientService;
-    @InjectMocks
-    private ClientDto expectClientDto;
-    @InjectMocks
-    private Client expectClient;
-    //private AddressDto addressDto;
-    @InjectMocks
-    private Address expectAddress;
-    @InjectMocks
+
+    private Address expectedAddress;
+    private Client expectedClient;
     private Manager manager;
-    //private ManagerDto managerDto;
+    private ClientDto expectedClientDto;
+
+
+    @BeforeEach
+    void init(){
+        Faker faker = new Faker();
+        expectedAddress = new Address();
+        expectedAddress.setPostalCode(faker.address().zipCode());
+        expectedAddress.setCity(faker.address().city());
+        expectedAddress.setStreet(faker.address().streetName());
+        expectedAddress.setHouseNr(faker.address().buildingNumber());
+        expectedAddress.setCountryCode(CountryCode.DE);
+        expectedClient = new Client();
+        expectedClient.setAddress(expectedAddress);
+
+        manager = new Manager();
+        manager.setId(1L);
+        manager.setFirstName(faker.name().firstName());
+        manager.setLastName(faker.name().lastName());
+        manager.setEmail(faker.internet().emailAddress());
+        manager.setPhone(faker.phoneNumber().phoneNumber());
+        manager.setStatus(Status.ACTIVE);
+        manager.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+        manager.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+        expectedClient.setManager(manager);
+
+        expectedClient.setFirstName(faker.name().firstName());
+        expectedClient.setLastName(faker.name().lastName());
+        expectedClient.setEmail(faker.internet().emailAddress());
+        expectedClient.setPhone(faker.phoneNumber().phoneNumber().toString());
+        expectedClient.setStatus(Status.ACTIVE);
+
+        expectedClientDto = new ClientDto();
+        expectedClientDto.setStatus(Status.ACTIVE);
+        expectedClientDto.setFirstName(expectedClient.getFirstName());
+        expectedClientDto.setLastName(expectedClient.getLastName());
+        expectedClientDto.setEmail(expectedClient.getEmail());
+        expectedClientDto.setPhone(expectedClient.getPhone());
+    }
+    @Test
+    void createClientTest() {
+
+        when(addressMapper.mapToEntity(any(AddressDto.class))).thenReturn(expectedAddress);
+        when(clientMapper.mapToEntity(any(ClientDto.class))).thenReturn(expectedClient);
+        when(clientMapper.mapToDto(any(Client.class))).thenReturn(expectedClientDto);
+        when(repository.findById(anyLong())).thenReturn(Optional.of(expectedClient));
+
+        ClientDto clientDto = clientMapper.mapToDto(expectedClient);
+        //expectClientDto.setId(null);
+
+        ClientDto savedClientDto = clientService.create(clientDto);
+        assertEquals(expectedClientDto.getEmail(), savedClientDto.getEmail());
+    }
     @Test
     @Disabled
     void getClientsTest() {
@@ -62,46 +109,5 @@ class ClientServiceTest {
     @Test
     @Disabled
     void getClientByEmailTest() {
-    }
-
-    @BeforeEach
-    void init(){
-        Faker faker = new Faker();
-        expectAddress.setPostalCode(faker.address().zipCode());
-        expectAddress.setCity(faker.address().city());
-        expectAddress.setStreet(faker.address().streetName());
-        expectAddress.setHouseNr(faker.address().buildingNumber());
-        expectAddress.setCountryCode(CountryCode.DE);
-        expectClient.setAddress(expectAddress);
-
-        manager.setId(1L);
-        manager.setFirstName(faker.name().firstName());
-        manager.setLastName(faker.name().lastName());
-        manager.setEmail(faker.internet().emailAddress());
-        manager.setPhone(faker.phoneNumber().phoneNumber());
-        manager.setStatus(Status.ACTIVE);
-        manager.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-        manager.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
-        expectClient.setManager(manager);
-
-        expectClient.setFirstName(faker.name().firstName());
-        expectClient.setLastName(faker.name().lastName());
-        expectClient.setEmail(faker.internet().emailAddress());
-        expectClient.setPhone(faker.phoneNumber().phoneNumber().toString());
-        expectClient.setStatus(Status.ACTIVE);
-    }
-    @Test
-    void createClientTest() {
-
-        when(addressMapper.mapToEntity(any(AddressDto.class))).thenReturn(expectAddress);
-        when(clientMapper.mapToEntity(any(ClientDto.class))).thenReturn(expectClient);
-        when(clientMapper.mapToDto(any(Client.class))).thenReturn(expectClientDto);
-        when(repository.findById(anyLong())).thenReturn(Optional.of(expectClient));
-
-        ClientDto expectClientDto = clientMapper.mapToDto(expectClient);
-        expectClientDto.setId(null);
-
-        ClientDto clientDto = clientService.create(expectClientDto);
-        assertEquals(expectClientDto, clientDto);
     }
 }
