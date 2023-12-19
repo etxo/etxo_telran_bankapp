@@ -41,7 +41,7 @@ public class ClientService {
 
     public ClientDto getClientByEmail(String email){
         Client client = repository.getClientByEmail(email)
-                .orElseThrow(() -> new RuntimeException("There is no client with such an email!"));
+                .orElseThrow(() -> new ClientNotFoundException("There is no client with such an email!"));
         return clientMapper.mapToDto(client);
     }
 
@@ -63,19 +63,12 @@ public class ClientService {
         return clientMapper.mapToDto(repository.save(clientMapper.mapToEntityUpdate(client, dto)));
     }
 
-    public ClientDto updateAddressByClientId(Long id, AddressDto dto){
-        Client client = repository.findById(id)
-                .orElseThrow(() -> new ClientNotFoundException("there is no client with this id!"));
-
-        client.setAddress(addressMapper.mapToEntity(dto));
-        return clientMapper.mapToDto(repository.save(client));
-    }
-
     public ClientDto delete(Long id){
         Client client = repository.findById(id)
                 .orElseThrow(() -> new ClientNotFoundException("there is no client with this id!"));
         client.setStatus(Status.INACTIVE);
-        ClientDto savedClientDto = clientMapper.mapToDto(repository.save(client));
+        Client savedClient = repository.save(client);
+        ClientDto savedClientDto = clientMapper.mapToDto(savedClient);
         return savedClientDto;
     }
 }

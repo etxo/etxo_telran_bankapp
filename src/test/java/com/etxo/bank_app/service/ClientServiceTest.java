@@ -105,21 +105,26 @@ class ClientServiceTest {
     @Test
     @Disabled
     void deleteClientTest(){
-        when(repository.findById(anyLong())).thenReturn(Optional.of(expectedClientWithId));
+        /*when(repository.findById(anyLong())).thenReturn(Optional.of(expectedClientWithId));
         when(repository.save(any(Client.class))).thenReturn(expectedClientWithId);
         when(clientMapper.mapToDto(any(Client.class))).thenReturn(expectedClientDto);
 
         ClientDto deletedClient = clientService.delete(1L);
         assertEquals(Status.INACTIVE, deletedClient.getStatus());
+         */
     }
     @Test
     @Disabled
     void getClientsTest() {
+
     }
 
     @Test
-    @Disabled
     void getClientByIdTest() {
+        when(repository.findById(anyLong())).thenReturn(Optional.of(expectedClientWithId));
+        when(clientMapper.mapToDto(any(Client.class))).thenReturn(expectedClientDto);
+        ClientDto clientDto = clientService.getClientById(1L);
+        assertEquals(expectedClientDto, clientDto);
     }
 
     @Test
