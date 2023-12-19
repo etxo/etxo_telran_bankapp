@@ -1,14 +1,11 @@
 package com.etxo.bank_app.service;
 
-import com.etxo.bank_app.dto.AddressDto;
 import com.etxo.bank_app.dto.ClientDto;
-import com.etxo.bank_app.dto.ManagerDto;
 import com.etxo.bank_app.entity.Address;
 import com.etxo.bank_app.entity.Client;
 import com.etxo.bank_app.entity.Manager;
 import com.etxo.bank_app.entity.enums.CountryCode;
 import com.etxo.bank_app.entity.enums.Status;
-import com.etxo.bank_app.mapping.AddressMapping;
 import com.etxo.bank_app.mapping.ClientMapping;
 import com.etxo.bank_app.reposi.ClientRepository;
 import com.github.javafaker.Faker;
@@ -34,7 +31,7 @@ class ClientServiceTest {
     private ClientRepository repository;
     //@Mock
     //private AddressMapping addressMapper;
-   @Mock
+    @Mock
     private ClientMapping clientMapper;
     @InjectMocks
     private ClientService clientService;
@@ -81,30 +78,39 @@ class ClientServiceTest {
         expectedClientWithId.setLastName(expectedClient.getLastName());
         expectedClientWithId.setEmail(expectedClient.getEmail());
         expectedClientWithId.setPhone(expectedClient.getPhone());
-        expectedClientWithId.setStatus(Status.ACTIVE);
+        expectedClientWithId.setStatus(expectedClient.getStatus());
+        expectedClientWithId.setAddress(expectedClient.getAddress());
+        expectedClientWithId.setManager(expectedClient.getManager());
 
         expectedClientDto = new ClientDto();
-        expectedClientDto.setStatus(Status.ACTIVE);
-        expectedClientDto.setFirstName(expectedClient.getFirstName());
+        expectedClientDto.setStatus(expectedClientWithId.getStatus());
+        expectedClientDto.setFirstName(expectedClientWithId.getFirstName());
         expectedClientDto.setLastName(expectedClient.getLastName());
-        expectedClientDto.setEmail(expectedClient.getEmail());
-        expectedClientDto.setPhone(expectedClient.getPhone());
+        expectedClientDto.setEmail(expectedClientWithId.getEmail());
+        expectedClientDto.setPhone(expectedClientWithId.getPhone());
     }
     @Test
     void createClientTest() {
 
-        //when(addressMapper.mapToEntity(any(AddressDto.class))).thenReturn(expectedAddress);
         when(clientMapper.mapToEntity(any(ClientDto.class))).thenReturn(expectedClient);
         when(clientMapper.mapToDto(any(Client.class))).thenReturn(expectedClientDto);
         //when(repository.findById(anyLong())).thenReturn(Optional.of(expectedClient));
         when(repository.existsByEmail(anyString())).thenReturn(false);
         when(repository.save(any(Client.class))).thenReturn(expectedClientWithId);
 
-        //ClientDto clientDto = clientMapper.mapToDto(expectedClient);
-        //expectClientDto.setId(null);
-
         ClientDto savedClientDto = clientService.create(expectedClientDto);
-        assertEquals(expectedClientDto.getEmail(), savedClientDto.getEmail());
+        assertEquals(expectedClientDto, savedClientDto);
+    }
+
+    @Test
+    @Disabled
+    void deleteClientTest(){
+        when(repository.findById(anyLong())).thenReturn(Optional.of(expectedClientWithId));
+        when(repository.save(any(Client.class))).thenReturn(expectedClientWithId);
+        when(clientMapper.mapToDto(any(Client.class))).thenReturn(expectedClientDto);
+
+        ClientDto deletedClient = clientService.delete(1L);
+        assertEquals(Status.INACTIVE, deletedClient.getStatus());
     }
     @Test
     @Disabled

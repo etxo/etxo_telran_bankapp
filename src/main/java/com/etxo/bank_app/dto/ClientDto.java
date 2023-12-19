@@ -16,6 +16,7 @@ import java.util.Set;
 
 @Setter @Getter
 @NoArgsConstructor
+@EqualsAndHashCode
 public class ClientDto {
 
     private Long id;

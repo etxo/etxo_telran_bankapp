@@ -45,14 +45,14 @@ public class ClientService {
         return clientMapper.mapToDto(client);
     }
 
-    public ClientDto create(ClientDto client){
-        if (repository.existsByEmail(client.getEmail())){
+    public ClientDto create(ClientDto clientDto){
+        if (repository.existsByEmail(clientDto.getEmail())){
             throw new RuntimeException("A client with such an email already exists!");
         }
 
-        ClientDto savedClient = clientMapper.mapToDto(
-                repository.save(clientMapper.mapToEntity(client)));
-        return savedClient;
+        ClientDto savedClientDto = clientMapper.mapToDto(
+                repository.save(clientMapper.mapToEntity(clientDto)));
+        return savedClientDto;
     }
 
     public ClientDto updateById(Long id, ClientDto dto){
@@ -73,9 +73,9 @@ public class ClientService {
 
     public ClientDto delete(Long id){
         Client client = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("there is no client with this id!"));
+                .orElseThrow(() -> new ClientNotFoundException("there is no client with this id!"));
         client.setStatus(Status.INACTIVE);
-        client = repository.save(client);
-        return clientMapper.mapToDto(client);
+        ClientDto savedClientDto = clientMapper.mapToDto(repository.save(client));
+        return savedClientDto;
     }
 }
