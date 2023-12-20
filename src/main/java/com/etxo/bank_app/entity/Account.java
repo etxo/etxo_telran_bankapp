@@ -30,7 +30,10 @@ public class Account {
     @Column(name = "iban")
     private String iban;
 
-    @Column(name = "account_type")
+    @Column(name = "bic")
+    private String bic;
+
+    @Column(name = "type")
     @Enumerated(value = EnumType.STRING)
     private AccountType accountType;
 
@@ -41,15 +44,15 @@ public class Account {
     @Column(name = "balance")
     private BigDecimal balance;
 
-    @Column(name = "currency_code")
+    @Column(name = "currency")
     @Enumerated(value = EnumType.STRING)
     private Currency currencyCode;
 
-    @Column(name = "created_at")
+    @Column(name = "created")
     @CreationTimestamp
     private Timestamp createdAt;
 
-    @Column(name = "updated_at")
+    @Column(name = "updated")
     @UpdateTimestamp
     private Timestamp updatedAt;
 

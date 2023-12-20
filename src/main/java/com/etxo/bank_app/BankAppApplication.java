@@ -1,11 +1,17 @@
 package com.etxo.bank_app;
 
+import com.etxo.bank_app.dto.AccountDto;
 import com.etxo.bank_app.dto.AddressDto;
 import com.etxo.bank_app.dto.ClientDto;
 import com.etxo.bank_app.dto.ManagerDto;
+import com.etxo.bank_app.entity.Account;
 import com.etxo.bank_app.entity.Manager;
+import com.etxo.bank_app.entity.enums.AccountType;
 import com.etxo.bank_app.entity.enums.CountryCode;
+import com.etxo.bank_app.entity.enums.Currency;
 import com.etxo.bank_app.entity.enums.Status;
+import com.etxo.bank_app.exceptions.ClientNotFoundException;
+import com.etxo.bank_app.service.AccountService;
 import com.etxo.bank_app.service.AddressService;
 import com.etxo.bank_app.service.ClientService;
 import com.etxo.bank_app.service.ManagerService;
@@ -15,6 +21,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import com.github.javafaker.Faker;
 
+import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Locale;
 
 @SpringBootApplication
@@ -27,10 +35,12 @@ public class BankAppApplication {
     @Bean
     CommandLineRunner commandLineRunner(
             ClientService clientService,
-            ManagerService managerService) {
+            ManagerService managerService,
+            AccountService accountService) {
         return args -> {
             generateRandomManagers(managerService);
             generateRandomClients(clientService, managerService);
+            generateAccounts(accountService);
         };
     }
 
@@ -76,6 +86,12 @@ public class BankAppApplication {
             client.setStatus(Status.ACTIVE);
             client.setManager(managerService.managerTrigger());
             clientService.create(client);
+        }
+    }
+    public void generateAccounts(AccountService service){
+
+        for(int i = 1; i <= 10; i++){
+            service.generateAccountForClientById((long) i);
         }
     }
 }

@@ -66,6 +66,7 @@ public class AccountService {
 
         account.setClient(clientRepo.findById(id).get());
         account.setIban(faker.finance().iban());
+        account.setBic(faker.finance().bic());
         account.setAccountType(AccountType.DEBIT);
         account.setStatus(Status.ACTIVE);
         account.setBalance(new BigDecimal(100.0));
