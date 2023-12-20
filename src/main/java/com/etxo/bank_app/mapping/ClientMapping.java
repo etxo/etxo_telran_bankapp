@@ -48,6 +48,7 @@ public class ClientMapping {
         return client;
     }
 
+    /*
     public Client mapToEntityUpdate(Client entity, ClientDto dto){
         if(dto.getFirstName() != null) entity.setFirstName(dto.getFirstName());
         if(dto.getLastName() != null) entity.setLastName(dto.getLastName());
@@ -58,5 +59,5 @@ public class ClientMapping {
         if(dto.getManager() != null) entity.setManager(
                 managerMapper.mapToEntity(dto.getManager()));
         return entity;
-    }
+    }*/
 }

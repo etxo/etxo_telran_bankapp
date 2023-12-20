@@ -2,6 +2,7 @@ package com.etxo.bank_app.controller;
 
 import com.etxo.bank_app.dto.ClientDto;
 import com.etxo.bank_app.dto.AccountDto;
+import com.etxo.bank_app.dto.ClientDtoUpdate;
 import com.etxo.bank_app.service.ClientService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -38,7 +39,7 @@ public class ClientController {
 
     @PutMapping("/update/{id}")
     public ResponseEntity<ClientDto> update(@PathVariable Long id,
-                                            @RequestBody ClientDto dto){
+                                            @RequestBody ClientDtoUpdate dto){
 
         return ResponseEntity.ok(service.updateById(id, dto));
     }

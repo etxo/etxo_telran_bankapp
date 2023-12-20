@@ -1,32 +1,26 @@
 package com.etxo.bank_app.dto;
 
-
 import com.etxo.bank_app.entity.enums.Status;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
-import java.sql.Timestamp;
-import java.util.Set;
 
-@Setter @Getter
+@Getter @Setter
 @NoArgsConstructor
-@EqualsAndHashCode
-public class ClientDto {
-
-    private Long id;
+public class ClientDtoUpdate {
 
     private Status status;
 
-    @NotNull@Length(min = 2, max = 22)
+    @Length(min = 2, max = 22)
     private String firstName;
 
-    @NotNull@Length(min = 2, max = 32)
+    @Length(min = 2, max = 32)
     private String lastName;
 
-    @NotNull(message = "You need an email to open an account")
     @Email
     private String email;
 
@@ -36,11 +30,6 @@ public class ClientDto {
     @Length(min = 7, max = 15)
     private String phone;
 
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
-
     @JsonProperty("manager")
     private ManagerDto manager;
-
-    //private Set<AccountDto> accounts;
 }

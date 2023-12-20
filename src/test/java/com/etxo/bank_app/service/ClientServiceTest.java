@@ -29,8 +29,6 @@ class ClientServiceTest {
 
     @Mock
     private ClientRepository repository;
-    //@Mock
-    //private AddressMapping addressMapper;
     @Mock
     private ClientMapping clientMapper;
     @InjectMocks

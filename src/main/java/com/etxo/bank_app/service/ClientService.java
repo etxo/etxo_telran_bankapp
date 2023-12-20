@@ -3,6 +3,7 @@ package com.etxo.bank_app.service;
 import com.etxo.bank_app.dto.AccountDto;
 import com.etxo.bank_app.dto.AddressDto;
 import com.etxo.bank_app.dto.ClientDto;
+import com.etxo.bank_app.dto.ClientDtoUpdate;
 import com.etxo.bank_app.entity.Account;
 import com.etxo.bank_app.entity.Client;
 import com.etxo.bank_app.entity.enums.Status;
@@ -10,6 +11,7 @@ import com.etxo.bank_app.exceptions.ClientNotFoundException;
 import com.etxo.bank_app.mapping.AccountMapping;
 import com.etxo.bank_app.mapping.AddressMapping;
 import com.etxo.bank_app.mapping.ClientMapping;
+import com.etxo.bank_app.mapping.ManagerMapping;
 import com.etxo.bank_app.reposi.AddressRepository;
 import com.etxo.bank_app.reposi.ClientRepository;
 import jakarta.validation.Valid;
@@ -26,6 +28,7 @@ public class ClientService {
     private final ClientRepository repository;
     private final AddressMapping addressMapper;
     private final ClientMapping clientMapper;
+    private final ManagerMapping managerMapper;
     public Set<ClientDto> getClients(){
 
         return new HashSet<>(repository.findAll()
@@ -55,12 +58,21 @@ public class ClientService {
         return savedClientDto;
     }
 
-    public ClientDto updateById(Long id, ClientDto dto){
+    public ClientDto updateById(Long id, ClientDtoUpdate dto){
 
         Client client = repository.findById(id)
                 .orElseThrow(() -> new ClientNotFoundException("there is no client with this id!"));
 
-        return clientMapper.mapToDto(repository.save(clientMapper.mapToEntityUpdate(client, dto)));
+        if(dto.getLastName() != null) client.setLastName(dto.getLastName());
+        if(dto.getEmail() != null) client.setEmail(dto.getEmail());
+        if(dto.getAddress() != null) client.setAddress(
+                addressMapper.mapToEntity(dto.getAddress()));
+        if(dto.getPhone() != null) client.setPhone(dto.getPhone());
+        if(dto.getManager() != null) client.setManager(
+                managerMapper.mapToEntity(dto.getManager()));
+        Client updatedClient = repository.save(client);
+        ClientDto updatedClientDto = clientMapper.mapToDto(updatedClient);
+        return updatedClientDto;
     }
 
     public ClientDto delete(Long id){
