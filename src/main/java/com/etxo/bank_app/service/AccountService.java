@@ -4,18 +4,20 @@ import com.etxo.bank_app.dto.AccountDto;
 
 import com.etxo.bank_app.entity.Account;
 import com.etxo.bank_app.entity.Client;
+import com.etxo.bank_app.entity.enums.AccountType;
+import com.etxo.bank_app.entity.enums.Currency;
+import com.etxo.bank_app.entity.enums.Status;
 import com.etxo.bank_app.exceptions.ClientNotFoundException;
 import com.etxo.bank_app.mapping.AccountMapping;
 import com.etxo.bank_app.reposi.AccountRepository;
 import com.etxo.bank_app.reposi.ClientRepository;
+import com.github.javafaker.Faker;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.math.BigDecimal;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor // DI over constructor!
@@ -51,6 +53,28 @@ public class AccountService {
 
         Account account = mapper.mapToEntity(dto);
         account.setClient(client);
-        return mapper.mapToDto(accountRepo.save(account));
+        Account savedAccount = accountRepo.save(account);
+        return mapper.mapToDto(savedAccount);
+    }
+    public AccountDto generateAccountForClientById(Long id){
+
+        Faker faker = new Faker(new Locale("DE"));
+        Account account = new Account();
+
+        if(!clientRepo.findById(id).isPresent())
+            throw new ClientNotFoundException("Client not found");
+
+        account.setClient(clientRepo.findById(id).get());
+        account.setIban(faker.finance().iban());
+        account.setAccountType(AccountType.DEBIT);
+        account.setStatus(Status.ACTIVE);
+        account.setBalance(new BigDecimal(100.0));
+        account.setCurrencyCode(Currency.EUR);
+        account.setSentTransactions(new HashSet<>());
+        account.setReceivedTransactions(new HashSet<>());
+        Account savedAccount = accountRepo.save(account);
+
+        AccountDto accountDto = mapper.mapToDto(savedAccount);
+        return accountDto;
     }
 }

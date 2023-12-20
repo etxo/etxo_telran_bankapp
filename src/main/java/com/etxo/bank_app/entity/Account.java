@@ -24,14 +24,11 @@ public class Account {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_id")
+    //@JoinColumn(name = "client_id")
     private Client client;
 
     @Column(name = "iban")
     private String iban;
-
-    @Column(name = "bic")
-    private String bic;
 
     @Column(name = "account_type")
     @Enumerated(value = EnumType.STRING)
@@ -57,8 +54,8 @@ public class Account {
     private Timestamp updatedAt;
 
     @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
-    private Set<Transaction> senderTransactions;
+    private Set<Transaction> sentTransactions;
 
     @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
-    private Set<Transaction> receiverTransactions;
+    private Set<Transaction> receivedTransactions;
 }

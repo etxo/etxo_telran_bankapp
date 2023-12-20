@@ -30,6 +30,5 @@ public class ClientDtoUpdate {
     @Length(min = 7, max = 15)
     private String phone;
 
-    @JsonProperty("manager")
-    private ManagerDto manager;
+    private Long managerId;
 }

@@ -27,8 +27,7 @@ public class BankAppApplication {
     @Bean
     CommandLineRunner commandLineRunner(
             ClientService clientService,
-            ManagerService managerService,
-            AddressService addressService) {
+            ManagerService managerService) {
         return args -> {
             generateRandomManagers(managerService);
             generateRandomClients(clientService, managerService);
@@ -41,7 +40,7 @@ public class BankAppApplication {
             ManagerDto manager = new ManagerDto();
             String firstName = faker.name().firstName();
             String lastName = faker.name().lastName();
-            String email = String.format("%s.%s@etxoton.be", firstName, lastName);
+            String email = String.format("%s.%s@etxoBank.be", firstName, lastName);
             manager.setFirstName(firstName);
             manager.setLastName(lastName);
             manager.setEmail(email);
@@ -68,7 +67,7 @@ public class BankAppApplication {
 
             String firstName = faker.name().firstName();
             String lastName = faker.name().lastName();
-            String email = String.format("%s.%s@etxon.muu", firstName, lastName);
+            String email = faker.internet().emailAddress();
 
             client.setFirstName(firstName);
             client.setLastName(lastName);

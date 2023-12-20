@@ -5,12 +5,11 @@ import com.etxo.bank_app.entity.*;
 import com.etxo.bank_app.entity.enums.Status;
 import com.etxo.bank_app.service.ManagerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 
-@Service //or @Service ??? not sure
+@Service
 @RequiredArgsConstructor
 public class ClientMapping {
 

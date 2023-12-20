@@ -1,6 +1,6 @@
 package com.etxo.bank_app.dto;
 
-import com.etxo.bank_app.entity.Account;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;

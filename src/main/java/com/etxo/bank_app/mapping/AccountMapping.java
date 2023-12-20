@@ -18,7 +18,6 @@ public class AccountMapping {
         AccountDto dto = new AccountDto();
         dto.setId(entity.getId());
         dto.setIban(entity.getIban());
-        dto.setBic(entity.getBic());
         dto.setType(entity.getAccountType());
         dto.setStatus(entity.getStatus());
         dto.setBalance(entity.getBalance());
@@ -31,7 +30,6 @@ public class AccountMapping {
     public Account mapToEntity(AccountDto dto){
         Account entity = new Account();
         entity.setIban(dto.getIban());
-        entity.setBic(dto.getBic());
         entity.setAccountType(AccountType.DEBIT);
         entity.setStatus(Status.ACTIVE);
         entity.setBalance(new BigDecimal(0));
