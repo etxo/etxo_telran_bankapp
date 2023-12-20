@@ -56,26 +56,5 @@ public class AccountService {
         Account savedAccount = accountRepo.save(account);
         return mapper.mapToDto(savedAccount);
     }
-    public AccountDto generateAccountForClientById(Long id){
 
-        Faker faker = new Faker(new Locale("DE"));
-        Account account = new Account();
-
-        if(!clientRepo.findById(id).isPresent())
-            throw new ClientNotFoundException("Client not found");
-
-        account.setClient(clientRepo.findById(id).get());
-        account.setIban(faker.finance().iban());
-        account.setBic(faker.finance().bic());
-        account.setAccountType(AccountType.DEBIT);
-        account.setStatus(Status.ACTIVE);
-        account.setBalance(new BigDecimal(100.0));
-        account.setCurrencyCode(Currency.EUR);
-        account.setSentTransactions(new HashSet<>());
-        account.setReceivedTransactions(new HashSet<>());
-        Account savedAccount = accountRepo.save(account);
-
-        AccountDto accountDto = mapper.mapToDto(savedAccount);
-        return accountDto;
-    }
 }

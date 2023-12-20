@@ -9,7 +9,7 @@ import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import java.sql.Timestamp;
-import java.util.Set;
+import java.util.List;
 
 @Setter @Getter
 @NoArgsConstructor
@@ -42,5 +42,6 @@ public class ClientDto {
     @JsonProperty("manager")
     private ManagerDto manager;
 
-    //private Set<AccountDto> accounts;
+    @JsonProperty("accounts")
+    private List<AccountDtoShort> accounts;
 }

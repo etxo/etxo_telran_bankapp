@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -57,8 +58,8 @@ public class Account {
     private Timestamp updatedAt;
 
     @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
-    private Set<Transaction> sentTransactions;
+    private List<Transaction> sentTransactions;
 
     @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
-    private Set<Transaction> receivedTransactions;
+    private List<Transaction> receivedTransactions;
 }

@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -62,6 +63,7 @@ public class Client {
             mappedBy = "client",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    private Set<Account> accounts;
+
+    private List<Account> accounts;
 
 }

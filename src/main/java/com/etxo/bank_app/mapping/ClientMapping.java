@@ -1,5 +1,6 @@
 package com.etxo.bank_app.mapping;
 
+import com.etxo.bank_app.dto.AccountDtoShort;
 import com.etxo.bank_app.dto.ClientDto;
 import com.etxo.bank_app.entity.*;
 import com.etxo.bank_app.entity.enums.Status;
@@ -7,7 +8,7 @@ import com.etxo.bank_app.service.ManagerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -16,6 +17,7 @@ public class ClientMapping {
     private final ManagerService managerService;
     private final ManagerMapping managerMapper;
     private final AddressMapping addressMapper;
+    private final AccountMapping accountMapper;
 
     public ClientDto mapToDto(Client entity){
         ClientDto dto = new ClientDto();
@@ -30,6 +32,13 @@ public class ClientMapping {
         dto.setUpdatedAt(entity.getUpdatedAt());
         dto.setManager(managerMapper.mapToDto(entity.getManager()));
 
+        List<AccountDtoShort> accounts = new ArrayList<>();
+        AccountDtoShort accountDtoShort = accountMapper
+                .mapToDtoShort(entity.getAccounts().get(0));
+
+        accounts.add(accountDtoShort);
+        dto.setAccounts(accounts);
+
         return dto;
     }
     public Client mapToEntity(ClientDto dto){
@@ -42,7 +51,7 @@ public class ClientMapping {
         client.setPhone(dto.getPhone());
         client.setManager(managerMapper.mapToEntity(
                 managerService.managerTrigger()));
-        client.setAccounts(new HashSet<>());
+        client.setAccounts(new ArrayList<>());
 
         return client;
     }

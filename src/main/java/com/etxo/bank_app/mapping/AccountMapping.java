@@ -1,6 +1,7 @@
 package com.etxo.bank_app.mapping;
 
 import com.etxo.bank_app.dto.AccountDto;
+import com.etxo.bank_app.dto.AccountDtoShort;
 import com.etxo.bank_app.entity.Account;
 import com.etxo.bank_app.entity.enums.AccountType;
 import com.etxo.bank_app.entity.enums.Status;
@@ -25,6 +26,15 @@ public class AccountMapping {
         dto.setCreatedAt(entity.getCreatedAt());
         dto.setUpdatedAt(entity.getUpdatedAt());
 
+        return dto;
+    }
+
+    public AccountDtoShort mapToDtoShort(Account entity){
+        AccountDtoShort dto = new AccountDtoShort();
+        dto.setId(entity.getId());
+        dto.setIban(entity.getIban());
+        dto.setBic(entity.getBic());
+        dto.setBalance(entity.getBalance());
         return dto;
     }
     public Account mapToEntity(AccountDto dto){

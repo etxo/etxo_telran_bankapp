@@ -43,8 +43,13 @@ public class ClientService {
     }
 
     public ClientDto getClientById(Long id){
-        Client client = repository.findById(id).orElse(null);
-        return client == null ? null : clientMapper.mapToDto(client);
+        Client client = repository.findById(id).orElseThrow(
+                () -> new ClientNotFoundException(
+                        String.format("NO CLIENT WITH ID: %s", id)));
+
+        ClientDto dto = clientMapper.mapToDto(client);
+
+        return dto;
     }
 
     public ClientDto getClientByEmail(String email){
