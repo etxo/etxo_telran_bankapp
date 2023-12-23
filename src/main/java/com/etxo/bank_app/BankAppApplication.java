@@ -5,6 +5,7 @@ import com.etxo.bank_app.reposi.AccountRepository;
 import com.etxo.bank_app.reposi.ClientRepository;
 import com.etxo.bank_app.reposi.ManagerRepository;
 
+import com.etxo.bank_app.security.repository.UserRepository;
 import com.etxo.bank_app.utility.RandomData;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -23,15 +24,17 @@ public class BankAppApplication {
     CommandLineRunner commandLineRunner(
             ManagerRepository managerRepo,
             ClientRepository clientRepo,
-            AccountRepository accountRepo) {
+            AccountRepository accountRepo,
+            UserRepository userRepo) {
         return args -> {
             RandomData randomData = new RandomData(
-                    managerRepo, clientRepo, accountRepo
+                    managerRepo, clientRepo, accountRepo, userRepo
             );
 
             randomData.generateRandomManagers(managerRepo);
             randomData.generateRandomClients(clientRepo, managerRepo);
             randomData.generateAccounts(accountRepo);
+            randomData.generateAdmin(userRepo);
         };
     }
 }

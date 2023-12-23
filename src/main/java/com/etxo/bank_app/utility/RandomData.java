@@ -12,8 +12,12 @@ import com.etxo.bank_app.exceptions.ClientNotFoundException;
 import com.etxo.bank_app.reposi.AccountRepository;
 import com.etxo.bank_app.reposi.ClientRepository;
 import com.etxo.bank_app.reposi.ManagerRepository;
+import com.etxo.bank_app.security.entity.Role;
+import com.etxo.bank_app.security.entity.User;
+import com.etxo.bank_app.security.repository.UserRepository;
 import com.github.javafaker.Faker;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -28,6 +32,7 @@ public class RandomData {
     private final ManagerRepository managerRepo;
     private final ClientRepository clientRepo;
     private final AccountRepository accountRepo;
+    private final UserRepository userRepo;
     public void generateRandomManagers(ManagerRepository managerRepo) {
         Faker faker = new Faker(new Locale("de"));
         for (int i = 0; i < 3; i++) {
@@ -88,7 +93,7 @@ public class RandomData {
         Faker faker = new Faker(new Locale("DE"));
         Account account = new Account();
 
-        if(!clientRepo.findById(id).isPresent())
+        if(clientRepo.findById(id).isEmpty())
             throw new ClientNotFoundException("Client not found");
 
         account.setClient(clientRepo.findById(id).get());
@@ -101,5 +106,16 @@ public class RandomData {
         account.setSentTransactions(new ArrayList<>());
         account.setReceivedTransactions(new ArrayList<>());
         accountRepo.save(account);
+    }
+
+    public void generateAdmin(UserRepository userRepo){
+
+        if(userRepo.findByRole(Role.ADMIN).isPresent()) return;
+        User user = new User();
+        user.setUsername("etxo");
+        user.setEmail("etxo@gmx.de");
+        user.setRole(Role.ADMIN);
+        user.setPassword(new BCryptPasswordEncoder().encode("prosto"));
+        userRepo.save(user);
     }
 }
