@@ -115,7 +115,9 @@ public class RandomData {
         user.setUsername("etxo");
         user.setEmail("etxo@gmx.de");
         user.setRole(Role.ADMIN);
-        user.setPassword(new BCryptPasswordEncoder().encode("prosto"));
+        String pw = new BCryptPasswordEncoder().encode("prosto");
+        System.out.println(pw);
+        user.setPassword(pw);
         userRepo.save(user);
     }
 }

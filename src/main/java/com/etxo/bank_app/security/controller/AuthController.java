@@ -1,5 +1,8 @@
 package com.etxo.bank_app.security.controller;
 
+import com.etxo.bank_app.security.dto.JwtAuthResponse;
+import com.etxo.bank_app.security.dto.RefreshTokenRequest;
+import com.etxo.bank_app.security.dto.SignInRequest;
 import com.etxo.bank_app.security.dto.SignUpRequest;
 import com.etxo.bank_app.security.entity.User;
 import com.etxo.bank_app.security.service.AuthService;
@@ -21,4 +24,16 @@ public class AuthController {
     public ResponseEntity<User> signUp(@RequestBody SignUpRequest request){
         return ResponseEntity.ok(service.signUp(request));
     }
+
+    @PostMapping("/signin")
+    public ResponseEntity<JwtAuthResponse> signIn(@RequestBody SignInRequest request){
+        return ResponseEntity.ok(service.signIn(request));
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<JwtAuthResponse> signIn(@RequestBody RefreshTokenRequest request){
+        return ResponseEntity.ok(service.refreshToken(request));
+    }
+
+
 }
