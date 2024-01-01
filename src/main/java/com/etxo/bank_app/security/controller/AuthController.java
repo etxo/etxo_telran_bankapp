@@ -1,10 +1,8 @@
 package com.etxo.bank_app.security.controller;
 
-import com.etxo.bank_app.security.dto.JwtAuthResponse;
-import com.etxo.bank_app.security.dto.RefreshTokenRequest;
-import com.etxo.bank_app.security.dto.SignInRequest;
-import com.etxo.bank_app.security.dto.SignUpRequest;
-import com.etxo.bank_app.security.entity.User;
+import com.etxo.bank_app.security.dto.AuthRequest;
+import com.etxo.bank_app.security.dto.AuthResponse;
+import com.etxo.bank_app.security.dto.RegisterRequest;
 import com.etxo.bank_app.security.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,20 +18,13 @@ public class AuthController {
 
     private final AuthService service;
 
-    @PostMapping("/signup")
-    public ResponseEntity<User> signUp(@RequestBody SignUpRequest request){
-        return ResponseEntity.ok(service.signUp(request));
+    @PostMapping("/register")
+    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request){
+        return ResponseEntity.ok(service.register(request));
     }
 
-    @PostMapping("/signin")
-    public ResponseEntity<JwtAuthResponse> signIn(@RequestBody SignInRequest request){
-        return ResponseEntity.ok(service.signIn(request));
+    @PostMapping("/authenticate")
+    public ResponseEntity<AuthResponse> authenticate(@RequestBody AuthRequest request){
+        return ResponseEntity.ok(service.authenticate(request));
     }
-
-    @PostMapping("/refresh")
-    public ResponseEntity<JwtAuthResponse> signIn(@RequestBody RefreshTokenRequest request){
-        return ResponseEntity.ok(service.refreshToken(request));
-    }
-
-
 }
