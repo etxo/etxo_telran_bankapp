@@ -40,8 +40,8 @@ public class SecurityConfig {
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authProvider())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                .logout(logout -> logout.logoutUrl("/api/auth/logout")
-                        .logoutSuccessUrl("/api/auth/login"));//should return to the login endpoint after successful logout
+                .logout(logout -> logout.logoutUrl("/api/auth/logout"));
+                       // .logoutSuccessUrl("/api/auth/login"));//should return to the login endpoint after successful logout
 
         http.headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));//to expose h2 console
 

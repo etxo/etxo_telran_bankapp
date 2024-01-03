@@ -1,5 +1,6 @@
 package com.etxo.bank_app.security.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
