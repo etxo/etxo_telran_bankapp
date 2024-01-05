@@ -4,6 +4,7 @@ import com.etxo.bank_app.security.dto.AuthRequest;
 import com.etxo.bank_app.security.dto.AuthResponse;
 import com.etxo.bank_app.security.dto.RegisterRequest;
 import com.etxo.bank_app.security.service.AuthService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,12 +20,12 @@ public class AuthController {
     private final AuthService service;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request){
+    public ResponseEntity<AuthResponse> register(@RequestBody @Valid RegisterRequest request){
         return ResponseEntity.ok(service.register(request));
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthResponse> authenticate(@RequestBody AuthRequest request){
+    public ResponseEntity<AuthResponse> authenticate(@RequestBody @Valid AuthRequest request){
         return ResponseEntity.ok(service.authenticate(request));
     }
 }

@@ -26,7 +26,6 @@ public class ClientService {
     private final AddressMapping addressMapper;
     private final ClientMapping clientMapper;
     private final ManagerRepository managerRepo;
-    private final ManagerMapping managerMapper;
     public Set<ClientDto> getClients(){
 
         return new HashSet<>(repository.findAll()

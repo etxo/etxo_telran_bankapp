@@ -42,7 +42,7 @@ public class ManagerController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
+    @Secured("MANAGER")
     public ResponseEntity<ManagerDto> update(@PathVariable Long id, @RequestBody ManagerDto dto){
 
         return ResponseEntity.ok(service.update(id, dto));

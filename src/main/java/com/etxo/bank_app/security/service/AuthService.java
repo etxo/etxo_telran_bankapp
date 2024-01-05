@@ -1,4 +1,6 @@
 package com.etxo.bank_app.security.service;
+import com.etxo.bank_app.exceptions.ClientNotFoundException;
+import com.etxo.bank_app.exceptions.EmailExistsException;
 import com.etxo.bank_app.security.dto.AuthRequest;
 import com.etxo.bank_app.security.dto.AuthResponse;
 import com.etxo.bank_app.security.dto.RegisterRequest;
@@ -20,7 +22,12 @@ public class AuthService {
     private final AuthenticationManager authManager;
     private final JwtService jwtService;
 
-    public AuthResponse register(RegisterRequest request){
+    public AuthResponse register(RegisterRequest request) throws EmailExistsException{
+
+        if(repository.findByEmail(request.getEmail()).isPresent()){
+            throw new EmailExistsException(
+                    "There is already a client with this email!");
+        }
 
         User user = new User();
         user.setUsername(request.getUsername());
@@ -40,7 +47,7 @@ public class AuthService {
                 request.getPassword()));
 
         User user = repository.findByUsername(request.getUsername())
-                .orElseThrow(() -> new IllegalArgumentException("No user with this name!"));
+                .orElseThrow(() -> new ClientNotFoundException("No user with this name!"));
 
         AuthResponse authResponse = new AuthResponse();
         authResponse.setToken(jwtService.generateToken(user));

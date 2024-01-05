@@ -39,8 +39,10 @@ public class ClientController {
     }
 
     @GetMapping("/by_email/{email}")
-    @PostAuthorize("returnObject.body.email == userService" +
-            ".loadUserByUsername(principal.username).getEmail()")
+    //@PostAuthorize("returnObject.body.email == userService" +
+    //      ".loadUserByUsername(principal.username).getEmail()")
+
+    @PreAuthorize("#email == userService.getEmailByUsername(principal.username)")
     public ResponseEntity<ClientDto> getClientByEmail(@PathVariable String email){
 
         return ResponseEntity.ok(service.getClientByEmail(email));
