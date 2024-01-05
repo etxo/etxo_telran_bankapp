@@ -1,28 +1,21 @@
 package com.etxo.bank_app.service;
 
-import com.etxo.bank_app.dto.AccountDto;
-import com.etxo.bank_app.dto.AddressDto;
 import com.etxo.bank_app.dto.ClientDto;
 import com.etxo.bank_app.dto.ClientDtoUpdate;
-import com.etxo.bank_app.entity.Account;
 import com.etxo.bank_app.entity.Client;
 import com.etxo.bank_app.entity.Manager;
 import com.etxo.bank_app.entity.enums.Status;
 import com.etxo.bank_app.exceptions.ClientNotFoundException;
 import com.etxo.bank_app.exceptions.ManagerNotFoundException;
-import com.etxo.bank_app.mapping.AccountMapping;
 import com.etxo.bank_app.mapping.AddressMapping;
 import com.etxo.bank_app.mapping.ClientMapping;
 import com.etxo.bank_app.mapping.ManagerMapping;
-import com.etxo.bank_app.reposi.AddressRepository;
 import com.etxo.bank_app.reposi.ClientRepository;
 import com.etxo.bank_app.reposi.ManagerRepository;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
