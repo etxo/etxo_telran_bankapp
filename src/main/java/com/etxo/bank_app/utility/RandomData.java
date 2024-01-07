@@ -49,10 +49,11 @@ public class RandomData {
         }
     }
     public void generateRandomClients(ClientRepository clientRepo,
-                                             ManagerRepository managerRepo) {
+                                             ManagerRepository managerRepo,
+                                      int numberOfClients) {
 
         Faker faker = new Faker(new Locale("de"));
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < numberOfClients; i++) {
             Client client = new Client();
             Address address = new Address();
             address.setPostalCode(faker.address().zipCode());

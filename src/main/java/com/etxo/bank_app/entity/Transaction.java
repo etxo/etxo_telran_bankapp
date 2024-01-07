@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "transaction")
+@Table//(name = "transaction")
 @Getter@Setter
 @NoArgsConstructor
 @EqualsAndHashCode
