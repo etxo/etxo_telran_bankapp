@@ -20,6 +20,7 @@ public class AccountController {
     private final AccountService service;
 
     @GetMapping("/by_client/{clientId}")
+    @Secured("MANAGER")
     public ResponseEntity<List<AccountDto>> getAccountsByClientId(
             @PathVariable Long clientId){
 

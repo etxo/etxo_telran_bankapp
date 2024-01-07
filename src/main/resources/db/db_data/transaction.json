@@ -1,6 +1,5 @@
 {
-  "name": "db_data",
-  "version": "1.0.0",
-  "dependencies": {
-  }
+  "sender": {"id": 1},
+  "receiver": {"id": 2},
+  "amount": 50.00
 }

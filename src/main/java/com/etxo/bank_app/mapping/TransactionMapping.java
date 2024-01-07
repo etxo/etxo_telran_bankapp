@@ -7,6 +7,8 @@ import com.etxo.bank_app.entity.Transaction;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 public class TransactionMapping {
 

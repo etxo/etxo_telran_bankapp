@@ -117,7 +117,6 @@ public class RandomData {
         admin.setEmail("admin@gmx.de");
         admin.setRole(Role.ADMIN);
         String pw = new BCryptPasswordEncoder().encode("prosto");
-        System.out.println(pw);
         admin.setPassword(pw);
         userRepo.save(admin);
 
