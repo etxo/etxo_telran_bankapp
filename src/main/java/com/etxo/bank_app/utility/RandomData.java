@@ -71,7 +71,7 @@ public class RandomData {
             client.setFirstName(firstName);
             client.setLastName(lastName);
             client.setEmail(email);
-            client.setPhone(faker.phoneNumber().phoneNumber().toString());
+            client.setPhone(faker.phoneNumber().phoneNumber());
             client.setStatus(Status.ACTIVE);
             client.setManager(managerTrigger(managerRepo));
             clientRepo.save(client);
@@ -109,16 +109,24 @@ public class RandomData {
         accountRepo.save(account);
     }
 
-    public void generateAdmin(UserRepository userRepo){
+    public void generateAdminAndManager(UserRepository userRepo){
 
         if(userRepo.findByRole(Role.ADMIN).isPresent()) return;
-        User user = new User();
-        user.setUsername("etxo");
-        user.setEmail("etxo@gmx.de");
-        user.setRole(Role.ADMIN);
+        User admin = new User();
+        admin.setUsername("etxo");
+        admin.setEmail("etxo@gmx.de");
+        admin.setRole(Role.ADMIN);
         String pw = new BCryptPasswordEncoder().encode("prosto");
         System.out.println(pw);
-        user.setPassword(pw);
-        userRepo.save(user);
+        admin.setPassword(pw);
+        userRepo.save(admin);
+
+        if(userRepo.findByRole(Role.MANAGER).isPresent()) return;
+        User manager = new User();
+        admin.setUsername("manager");
+        admin.setEmail("manager@gmx.de");
+        admin.setRole(Role.MANAGER);
+        admin.setPassword(pw);
+        userRepo.save(manager);
     }
 }

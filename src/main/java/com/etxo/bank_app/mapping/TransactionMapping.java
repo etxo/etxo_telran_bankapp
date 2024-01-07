@@ -5,8 +5,9 @@ import com.etxo.bank_app.dto.TransactionDto;
 import com.etxo.bank_app.entity.Account;
 import com.etxo.bank_app.entity.Transaction;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component // or @Service ??? not sure
+@Service
 public class TransactionMapping {
 
     public TransactionDto mapToDto(Transaction entity){

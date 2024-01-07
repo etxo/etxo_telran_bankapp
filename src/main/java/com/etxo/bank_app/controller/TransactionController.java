@@ -7,6 +7,7 @@ import com.etxo.bank_app.service.TransactionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class TransactionController {
 
     private final TransactionService service;
     @PostMapping
+    @Secured("MANAGER")
     public ResponseEntity<TransactionDto> execute(
             @Valid @RequestBody TransactionDto dto) throws AccountNotFoundException {
         return ResponseEntity.ok(service.execute(dto));

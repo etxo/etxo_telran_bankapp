@@ -2,6 +2,7 @@ package com.etxo.bank_app.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -18,11 +19,21 @@ public class Transaction {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sender_id")
+    @JoinColumn(
+            name = "sender_id",
+            referencedColumnName = "id",
+            nullable = false,
+            foreignKey = @ForeignKey(
+                    name = "sender_id_fk"))
     private Account sender;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "receiver_id")
+    @JoinColumn(
+            name = "receiver_id",
+            referencedColumnName = "id",
+            nullable = false,
+            foreignKey = @ForeignKey(
+                    name = "receiver_id_fk"))
     private Account receiver;
 
     @Column(name = "amount")
@@ -32,5 +43,6 @@ public class Transaction {
     private String description;
 
     @Column(name = "executed_at")
+    @CreationTimestamp
     private Timestamp executedAt;
 }
