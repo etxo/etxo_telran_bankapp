@@ -26,14 +26,17 @@ public class TransactionService {
     @Transactional
     public TransactionDto execute(TransactionDto dto) throws AccountNotFoundException {
 
-        if (!accountRepository.existsById(dto.getSender().getId()))
+        if (!accountRepository.existsById(dto.getSender().getId())) {
             throw new AccountNotFoundException("this sender account does not exist!");
-        if (!accountRepository.existsById(dto.getReceiver().getId()))
+        }
+
+        if (!accountRepository.existsById(dto.getReceiver().getId())) {
             throw new AccountNotFoundException("this receiver account does not exist!");
+        }
 
         //TODO Business logic for executing a transaction.
-        Account sender = accountRepository.findById(dto.getId()).get();
-        Account receiver = accountRepository.findById(dto.getId()).get();
+        Account sender = accountRepository.findById(dto.getSender().getId()).get();
+        Account receiver = accountRepository.findById(dto.getReceiver().getId()).get();
         TransactionDto savedDto = null;
 
         if (sender.getBalance().compareTo(dto.getAmount()) >= 0) {

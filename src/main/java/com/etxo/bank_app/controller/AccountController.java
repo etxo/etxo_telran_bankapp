@@ -5,6 +5,8 @@ import com.etxo.bank_app.service.AccountService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,9 +18,9 @@ import java.util.Set;
 public class AccountController {
 
     private final AccountService service;
-    private Long clientId;
 
     @GetMapping("/by_client/{clientId}")
+    @Secured("MANAGER")
     public ResponseEntity<List<AccountDto>> getAccountsByClientId(
             @PathVariable Long clientId){
 
@@ -26,6 +28,7 @@ public class AccountController {
     }
 
     @PostMapping
+    @Secured("MANAGER")
     public ResponseEntity<AccountDto> create(@RequestBody @Valid AccountDto dto){
 
         return ResponseEntity.ok(service.create(dto));

@@ -32,9 +32,9 @@ public class BankAppApplication {
             );
 
             randomData.generateRandomManagers(managerRepo);
-            randomData.generateRandomClients(clientRepo, managerRepo);
+            randomData.generateRandomClients(clientRepo, managerRepo, 10);
             randomData.generateAccounts(accountRepo);
-            randomData.generateAdmin(userRepo);
+            randomData.generateAdminAndManager(userRepo);
         };
     }
 }

@@ -49,10 +49,11 @@ public class RandomData {
         }
     }
     public void generateRandomClients(ClientRepository clientRepo,
-                                             ManagerRepository managerRepo) {
+                                             ManagerRepository managerRepo,
+                                      int numberOfClients) {
 
         Faker faker = new Faker(new Locale("de"));
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < numberOfClients; i++) {
             Client client = new Client();
             Address address = new Address();
             address.setPostalCode(faker.address().zipCode());
@@ -70,7 +71,7 @@ public class RandomData {
             client.setFirstName(firstName);
             client.setLastName(lastName);
             client.setEmail(email);
-            client.setPhone(faker.phoneNumber().phoneNumber().toString());
+            client.setPhone(faker.phoneNumber().phoneNumber());
             client.setStatus(Status.ACTIVE);
             client.setManager(managerTrigger(managerRepo));
             clientRepo.save(client);
@@ -108,16 +109,23 @@ public class RandomData {
         accountRepo.save(account);
     }
 
-    public void generateAdmin(UserRepository userRepo){
+    public void generateAdminAndManager(UserRepository userRepo){
 
         if(userRepo.findByRole(Role.ADMIN).isPresent()) return;
-        User user = new User();
-        user.setUsername("etxo");
-        user.setEmail("etxo@gmx.de");
-        user.setRole(Role.ADMIN);
+        User admin = new User();
+        admin.setUsername("admin");
+        admin.setEmail("admin@gmx.de");
+        admin.setRole(Role.ADMIN);
         String pw = new BCryptPasswordEncoder().encode("prosto");
-        System.out.println(pw);
-        user.setPassword(pw);
-        userRepo.save(user);
+        admin.setPassword(pw);
+        userRepo.save(admin);
+
+        if(userRepo.findByRole(Role.MANAGER).isPresent()) return;
+        User manager = new User();
+        manager.setUsername("manager");
+        manager.setEmail("manager@gmx.de");
+        manager.setRole(Role.MANAGER);
+        manager.setPassword(pw);
+        userRepo.save(manager);
     }
 }
