@@ -113,8 +113,8 @@ public class RandomData {
 
         if(userRepo.findByRole(Role.ADMIN).isPresent()) return;
         User admin = new User();
-        admin.setUsername("etxo");
-        admin.setEmail("etxo@gmx.de");
+        admin.setUsername("admin");
+        admin.setEmail("admin@gmx.de");
         admin.setRole(Role.ADMIN);
         String pw = new BCryptPasswordEncoder().encode("prosto");
         System.out.println(pw);
@@ -123,10 +123,10 @@ public class RandomData {
 
         if(userRepo.findByRole(Role.MANAGER).isPresent()) return;
         User manager = new User();
-        admin.setUsername("manager");
-        admin.setEmail("manager@gmx.de");
-        admin.setRole(Role.MANAGER);
-        admin.setPassword(pw);
+        manager.setUsername("manager");
+        manager.setEmail("manager@gmx.de");
+        manager.setRole(Role.MANAGER);
+        manager.setPassword(pw);
         userRepo.save(manager);
     }
 }
