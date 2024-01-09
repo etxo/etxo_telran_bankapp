@@ -7,19 +7,20 @@ import com.etxo.bank_app.security.entity.Role;
 import com.etxo.bank_app.security.entity.User;
 import com.etxo.bank_app.security.repository.UserRepository;
 import com.github.javafaker.Faker;
-import org.hibernate.mapping.Any;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.stubbing.Answer;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -41,45 +42,50 @@ class AuthServiceTest {
     private AuthService authService;
 
 
-    private RegisterRequest registerRequest;
+    private RegisterRequest request;
     private String encodedPassword;
     private AuthRequest authRequest;
     private AuthResponse expectedResponse;
-    private
     @BeforeEach
-    void setUp() {
+    public void setUp() {
 
         Faker faker = new Faker();
-        registerRequest = new RegisterRequest();
-        registerRequest.setUsername(faker.name().username());
-        registerRequest.setEmail(faker.internet().emailAddress());
-        registerRequest.setPassword(faker.internet().password());
+        request = new RegisterRequest();
+        request.setUsername(faker.name().username());
+        request.setEmail(faker.internet().emailAddress());
+        request.setPassword(faker.internet().password());
 
         expectedResponse = new AuthResponse();
         encodedPassword = new BCryptPasswordEncoder()
-                .encode(registerRequest.getPassword());
+                .encode(request.getPassword());
         expectedResponse.setToken(new JwtService()
-                .generateToken(new User(1L, registerRequest.getUsername(),
-                        registerRequest.getEmail(),
-                        registerRequest.getPassword(),
+                .generateToken(new User(1L, request.getUsername(),
+                        request.getEmail(),
+                        request.getPassword(),
                         Role.USER)));
     }
 
     @Test
     void itShouldRegister() {
 
-        when(repository.existsByEmail(registerRequest.getEmail()))
+        when(repository.existsByEmail(request.getEmail()))
                 .thenReturn(false);
         when(jwtService.generateToken(any(User.class)))
                 .thenReturn(expectedResponse.getToken());
         when(encoder.encode(anyString())).thenReturn(encodedPassword);
 
         assertEquals(expectedResponse.getToken(),
-                authService.register(registerRequest).getToken());
+                authService.register(request).getToken());
     }
 
     @Test
     void itShouldAuthenticate() {
+
+        authService.register(request);
+        //when(authManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
+          //      .thenReturn(SecurityContextHolder.getContext()
+            //            .setAuthentication(request.getUsername(), request.getPassword()));
+
     }
     @Test
     void itShouldNotAuthenticateWithWrongPW() {

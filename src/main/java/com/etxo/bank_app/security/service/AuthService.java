@@ -10,6 +10,7 @@ import com.etxo.bank_app.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +44,7 @@ public class AuthService {
 
     public AuthResponse authenticate(AuthRequest request){
 
-        authManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(),
+        Authentication auth = authManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(),
                 request.getPassword()));
 
         User user = repository.findByUsername(request.getUsername())
