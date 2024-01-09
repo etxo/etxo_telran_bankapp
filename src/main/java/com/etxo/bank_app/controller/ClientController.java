@@ -2,6 +2,7 @@ package com.etxo.bank_app.controller;
 
 import com.etxo.bank_app.dto.ClientDto;
 import com.etxo.bank_app.dto.ClientDtoUpdate;
+import com.etxo.bank_app.security.entity.Role;
 import com.etxo.bank_app.security.service.UserService;
 import com.etxo.bank_app.service.ClientService;
 import jakarta.validation.Valid;
@@ -10,11 +11,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.AuthenticatedPrincipal;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("api/client")
@@ -42,11 +45,16 @@ public class ClientController {
     //@PostAuthorize("returnObject.body.email == userService" +
     //      ".loadUserByUsername(principal.username).getEmail()")
     //@Secured("MANAGER")
-    @PreAuthorize("hasRole('USER')") //and #email == userService.getEmailByUsername(authentication.principal.username)")
+    //@PreAuthorize("this.isOwner(#email)")
+    //@PreAuthorize("#email == ")
     public ResponseEntity<ClientDto> getClientByEmail(@PathVariable String email){
-
-        return ResponseEntity.ok(service.getClientByEmail(email));
+        if(userService.isOwner(email)) {
+            return ResponseEntity.ok(service.getClientByEmail(email));
+        }
+        else return ResponseEntity.badRequest().body(null);
     }
+
+
 
     @PostMapping
     @Secured("MANAGER")

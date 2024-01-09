@@ -12,12 +12,12 @@ import org.springframework.lang.NonNull;
 public class RegisterRequest {
 
 
-    @NonNull @Length(min = 3)
+    @NonNull @Length(min = 3, max = 25)
     private String username;
 
     @Email
     private String email;
 
-    @NonNull @Length(min = 6)
+    @NonNull @Length(min = 6, max = 25)
     private String password;
 }

@@ -3,6 +3,8 @@ package com.etxo.bank_app.security.service;
 import com.etxo.bank_app.security.entity.User;
 import com.etxo.bank_app.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,5 +27,11 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("No user with this name!"));
 
         return user.getEmail();
+    }
+
+    public boolean isOwner(String email){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        return email.equals(getEmailByUsername(username));
     }
 }
