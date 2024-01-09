@@ -24,7 +24,7 @@ public class AuthService {
 
     public AuthResponse register(RegisterRequest request) throws EmailExistsException{
 
-        if(repository.findByEmail(request.getEmail()).isPresent()){
+        if(repository.existsByEmail(request.getEmail())){
             throw new EmailExistsException(
                     "There is already a client with this email!");
         }
