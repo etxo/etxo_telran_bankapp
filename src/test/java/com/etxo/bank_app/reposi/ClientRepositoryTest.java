@@ -18,27 +18,27 @@ class ClientRepositoryTest {
     @Autowired
     private ClientRepository repository;
 
-    private Client expClient;
+    private Client expectedClient;
 
     @BeforeEach
     void setUp() {
 
         Faker faker = new Faker(new Locale("DE"));
-        expClient = new Client();
-        expClient.setStatus(Status.ACTIVE);
-        expClient.setFirstName(faker.name().firstName());
-        expClient.setLastName(faker.name().lastName());
-        expClient.setEmail(faker.internet().emailAddress());
+        expectedClient = new Client();
+        expectedClient.setStatus(Status.ACTIVE);
+        expectedClient.setFirstName(faker.name().firstName());
+        expectedClient.setLastName(faker.name().lastName());
+        expectedClient.setEmail(faker.internet().emailAddress());
     }
 
     @Test
     void shouldGetClientByEmail() {
 
-        repository.save(expClient);
-        Client savedClient = repository.getClientByEmail(expClient.getEmail())
+        repository.save(expectedClient);
+        Client savedClient = repository.getClientByEmail(expectedClient.getEmail())
                         .orElseThrow();
 
-        assertTrue(repository.existsByEmail(expClient.getEmail()));
-        assertEquals(expClient, savedClient);
+        assertTrue(repository.existsByEmail(expectedClient.getEmail()));
+        assertEquals(expectedClient, savedClient);
     }
 }
