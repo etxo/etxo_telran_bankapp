@@ -37,7 +37,7 @@ public class ManagerMapping {
         return dto;
     }
 
-    public static Manager mapToEntityUpdate(Manager entity, ManagerDto dto){
+    public Manager mapToEntityUpdate(Manager entity, ManagerDto dto){
         //entity.setId(dto.getId());
         if(dto.getFirstName() != null) entity.setFirstName(dto.getFirstName());
         if(dto.getLastName() != null) entity.setLastName(dto.getLastName());

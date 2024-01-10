@@ -41,7 +41,7 @@ public class ManagerService {
     public ManagerDto update(Long id, ManagerDto dto){
         Manager entity = repository.findById(id).orElse(null);
         return mapper.mapToDto(
-                repository.save(ManagerMapping.mapToEntityUpdate(entity, dto)));
+                repository.save(mapper.mapToEntityUpdate(entity, dto)));
     }
 
     //this method triggers a random manager from a list of the existing by creating a new client
