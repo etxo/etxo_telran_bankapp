@@ -57,7 +57,6 @@ public class ClientService {
                     "A client with email %s already exists!", clientDto.getEmail()));
         }
 
-
         ClientDto savedClientDto = clientMapper.mapToDto(
                 repository.save(clientMapper.mapToEntity(clientDto)));
         return savedClientDto;

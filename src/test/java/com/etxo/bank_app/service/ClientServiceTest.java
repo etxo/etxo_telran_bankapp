@@ -33,18 +33,15 @@ class ClientServiceTest {
     private ClientMapping clientMapper;
     @InjectMocks
     private ClientService clientService;
-
-    private Address expectedAddress;
     private Client expectedClient;
     private Client expectedClientWithId;
-    private Manager manager;
     private ClientDto expectedClientDto;
 
 
     @BeforeEach
     void init(){
         Faker faker = new Faker();
-        expectedAddress = new Address();
+        Address expectedAddress = new Address();
         expectedAddress.setPostalCode(faker.address().zipCode());
         expectedAddress.setCity(faker.address().city());
         expectedAddress.setStreet(faker.address().streetName());
@@ -53,7 +50,7 @@ class ClientServiceTest {
         expectedClient = new Client();
         expectedClient.setAddress(expectedAddress);
 
-        manager = new Manager();
+        Manager manager = new Manager();
         manager.setId(1L);
         manager.setFirstName(faker.name().firstName());
         manager.setLastName(faker.name().lastName());
@@ -115,7 +112,12 @@ class ClientServiceTest {
     }
 
     @Test
-    @Disabled
+    //@Disabled
     void getClientByEmailTest() {
+        when(repository.getClientByEmail(anyString())).thenReturn(Optional.of(expectedClient));
+        when(clientMapper.mapToDto(any(Client.class))).thenReturn(expectedClientDto);
+
+        ClientDto foundClient = clientService.getClientByEmail(expectedClient.getEmail());
+        assertEquals(expectedClientDto, foundClient);
     }
 }
