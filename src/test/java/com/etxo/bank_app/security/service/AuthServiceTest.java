@@ -13,18 +13,18 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.Answer;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -55,14 +55,19 @@ class AuthServiceTest {
         request.setEmail(faker.internet().emailAddress());
         request.setPassword(faker.internet().password());
 
+        authRequest = new AuthRequest();
+        authRequest.setUsername(request.getUsername());
+        authRequest.setPassword(request.getPassword());
+
         expectedResponse = new AuthResponse();
         encodedPassword = new BCryptPasswordEncoder()
                 .encode(request.getPassword());
         expectedResponse.setToken(new JwtService()
                 .generateToken(new User(1L, request.getUsername(),
                         request.getEmail(),
-                        request.getPassword(),
+                        encodedPassword,
                         Role.USER)));
+
     }
 
     @Test
@@ -79,15 +84,23 @@ class AuthServiceTest {
     }
 
     @Test
-    void itShouldAuthenticate() {
+    void itShouldAuthenticate(){
 
         authService.register(request);
-        //when(authManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
-          //      .thenReturn(SecurityContextHolder.getContext()
-            //            .setAuthentication(request.getUsername(), request.getPassword()));
+        Authentication auth = mock(Authentication.class);
+        auth.setAuthenticated(true);
+        when(authManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
+                .thenReturn(auth);
+        when(repository.findByUsername(anyString())).thenReturn(Optional.of(
+                new User(1L, request.getUsername(),
+                request.getEmail(),
+                encodedPassword,
+                Role.USER)));
+        when(jwtService.generateToken(any(User.class)))
+                .thenReturn(expectedResponse.getToken());
 
-    }
-    @Test
-    void itShouldNotAuthenticateWithWrongPW() {
+        assertEquals(expectedResponse.getToken(),
+                authService.authenticate(authRequest).getToken());
+
     }
 }
