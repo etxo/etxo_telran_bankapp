@@ -34,7 +34,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 
         http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/api/auth/**")
+                .authorizeHttpRequests(
+                        auth -> auth.requestMatchers(
+                                "/api/auth/**","/swagger-ui.html","/v3/api-docs/**","/swagger-ui/**")
                         .permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
                         //TODO should contain all endpoints, which you can pass through without authentication
