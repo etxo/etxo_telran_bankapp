@@ -5,6 +5,7 @@ import com.etxo.bank_app.dto.ClientDtoUpdate;
 import com.etxo.bank_app.security.entity.Role;
 import com.etxo.bank_app.security.service.UserService;
 import com.etxo.bank_app.service.ClientService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

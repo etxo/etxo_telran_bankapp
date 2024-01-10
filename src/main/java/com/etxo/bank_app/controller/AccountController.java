@@ -2,6 +2,7 @@ package com.etxo.bank_app.controller;
 
 import com.etxo.bank_app.dto.AccountDto;
 import com.etxo.bank_app.service.AccountService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

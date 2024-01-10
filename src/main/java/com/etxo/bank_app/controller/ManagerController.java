@@ -3,6 +3,7 @@ package com.etxo.bank_app.controller;
 
 import com.etxo.bank_app.dto.ManagerDto;
 import com.etxo.bank_app.service.ManagerService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
