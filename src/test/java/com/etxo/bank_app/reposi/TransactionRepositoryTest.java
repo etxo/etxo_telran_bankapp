@@ -36,7 +36,7 @@ class TransactionRepositoryTest {
         expSender.setIban(faker.finance().iban());
         expSender.setAccountType(AccountType.DEBIT);
         expSender.setStatus(Status.ACTIVE);
-        expSender.setBalance(BigDecimal.valueOf(100));
+        expSender.setBalance(new BigDecimal("100"));
         expSender.setCurrencyCode(Currency.EUR);
 
         Account expReceiver = new Account();
@@ -44,11 +44,11 @@ class TransactionRepositoryTest {
         expReceiver.setIban(faker.finance().iban());
         expReceiver.setAccountType(AccountType.DEBIT);
         expReceiver.setStatus(Status.ACTIVE);
-        expReceiver.setBalance(BigDecimal.valueOf(100));
+        expReceiver.setBalance(new BigDecimal("100"));
         expReceiver.setCurrencyCode(Currency.EUR);
 
         expTransaction = new Transaction();
-        expTransaction.setAmount(BigDecimal.valueOf(25));
+        expTransaction.setAmount(new BigDecimal("25"));
         expTransaction.setSender(expSender);
         expTransaction.setReceiver(expReceiver);
 
