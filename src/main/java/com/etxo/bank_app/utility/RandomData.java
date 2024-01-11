@@ -81,7 +81,7 @@ public class RandomData {
             generateRandomClient();
         }
     }
-    public Manager managerTrigger(){
+    private Manager managerTrigger(){
         Long randomId = 1L + new Random().nextLong(managerRepo.count());
         System.out.println(randomId);
         return managerRepo.findById(randomId).orElse(null);
