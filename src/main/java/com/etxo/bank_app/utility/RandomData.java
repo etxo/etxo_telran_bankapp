@@ -33,7 +33,9 @@ public class RandomData {
     private final ClientRepository clientRepo;
     private final AccountRepository accountRepo;
     private final UserRepository userRepo;
-    public void generateRandomManagers(ManagerRepository managerRepo) {
+
+    private static final int NUMBER_OF_CLIENTS = 10;
+    public void generateRandomManagers() {
         Faker faker = new Faker(new Locale("de"));
         for (int i = 0; i < 3; i++) {
             Manager manager = new Manager();
@@ -48,12 +50,9 @@ public class RandomData {
             managerRepo.save(manager);
         }
     }
-    public void generateRandomClients(ClientRepository clientRepo,
-                                             ManagerRepository managerRepo,
-                                      int numberOfClients) {
+    private void generateRandomClient() {
 
         Faker faker = new Faker(new Locale("de"));
-        for (int i = 0; i < numberOfClients; i++) {
             Client client = new Client();
             Address address = new Address();
             address.setPostalCode(faker.address().zipCode());
@@ -66,30 +65,34 @@ public class RandomData {
 
             String firstName = faker.name().firstName();
             String lastName = faker.name().lastName();
-            String email = faker.internet().emailAddress();
+            String email = faker.internet().emailAddress(firstName.concat(lastName));
 
             client.setFirstName(firstName);
             client.setLastName(lastName);
             client.setEmail(email);
             client.setPhone(faker.phoneNumber().phoneNumber());
             client.setStatus(Status.ACTIVE);
-            client.setManager(managerTrigger(managerRepo));
+            client.setManager(managerTrigger());
             clientRepo.save(client);
+    }
+
+    public void generateClients(){
+        for (int i = 0; i < NUMBER_OF_CLIENTS; i++) {
+            generateRandomClient();
         }
     }
-    public Manager managerTrigger(ManagerRepository managerRepo){
+    public Manager managerTrigger(){
         Long randomId = 1L + new Random().nextLong(managerRepo.count());
         System.out.println(randomId);
-        Manager entity = managerRepo.findById(randomId).orElse(null);
-        return entity;
+        return managerRepo.findById(randomId).orElse(null);
     }
-    public void generateAccounts(AccountRepository accountRepo){
+    public void generateAccounts(){
 
-        for(int i = 1; i <= 10; i++){
+        for(int i = 1; i <= NUMBER_OF_CLIENTS; i++){
             generateAccountForClientById((long) i);
         }
     }
-    public void generateAccountForClientById(Long id){
+    private void generateAccountForClientById(Long id){
 
         Faker faker = new Faker(new Locale("DE"));
         Account account = new Account();
@@ -102,14 +105,14 @@ public class RandomData {
         account.setBic(faker.finance().bic());
         account.setAccountType(AccountType.DEBIT);
         account.setStatus(Status.ACTIVE);
-        account.setBalance(new BigDecimal(100.0));
+        account.setBalance(new BigDecimal(100));
         account.setCurrencyCode(Currency.EUR);
         account.setSentTransactions(new ArrayList<>());
         account.setReceivedTransactions(new ArrayList<>());
         accountRepo.save(account);
     }
 
-    public void generateAdminAndManager(UserRepository userRepo){
+    public void generateAdminAndManager(){
 
         if(userRepo.findByRole(Role.ADMIN).isPresent()) return;
         User admin = new User();
