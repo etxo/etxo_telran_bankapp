@@ -8,6 +8,7 @@ import com.etxo.bank_app.entity.enums.Currency;
 import com.etxo.bank_app.entity.enums.Status;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -22,6 +23,7 @@ class TransactionRepositoryTest {
     private TransactionRepository repository;
 
     private Transaction expTransaction;
+
     @BeforeEach
     void init(){
 
@@ -34,6 +36,7 @@ class TransactionRepositoryTest {
         expSender.setClient(expClient);
         expSender.setId(1L);
         expSender.setIban(faker.finance().iban());
+        expSender.setBic(faker.finance().bic());
         expSender.setAccountType(AccountType.DEBIT);
         expSender.setStatus(Status.ACTIVE);
         expSender.setBalance(BigDecimal.valueOf(100));
@@ -42,6 +45,7 @@ class TransactionRepositoryTest {
         Account expReceiver = new Account();
         expReceiver.setId(2L);
         expReceiver.setIban(faker.finance().iban());
+        expReceiver.setBic(faker.finance().bic());
         expReceiver.setAccountType(AccountType.DEBIT);
         expReceiver.setStatus(Status.ACTIVE);
         expReceiver.setBalance(BigDecimal.valueOf(100));
@@ -56,6 +60,7 @@ class TransactionRepositoryTest {
 
 
     @Test
+    //@Disabled
     void shouldFindTransactionsByAccountId() {
 
         repository.save(expTransaction);
@@ -64,6 +69,7 @@ class TransactionRepositoryTest {
     }
 
     @Test
+    //@Disabled
     void shouldFindTransactionsByClientId() {
 
         repository.save(expTransaction);

@@ -25,7 +25,7 @@ public class Account {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "client_id")
+    @JoinColumn(name = "client_id")
     private Client client;
 
     @Column(name = "iban")
