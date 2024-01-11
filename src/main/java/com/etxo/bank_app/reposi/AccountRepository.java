@@ -10,9 +10,6 @@ import java.util.Set;
 
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
-    //@Transactional
-    //@Query(value = "select * from Account  where client_id = ?1",
-    //        nativeQuery = true)
     @Query("select a from Account a join a.client c where c.id = ?1")
     List<Account> getAccountsByClientId(Long clientId);
 
