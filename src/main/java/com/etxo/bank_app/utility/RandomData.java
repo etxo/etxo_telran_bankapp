@@ -8,10 +8,7 @@ import com.etxo.bank_app.entity.enums.AccountType;
 import com.etxo.bank_app.entity.enums.CountryCode;
 import com.etxo.bank_app.entity.enums.Currency;
 import com.etxo.bank_app.entity.enums.Status;
-import com.etxo.bank_app.exceptions.ClientNotFoundException;
 import com.etxo.bank_app.exceptions.ManagerNotFoundException;
-import com.etxo.bank_app.reposi.ClientRepository;
-import com.etxo.bank_app.reposi.ManagerRepository;
 import com.etxo.bank_app.security.entity.Role;
 import com.etxo.bank_app.security.entity.User;
 import com.etxo.bank_app.security.repository.UserRepository;
@@ -94,7 +91,7 @@ public class RandomData {
         return account;
     }
 
-    public void generateAdminAndManager(UserRepository repo){
+    public void generateAndSaveAdminAndManager(UserRepository repo){
 
         if(repo.findByRole(Role.ADMIN).isPresent()) return;
         User admin = new User();

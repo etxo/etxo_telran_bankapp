@@ -8,6 +8,7 @@ import com.etxo.bank_app.entity.enums.AccountType;
 import com.etxo.bank_app.entity.enums.Currency;
 import com.etxo.bank_app.entity.enums.Status;
 import com.etxo.bank_app.exceptions.ClientNotFoundException;
+import com.etxo.bank_app.exceptions.ValidationException;
 import com.etxo.bank_app.mapping.AccountMapping;
 import com.etxo.bank_app.reposi.AccountRepository;
 import com.etxo.bank_app.reposi.ClientRepository;
@@ -35,21 +36,22 @@ public class AccountService {
                 .map(mapping::mapToDto).toList());
     }*/
 
-    public List<AccountDto> getAccountsByClientId(Long clientId){
-        return accountRepo.getAccountsByClientId(clientId).stream()
-                .map(mapper::mapToDto).toList();
+    public List<AccountDto> getAccountsByClientId(Long clientId)
+            throws ClientNotFoundException{
+        if(clientRepo.existsById(clientId)) {
+            return accountRepo.getAccountsByClientId(clientId).stream()
+                    .map(mapper::mapToDto).toList();
+        }else {
+            throw new ClientNotFoundException(
+                    String.format("No client with id: %s", clientId));
+        }
     }
 
     @Transactional
-    public AccountDto create(AccountDto dto){
+    public AccountDto create(AccountDto dto) throws ClientNotFoundException{
 
-        Client client = null;
-        if(dto.getClient().getId() != null) {
-            client = clientRepo.findById(dto.getClient().getId()).orElse(null);
-        }else if(dto.getClient().getEmail() != null){
-            client = clientRepo.getClientByEmail(dto.getClient().getEmail()).orElse(null);
-        }
-        else throw new ClientNotFoundException("client not found!");
+        Client client = clientRepo.getClientByEmail(dto.getClient().getEmail())
+                .orElseThrow(() -> new ClientNotFoundException("No client found!"));
 
         Account account = mapper.mapToEntity(dto);
         account.setClient(client);

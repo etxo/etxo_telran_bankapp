@@ -38,7 +38,7 @@ public class BankAppApplication {
                 accountRepo.save(data.generateAccountForClient(client));
             }
 
-            data.generateAdminAndManager(userRepo);
+            data.generateAndSaveAdminAndManager(userRepo);
         };
     }
 }

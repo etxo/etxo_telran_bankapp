@@ -20,17 +20,17 @@ public class ClientDto {
 
     private Status status;
 
-    @NotNull@Length(min = 2, max = 22)
+    @NotNull @Length(min = 2, max = 22)
     private String firstName;
 
-    @NotNull@Length(min = 2, max = 32)
+    @NotNull @Length(min = 2, max = 32)
     private String lastName;
 
     @NotNull(message = "You need an email to open an account")
     @Email
     private String email;
 
-    @JsonProperty("address")
+    //@JsonProperty("address")
     private AddressDto address;
 
     @Length(min = 7, max = 15)
@@ -39,9 +39,9 @@ public class ClientDto {
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
-    @JsonProperty("manager")
+    //@JsonProperty("manager")
     private ManagerDto manager;
 
-    @JsonProperty("accounts")
+    //@JsonProperty("accounts")
     private List<AccountDtoShort> accounts;
 }

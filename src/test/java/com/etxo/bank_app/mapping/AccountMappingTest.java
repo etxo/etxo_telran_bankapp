@@ -51,6 +51,7 @@ class AccountMappingTest {
 
     @Test
     void itShouldMapToDto() {
+
         assertEquals(expectedDto, mapping.mapToDto(expectedEntity));
     }
 

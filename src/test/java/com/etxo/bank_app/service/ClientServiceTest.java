@@ -64,7 +64,7 @@ class ClientServiceTest {
         expectedClient.setFirstName(faker.name().firstName());
         expectedClient.setLastName(faker.name().lastName());
         expectedClient.setEmail(faker.internet().emailAddress());
-        expectedClient.setPhone(faker.phoneNumber().phoneNumber().toString());
+        expectedClient.setPhone(faker.phoneNumber().phoneNumber());
         expectedClient.setStatus(Status.ACTIVE);
 
         expectedClientWithId = new Client();

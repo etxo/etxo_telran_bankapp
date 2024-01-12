@@ -29,6 +29,6 @@ public class AddressDto {
     @NotNull
     @Enumerated
     private CountryCode countryCode;
-    @JsonIgnore
+    @JsonIgnore // to escape a chain reaction
     private ClientDto client;
 }
