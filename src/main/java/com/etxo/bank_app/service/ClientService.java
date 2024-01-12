@@ -86,7 +86,7 @@ public class ClientService {
         return updatedClientDto;
     }
 
-    public ClientDto delete(Long id){
+    public ClientDto delete(Long id) throws ClientNotFoundException {
         Client client = repository.findById(id)
                 .orElseThrow(() -> new ClientNotFoundException(
                         String.format("There is no client with id: %s", id)));

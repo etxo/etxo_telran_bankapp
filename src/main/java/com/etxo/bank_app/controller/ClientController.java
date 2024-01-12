@@ -2,12 +2,14 @@ package com.etxo.bank_app.controller;
 
 import com.etxo.bank_app.dto.ClientDto;
 import com.etxo.bank_app.dto.ClientDtoUpdate;
+import com.etxo.bank_app.exceptions.ClientNotFoundException;
 import com.etxo.bank_app.security.entity.Role;
 import com.etxo.bank_app.security.service.UserService;
 import com.etxo.bank_app.service.ClientService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PostAuthorize;
@@ -23,6 +25,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/client")
 @RequiredArgsConstructor
+@Slf4j
 public class ClientController {
 
     private final ClientService service;
@@ -75,6 +78,12 @@ public class ClientController {
     @Secured("MANAGER")
     public ResponseEntity<ClientDto> delete(@PathVariable Long id){
 
-        return ResponseEntity.ok(service.delete(id));
+        try {
+            ClientDto clientDto = service.delete(id);
+            return ResponseEntity.ok(clientDto);
+        } catch (ClientNotFoundException e){
+            log.error("Can not delete client. Client with id {} not found.",id);
+            return ResponseEntity.notFound().build();
+        }
     }
 }
