@@ -30,4 +30,10 @@ public class TransactionController {
             @PathVariable Long id) throws ClientNotFoundException {
         return ResponseEntity.ok(service.getTransactionsByClientId(id));
     }
+
+    @GetMapping("/account_id/{id}")
+    public ResponseEntity<List<TransactionDto>> getTransactionsByAccountId(
+            @PathVariable Long id) throws AccountNotFoundException {
+        return ResponseEntity.ok(service.getTransactionsByAccountId(id));
+    }
 }

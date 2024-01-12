@@ -18,18 +18,20 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
-import static com.etxo.bank_app.entity.enums.CountryCode.DE;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -105,19 +107,29 @@ class TransactionServiceTest {
     }
 
     @Test
-    @Disabled
-    void executeTest() {
+    //@Disabled
+    void itShouldExecuteTransaction() {
+
         when(accountRepository.existsById(anyLong())).thenReturn(true);
         when(accountRepository.findById(1L)).thenReturn(Optional.of(expectedSender));
         when(accountRepository.findById(2L)).thenReturn(Optional.of(expectedReceiver));
-        when(mapper.mapToDto(expectedTransaction)).thenReturn(expectedTransactionDto);
+        when(accountRepository.save(any(Account.class))).thenReturn(expectedSender);
         when(mapper.mapToEntity(expectedTransactionDto)).thenReturn(expectedTransaction);
+        when(transactionRepository.save(any(Transaction.class))).thenReturn(expectedTransaction);
+        when(mapper.mapToDto(expectedTransaction)).thenReturn(expectedTransactionDto);
 
         TransactionDto savedDto = transactionService.execute(expectedTransactionDto);
         assertEquals(expectedTransactionDto, savedDto);
     }
 
     @Test
-    void getTransactionsByClientIdTest() {
+    void itShouldGetTransactionsByClientId() {
+
+        when(transactionRepository.findTransactionsByClientId(anyLong()))
+                .thenReturn(List.of(expectedTransaction));
+        when(mapper.mapToDto(any(Transaction.class))).thenReturn(expectedTransactionDto);
+
+        assertIterableEquals(List.of(expectedTransactionDto),
+                transactionService.getTransactionsByClientId(1L));
     }
 }

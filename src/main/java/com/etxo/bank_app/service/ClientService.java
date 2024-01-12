@@ -13,6 +13,7 @@ import com.etxo.bank_app.mapping.ManagerMapping;
 import com.etxo.bank_app.reposi.ClientRepository;
 import com.etxo.bank_app.reposi.ManagerRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -34,36 +35,34 @@ public class ClientService {
                 .toList());
     }
 
-    public ClientDto getClientById(Long id){
+    public ClientDto getClientById(Long id) throws ClientNotFoundException{
         Client client = repository.findById(id).orElseThrow(
                 () -> new ClientNotFoundException(
                         String.format("NO CLIENT WITH ID: %s", id)));
 
-        ClientDto dto = clientMapper.mapToDto(client);
-
-        return dto;
+        return clientMapper.mapToDto(client);
     }
 
-    public ClientDto getClientByEmail(String email){
+    public ClientDto getClientByEmail(String email) throws ClientNotFoundException{
         Client client = repository.getClientByEmail(email)
                 .orElseThrow(() -> new ClientNotFoundException(
                         String.format("There is no client with email: %s", email)));
         return clientMapper.mapToDto(client);
     }
 
-    public ClientDto create(ClientDto clientDto){
+    public ClientDto create(ClientDto clientDto) throws RuntimeException{
         if (repository.existsByEmail(clientDto.getEmail())){
             throw new RuntimeException(String.format(
                     "A client with email %s already exists!", clientDto.getEmail()));
         }
 
-        ClientDto savedClientDto = clientMapper.mapToDto(
+        return clientMapper.mapToDto(
                 repository.save(clientMapper.mapToEntity(clientDto)));
-        return savedClientDto;
     }
 
     // this service allows to update
-    public ClientDto updateById(Long id, ClientDtoUpdate dto){
+    public ClientDto updateById(Long id, ClientDtoUpdate dto)
+            throws ClientNotFoundException, ManagerNotFoundException{
 
         Client client = repository.findById(id)
                 .orElseThrow(() -> new ClientNotFoundException(
@@ -82,17 +81,15 @@ public class ClientService {
             client.setManager(manager);
         }
         Client updatedClient = repository.save(client);
-        ClientDto updatedClientDto = clientMapper.mapToDto(updatedClient);
-        return updatedClientDto;
+        return clientMapper.mapToDto(updatedClient);
     }
 
-    public ClientDto delete(Long id){
+    public ClientDto delete(Long id) throws ClientNotFoundException{
         Client client = repository.findById(id)
                 .orElseThrow(() -> new ClientNotFoundException(
                         String.format("There is no client with id: %s", id)));
         client.setStatus(Status.INACTIVE);
         Client savedClient = repository.save(client);
-        ClientDto savedClientDto = clientMapper.mapToDto(savedClient);
-        return savedClientDto;
+        return clientMapper.mapToDto(savedClient);
     }
 }

@@ -18,7 +18,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("api/client")
@@ -30,9 +32,9 @@ public class ClientController {
 
     @Secured({"ADMIN", "MANAGER"})
     @GetMapping
-    public List<ClientDto> getClients(){
+    public ResponseEntity<Set<ClientDto>> getClients(){
 
-        return new ArrayList<>(service.getClients());
+        return ResponseEntity.ok(service.getClients());
     }
 
     @GetMapping("/{id}")
@@ -47,7 +49,6 @@ public class ClientController {
     //      ".loadUserByUsername(principal.username).getEmail()")
     //@Secured("MANAGER")
     //@PreAuthorize("this.isOwner(#email)")
-    //@PreAuthorize("#email == ")
     public ResponseEntity<ClientDto> getClientByEmail(@PathVariable String email){
         if(userService.isOwner(email)) {
             return ResponseEntity.ok(service.getClientByEmail(email));

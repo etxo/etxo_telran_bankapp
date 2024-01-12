@@ -56,5 +56,4 @@ public class AccountService {
         Account savedAccount = accountRepo.save(account);
         return mapper.mapToDto(savedAccount);
     }
-
 }

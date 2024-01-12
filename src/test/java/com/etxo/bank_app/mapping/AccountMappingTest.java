@@ -22,8 +22,8 @@ class AccountMappingTest {
     AccountMapping mapping;
     @BeforeEach
     void setUp() {
-        Faker faker = new Faker();
 
+        Faker faker = new Faker();
         expectedEntity = new Account();
         expectedEntity.setId(1L);
         expectedEntity.setIban(faker.finance().iban());
