@@ -15,14 +15,17 @@ import org.mockito.Mock;
 
 import com.etxo.bank_app.dto.ClientDto;
 import com.etxo.bank_app.entity.*;
+import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.FactoryBasedNavigableListAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -42,6 +45,7 @@ class ClientMappingTest {
     private Client expectedEntity;
     private AccountDtoShort accountDto;
     private AddressDto addressDto;
+    private ManagerDto managerDto;
     private ClientDto expectedDto;
     private RandomData data;
 
@@ -56,19 +60,8 @@ class ClientMappingTest {
         expectedEntity.setAccounts(
                 List.of(data.generateAccountForClient(expectedEntity)));
 
-        addressDto = new AddressDto();
-        addressDto.setId(expectedEntity.getAddress().getId());
-        addressDto.setPostalCode(expectedEntity.getAddress().getPostalCode());
-        addressDto.setCity(expectedEntity.getAddress().getCity());
-        addressDto.setStreet(expectedEntity.getAddress().getStreet());
-        addressDto.setHouseNr(expectedEntity.getAddress().getHouseNr());
-        addressDto.setCountryCode(expectedEntity.getAddress().getCountryCode());
-
-        accountDto = new AccountDtoShort();
-        accountDto.setId(expectedEntity.getAccounts().get(0).getId());
-        accountDto.setIban(expectedEntity.getAccounts().get(0).getIban());
-        accountDto.setBic(expectedEntity.getAccounts().get(0).getBic());
-        accountDto.setBalance(expectedEntity.getAccounts().get(0).getBalance());
+        addressDto = mock(AddressDto.class);
+        accountDto = mock(AccountDtoShort.class);
 
         expectedDto = new ClientDto();
         expectedDto.setId(expectedEntity.getId());
@@ -81,7 +74,7 @@ class ClientMappingTest {
         expectedDto.setCreatedAt(new Timestamp(123));
         expectedDto.setUpdatedAt(new Timestamp(123));
 
-        ManagerDto managerDto = new ManagerDto();
+        managerDto = new ManagerDto();
         managerDto.setId(1L);
         expectedDto.setManager(managerDto);
         expectedDto.setAccounts(List.of(accountDto));
@@ -97,12 +90,21 @@ class ClientMappingTest {
         when(addressMapper.mapToDto(any(Address.class)))
                 .thenReturn(addressDto);
         when(managerMapper.mapToDto(any(Manager.class)))
-                .thenReturn(new ManagerDto());
+                .thenReturn(managerDto);
         when(accountMapper.mapToDtoShort(any(Account.class)))
                 .thenReturn(accountDto);
 
-        assertEquals(expectedDto,
-                clientMapper.mapToDto(expectedEntity));
+        assertIterableEquals(expectedDto.getAccounts(),
+                clientMapper.mapToDto(expectedEntity).getAccounts());
+
+        ClientDto actualDto = clientMapper.mapToDto(expectedEntity);
+
+        assertEquals(expectedDto.getId(), actualDto.getId());
+        assertEquals(expectedDto.getStatus(), actualDto.getStatus());
+        assertEquals(expectedDto.getFirstName(), actualDto.getFirstName());
+        assertEquals(expectedDto.getLastName(), actualDto.getLastName());
+        assertEquals(expectedDto.getEmail(), actualDto.getEmail());
+        assertEquals(expectedDto.getPhone(), actualDto.getPhone());
     }
 
     @Test

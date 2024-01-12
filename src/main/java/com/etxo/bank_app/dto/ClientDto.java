@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.Length;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 @Setter @Getter
 @NoArgsConstructor
@@ -44,4 +45,5 @@ public class ClientDto {
 
     //@JsonProperty("accounts")
     private List<AccountDtoShort> accounts;
+
 }
