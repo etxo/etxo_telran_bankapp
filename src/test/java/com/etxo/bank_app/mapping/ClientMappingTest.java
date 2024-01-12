@@ -26,7 +26,7 @@ class ClientMappingTest {
     private ClientMapping clientMapper;
     private Client expectedEntity;
     private ClientDto expectedDto;
-    //private RandomData data;
+    private RandomData data;
 
     @BeforeEach
     void setUp() {

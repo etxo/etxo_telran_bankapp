@@ -21,9 +21,8 @@ public class ManagerService {
         if (repository.existsByEmail(dto.getEmail())){
             throw new RuntimeException("manager with such an email already exists!");
         }
-        ManagerDto savedManager = mapper.mapToDto(
+        return mapper.mapToDto(
                 repository.save(mapper.mapToEntity(dto)));
-        return savedManager;
     }
 
     public ManagerDto getManagerById(Long id){

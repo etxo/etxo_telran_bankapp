@@ -1,5 +1,6 @@
 package com.etxo.bank_app;
 
+import com.etxo.bank_app.entity.Client;
 import com.etxo.bank_app.reposi.AccountRepository;
 import com.etxo.bank_app.reposi.ClientRepository;
 import com.etxo.bank_app.reposi.ManagerRepository;
@@ -25,13 +26,19 @@ public class BankAppApplication {
             AccountRepository accountRepo,
             UserRepository userRepo) {
         return args -> {
-            RandomData randomData = new RandomData(
-                    managerRepo, clientRepo, accountRepo, userRepo
-            );
-            randomData.generateRandomManagers();
-            randomData.generateClients();
-            randomData.generateAccounts();
-            randomData.generateAdminAndManager();
+            RandomData data = new RandomData();
+            for (int i = 0; i < 3; i++) {
+                managerRepo.save(data.generateRandomManager());
+            }
+
+            for (int i = 0; i < 10; i++) {
+
+                Client client = clientRepo.save(data.generateRandomClient(
+                        data.managerTrigger(managerRepo.findAll())));
+                accountRepo.save(data.generateAccountForClient(client));
+            }
+
+            data.generateAdminAndManager(userRepo);
         };
     }
 }
