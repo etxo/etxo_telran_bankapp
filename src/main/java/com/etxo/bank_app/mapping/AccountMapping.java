@@ -2,6 +2,7 @@ package com.etxo.bank_app.mapping;
 
 import com.etxo.bank_app.dto.AccountDto;
 import com.etxo.bank_app.dto.AccountDtoShort;
+import com.etxo.bank_app.dto.ClientDto;
 import com.etxo.bank_app.entity.Account;
 import com.etxo.bank_app.entity.enums.AccountType;
 import com.etxo.bank_app.entity.enums.Status;

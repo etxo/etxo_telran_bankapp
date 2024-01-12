@@ -37,7 +37,7 @@ public class AccountService {
 
     public List<AccountDto> getAccountsByClientId(Long clientId){
         return accountRepo.getAccountsByClientId(clientId).stream()
-                .map(x -> mapper.mapToDto(x)).toList();
+                .map(mapper::mapToDto).toList();
     }
 
     @Transactional
