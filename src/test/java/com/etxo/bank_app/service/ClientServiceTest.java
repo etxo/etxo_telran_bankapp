@@ -1,11 +1,14 @@
 package com.etxo.bank_app.service;
 
+import com.etxo.bank_app.dto.AddressDto;
 import com.etxo.bank_app.dto.ClientDto;
+import com.etxo.bank_app.dto.ClientDtoUpdate;
 import com.etxo.bank_app.entity.Address;
 import com.etxo.bank_app.entity.Client;
 import com.etxo.bank_app.entity.Manager;
 import com.etxo.bank_app.entity.enums.CountryCode;
 import com.etxo.bank_app.entity.enums.Status;
+import com.etxo.bank_app.mapping.AddressMapping;
 import com.etxo.bank_app.mapping.ClientMapping;
 import com.etxo.bank_app.reposi.ClientRepository;
 import com.github.javafaker.Faker;
@@ -33,6 +36,8 @@ class ClientServiceTest {
     private ClientRepository repository;
     @Mock
     private ClientMapping clientMapper;
+    @Mock
+    private AddressMapping addressMapper;
     @InjectMocks
     private ClientService clientService;
     private Client expectedClient;
@@ -87,19 +92,23 @@ class ClientServiceTest {
         expectedClientDto.setPhone(expectedClientWithId.getPhone());
     }
     @Test
-    void createClientTest() {
+    void itShouldCreateClient() {
 
-        when(clientMapper.mapToEntity(any(ClientDto.class))).thenReturn(expectedClient);
-        when(clientMapper.mapToDto(any(Client.class))).thenReturn(expectedClientDto);
-        when(repository.existsByEmail(anyString())).thenReturn(false);
-        when(repository.save(any(Client.class))).thenReturn(expectedClientWithId);
+        when(clientMapper.mapToEntity(any(ClientDto.class)))
+                .thenReturn(expectedClient);
+        when(clientMapper.mapToDto(any(Client.class)))
+                .thenReturn(expectedClientDto);
+        when(repository.existsByEmail(anyString()))
+                .thenReturn(false);
+        when(repository.save(any(Client.class)))
+                .thenReturn(expectedClientWithId);
 
         ClientDto savedClientDto = clientService.create(expectedClientDto);
         assertEquals(expectedClientDto, savedClientDto);
     }
 
     @Test
-    void getClientsTest() {
+    void itShouldGetAllClients() {
         when(repository.findAll())
                 .thenReturn(List.of(mock(Client.class)));
         when(clientMapper.mapToDto(any(Client.class)))
@@ -109,20 +118,63 @@ class ClientServiceTest {
     }
 
     @Test
-    void getClientByIdTest() {
-        when(repository.findById(anyLong())).thenReturn(Optional.of(expectedClientWithId));
-        when(clientMapper.mapToDto(any(Client.class))).thenReturn(expectedClientDto);
+    void itShouldGetClientById() {
+        when(repository.findById(anyLong()))
+                .thenReturn(Optional.of(expectedClientWithId));
+        when(clientMapper.mapToDto(any(Client.class)))
+                .thenReturn(expectedClientDto);
         ClientDto clientDto = clientService.getClientById(1L);
         assertEquals(expectedClientDto, clientDto);
     }
 
     @Test
     //@Disabled
-    void getClientByEmailTest() {
-        when(repository.getClientByEmail(anyString())).thenReturn(Optional.of(expectedClient));
-        when(clientMapper.mapToDto(any(Client.class))).thenReturn(expectedClientDto);
+    void itShouldGetClientByEmail() {
+
+        when(repository.getClientByEmail(anyString()))
+                .thenReturn(Optional.of(expectedClient));
+        when(clientMapper.mapToDto(any(Client.class)))
+                .thenReturn(expectedClientDto);
 
         ClientDto foundClient = clientService.getClientByEmail(expectedClient.getEmail());
         assertEquals(expectedClientDto, foundClient);
+    }
+
+    @Test
+    void itShouldUpdateClientById() {
+
+        Faker faker = new Faker();
+        Address newAddress = new Address();
+        newAddress.setPostalCode(faker.address().zipCode());
+        newAddress.setCity(faker.address().city());
+        newAddress.setStreet(faker.address().streetName());
+        newAddress.setHouseNr(faker.address().buildingNumber());
+        newAddress.setCountryCode(CountryCode.DE);
+
+        AddressDto newAddressDto = new AddressDto();
+        newAddressDto.setPostalCode(newAddress.getPostalCode());
+        newAddressDto.setCity(newAddress.getPostalCode());
+        newAddressDto.setStreet(newAddress.getStreet());
+        newAddressDto.setHouseNr(newAddress.getHouseNr());
+        newAddressDto.setCountryCode(newAddress.getCountryCode());
+
+        ClientDtoUpdate dtoUpdate = new ClientDtoUpdate();
+        dtoUpdate.setAddress(newAddressDto);
+        Client updatedClient = new Client();
+        updatedClient.setAddress(newAddress);
+        ClientDto updatedClientDto = new ClientDto();
+        updatedClientDto.setAddress(newAddressDto);
+
+        when(repository.findById(anyLong()))
+                .thenReturn(Optional.of(expectedClientWithId));
+        when(addressMapper.mapToEntity(any(AddressDto.class)))
+                .thenReturn(newAddress);
+        when(repository.save(any(Client.class)))
+                .thenReturn(updatedClient);
+        when(clientMapper.mapToDto(any(Client.class)))
+                .thenReturn(updatedClientDto);
+
+        assertEquals(updatedClientDto, clientService.updateById(
+                1l, dtoUpdate));
     }
 }
