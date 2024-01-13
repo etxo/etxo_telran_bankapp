@@ -18,10 +18,12 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -89,7 +91,6 @@ class ClientServiceTest {
 
         when(clientMapper.mapToEntity(any(ClientDto.class))).thenReturn(expectedClient);
         when(clientMapper.mapToDto(any(Client.class))).thenReturn(expectedClientDto);
-        //when(repository.findById(anyLong())).thenReturn(Optional.of(expectedClient));
         when(repository.existsByEmail(anyString())).thenReturn(false);
         when(repository.save(any(Client.class))).thenReturn(expectedClientWithId);
 
@@ -98,9 +99,13 @@ class ClientServiceTest {
     }
 
     @Test
-    @Disabled
     void getClientsTest() {
+        when(repository.findAll())
+                .thenReturn(List.of(mock(Client.class)));
+        when(clientMapper.mapToDto(any(Client.class)))
+                .thenReturn(mock(ClientDto.class));
 
+        assertFalse(clientService.getClients().isEmpty());
     }
 
     @Test
