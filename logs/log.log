@@ -47,3 +47,41 @@
 2024-01-13T13:07:04.813+01:00  INFO 31006 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
 2024-01-13T13:07:05.406+01:00  INFO 31006 --- [main] c.e.b.reposi.ClientRepositoryTest        : Started ClientRepositoryTest in 3.696 seconds (process running for 4.797)
 2024-01-13T13:07:07.037+01:00  INFO 31006 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-01-13T13:28:54.769+01:00  INFO 35207 --- [main] com.etxo.bank_app.BankAppApplication     : Starting BankAppApplication using Java 17.0.9 with PID 35207 (/home/etxo/TelRan/bank_app/target/classes started by etxo in /home/etxo/TelRan/bank_app)
+2024-01-13T13:28:54.773+01:00  INFO 35207 --- [main] com.etxo.bank_app.BankAppApplication     : No active profile set, falling back to 1 default profile: "default"
+2024-01-13T13:28:55.519+01:00  INFO 35207 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-01-13T13:28:55.581+01:00  INFO 35207 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 56 ms. Found 6 JPA repository interfaces.
+2024-01-13T13:28:56.366+01:00  INFO 35207 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-01-13T13:28:56.373+01:00  INFO 35207 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-01-13T13:28:56.373+01:00  INFO 35207 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2024-01-13T13:28:56.419+01:00  INFO 35207 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-01-13T13:28:56.419+01:00  INFO 35207 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1595 ms
+2024-01-13T13:28:56.478+01:00  INFO 35207 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-01-13T13:28:56.644+01:00  INFO 35207 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:db_bank user=ETXO
+2024-01-13T13:28:56.646+01:00  INFO 35207 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-01-13T13:28:56.656+01:00  INFO 35207 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:db_bank'
+2024-01-13T13:28:56.791+01:00  INFO 35207 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-01-13T13:28:56.832+01:00  INFO 35207 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2024-01-13T13:28:56.859+01:00  INFO 35207 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-01-13T13:28:57.021+01:00  INFO 35207 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-01-13T13:28:57.049+01:00  WARN 35207 --- [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-01-13T13:28:57.821+01:00  INFO 35207 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-01-13T13:28:57.878+01:00  INFO 35207 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-01-13T13:28:58.478+01:00  INFO 35207 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-01-13T13:28:59.644+01:00  WARN 35207 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-01-13T13:29:00.265+01:00  INFO 35207 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5d685156, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@30926583, org.springframework.security.web.context.SecurityContextHolderFilter@72548e3c, org.springframework.security.web.header.HeaderWriterFilter@622be81d, org.springframework.web.filter.CorsFilter@55aadbf2, org.springframework.security.web.authentication.logout.LogoutFilter@50ba10de, com.etxo.bank_app.security.config.JwtAuthFilter@6b888692, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@47f50549, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@58ed5ed3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5b3c491e, org.springframework.security.web.session.SessionManagementFilter@4893d628, org.springframework.security.web.access.ExceptionTranslationFilter@387cd426, org.springframework.security.web.access.intercept.AuthorizationFilter@4f755506]
+2024-01-13T13:29:00.931+01:00  INFO 35207 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-01-13T13:29:00.941+01:00  INFO 35207 --- [main] com.etxo.bank_app.BankAppApplication     : Started BankAppApplication in 6.588 seconds (process running for 7.042)
+2024-01-13T13:29:14.203+01:00  INFO 35207 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-13T13:29:14.203+01:00  INFO 35207 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-01-13T13:29:14.205+01:00  INFO 35207 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-01-13T13:29:14.215+01:00  WARN 35207 --- [http-nio-8080-exec-1] o.s.w.s.h.HandlerMappingIntrospector     : Cache miss for REQUEST dispatch to '/swagger-ui/index.html' (previous null). Performing CorsConfiguration lookup. This is logged once only at WARN level, and every time at TRACE.
+2024-01-13T13:29:14.226+01:00  WARN 35207 --- [http-nio-8080-exec-1] o.s.w.s.h.HandlerMappingIntrospector     : Cache miss for REQUEST dispatch to '/swagger-ui/index.html' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
+2024-01-13T13:29:15.192+01:00  INFO 35207 --- [http-nio-8080-exec-9] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 485 ms
+2024-01-13T13:31:00.452+01:00  INFO 35207 --- [http-nio-8080-exec-6] com.etxo.bank_app.aop.AspectLogging      : Method Set com.etxo.bank_app.service.ManagerService.getAll() was invoked with parameter [].
+2024-01-13T13:31:00.455+01:00  INFO 35207 --- [http-nio-8080-exec-6] com.etxo.bank_app.aop.AspectLogging      : Mapper mapToDto was invoked with parameters [com.etxo.bank_app.entity.Manager@b4193b98]
+2024-01-13T13:31:00.455+01:00  INFO 35207 --- [http-nio-8080-exec-6] com.etxo.bank_app.aop.AspectLogging      : Mapper mapToDto was invoked with parameters [com.etxo.bank_app.entity.Manager@f20f51ad]
+2024-01-13T13:31:00.455+01:00  INFO 35207 --- [http-nio-8080-exec-6] com.etxo.bank_app.aop.AspectLogging      : Mapper mapToDto was invoked with parameters [com.etxo.bank_app.entity.Manager@af8d1c97]
+2024-01-13T13:33:59.029+01:00  INFO 35207 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-01-13T13:33:59.037+01:00  INFO 35207 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-01-13T13:33:59.039+01:00  INFO 35207 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
