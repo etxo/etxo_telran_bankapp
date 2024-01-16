@@ -43,6 +43,8 @@ class ClientServiceTest {
     private AddressMapping addressMapper;
     @InjectMocks
     private ClientService clientService;
+    @Captor
+    private ArgumentCaptor<Client> clientCaptor;
     private Client expectedClient;
     private Client expectedClientWithId;
     private ClientDto expectedClientDto;
@@ -173,17 +175,14 @@ class ClientServiceTest {
                 .thenReturn(Optional.of(expectedClientWithId));
         when(addressMapper.mapToEntity(any(AddressDto.class)))
                 .thenReturn(newAddress);
-        when(repository.save(any(Client.class)))
-                .thenReturn(updatedClient);
-        when(clientMapper.mapToDto(any(Client.class)))
-                .thenReturn(updatedClientDto);
 
-        assertEquals(updatedClientDto, clientService.updateById(
-                1l, dtoUpdate));
+        clientService.updateById(1L, dtoUpdate);
+        verify(repository).save(clientCaptor.capture());
+        Client savedClient = clientCaptor.getValue();
+
+        assertEquals(newAddress, savedClient.getAddress());
     }
 
-    @Captor
-    private ArgumentCaptor<Client> clientCaptor;
     @Test
     void itShouldDeleteClientById(){
 
