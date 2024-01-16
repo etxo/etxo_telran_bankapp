@@ -5,6 +5,7 @@ import com.etxo.bank_app.entity.Manager;
 import com.etxo.bank_app.entity.enums.Status;
 import com.etxo.bank_app.mapping.ManagerMapping;
 import com.etxo.bank_app.reposi.ManagerRepository;
+import com.etxo.bank_app.utility.RandomData;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,18 +34,10 @@ class ManagerServiceTest {
     private ManagerDto expectedManagerDto;
 
     @BeforeEach
-    void setUp() {
+    void init() {
 
-        service = new ManagerService(repository, mapper);
-        Faker faker = new Faker();
-        expectedManager = new Manager();
-        expectedManager.setId(1L);
-        expectedManager.setFirstName(faker.name().firstName());
-        expectedManager.setLastName(faker.name().lastName());
-        expectedManager.setEmail(faker.internet().emailAddress());
-        expectedManager.setPhone(faker.phoneNumber().phoneNumber());
-        expectedManager.setStatus(Status.ACTIVE);
-
+        RandomData data = new RandomData();
+        expectedManager = data.generateRandomManager();
         expectedManagerDto = new ManagerDto();
         expectedManagerDto.setId(1L);
         expectedManagerDto.setFirstName(expectedManager.getFirstName());
@@ -56,7 +49,9 @@ class ManagerServiceTest {
 
     @Test
     void itShouldCreateManager() {
-        when(repository.existsByEmail(anyString())).thenReturn(false);
+
+        when(repository.existsByEmail(anyString()))
+                .thenReturn(false);
         when(mapper.mapToEntity(any(ManagerDto.class)))
                 .thenReturn(expectedManager);
         when(repository.save(any(Manager.class)))
@@ -64,7 +59,11 @@ class ManagerServiceTest {
         when(mapper.mapToDto(any(Manager.class)))
                 .thenReturn(expectedManagerDto);
 
-        ManagerDto createdManagerDto = service.create(expectedManagerDto);
-        assertEquals(expectedManagerDto, createdManagerDto);
+        assertEquals(expectedManagerDto, service.create(expectedManagerDto));
+    }
+
+    @Test
+    void itShouldGetManagerById(){
+
     }
 }
