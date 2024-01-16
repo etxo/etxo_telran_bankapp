@@ -18,7 +18,7 @@ public class AspectLogging {
     public void getAnyFromMapping(){}
     @Before("getAnyFromMapping()")
     public void logAnyCallsOfMapping(JoinPoint jp){
-        LOGGER.info("Mapper {} was invoked with parameters {}",
+        LOGGER.debug("Mapper {} was invoked with parameters {}",
                 jp.getSignature().getName(), Arrays.stream(jp.getArgs()).toList());
     }
 
@@ -27,14 +27,14 @@ public class AspectLogging {
 
     @Before("getAnyFromServices()")
     public void logAnyCallOfService(JoinPoint joinPoint) {
-        LOGGER.info("Method {} was invoked with parameter {}.",
+        LOGGER.debug("Method {} was invoked with parameter {}.",
                 joinPoint.getSignature(),
                 joinPoint.getArgs());
     }
 
     @AfterThrowing("getAnyFromServices()")
     public void logAfterThrowingException(JoinPoint joinPoint){
-        LOGGER.info("Method {} of {} threw an exception",
+        LOGGER.debug("Method {} of {} threw an exception",
                 joinPoint.getSignature(),
                 joinPoint.getSignature().getDeclaringType());
     }

@@ -67,7 +67,7 @@ public class RandomData {
     public Manager managerTrigger(List<Manager> managers)
                                 throws ManagerNotFoundException {
         Long randomId = 1L + new Random().nextLong(managers.size());
-        System.out.println(randomId);
+        //System.out.println(randomId);
         return managers.stream()
                 .filter(manager -> manager.getId().equals(randomId))
                 .findFirst()

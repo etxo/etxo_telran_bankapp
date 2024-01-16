@@ -50,6 +50,7 @@ public class ClientController {
     //@Secured("MANAGER")
     //@PreAuthorize("this.isOwner(#email)")
     public ResponseEntity<ClientDto> getClientByEmail(@PathVariable String email){
+
         if(userService.isOwner(email)) {
             return ResponseEntity.ok(service.getClientByEmail(email));
         }
