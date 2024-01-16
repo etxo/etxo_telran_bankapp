@@ -77,6 +77,6 @@ public class ClientController {
     @Secured("MANAGER")
     public ResponseEntity<ClientDto> delete(@PathVariable Long id){
 
-        return ResponseEntity.ok(service.delete(id));
+        return ResponseEntity.ok(service.deleteById(id));
     }
 }

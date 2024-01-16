@@ -11,11 +11,14 @@ import com.etxo.bank_app.entity.enums.Status;
 import com.etxo.bank_app.mapping.AddressMapping;
 import com.etxo.bank_app.mapping.ClientMapping;
 import com.etxo.bank_app.reposi.ClientRepository;
+import com.etxo.bank_app.utility.RandomData;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -24,10 +27,10 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.BDDAssertions.then;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class ClientServiceTest {
@@ -43,6 +46,7 @@ class ClientServiceTest {
     private Client expectedClient;
     private Client expectedClientWithId;
     private ClientDto expectedClientDto;
+    private RandomData data;
 
 
     @BeforeEach
@@ -176,5 +180,26 @@ class ClientServiceTest {
 
         assertEquals(updatedClientDto, clientService.updateById(
                 1l, dtoUpdate));
+    }
+
+    @Captor
+    private ArgumentCaptor<Client> clientCaptor;
+    @Test
+    void itShouldDeleteClientById(){
+
+        data = new RandomData();
+        expectedClient.setAccounts(List.of(
+                data.generateAccountForClient(expectedClient)));
+
+        when(repository.findById(anyLong()))
+                .thenReturn(Optional.of(expectedClient));
+        //ArgumentCaptor???
+        clientService.deleteById(1L);
+        verify(repository).save(clientCaptor.capture());
+        Client savedClient = clientCaptor.getValue();
+
+        assertEquals(Status.INACTIVE, savedClient.getStatus());
+        assertEquals(Status.INACTIVE,
+                savedClient.getAccounts().get(0).getStatus());
     }
 }

@@ -2,6 +2,7 @@ package com.etxo.bank_app.service;
 
 import com.etxo.bank_app.dto.ClientDto;
 import com.etxo.bank_app.dto.ClientDtoUpdate;
+import com.etxo.bank_app.entity.Account;
 import com.etxo.bank_app.entity.Client;
 import com.etxo.bank_app.entity.Manager;
 import com.etxo.bank_app.entity.enums.Status;
@@ -99,12 +100,14 @@ public class ClientService {
         return clientMapper.mapToDto(updatedClient);
     }
 
-    public ClientDto delete(Long id) throws ClientNotFoundException{
+    public ClientDto deleteById(Long id) throws ClientNotFoundException{
 
         Client client = clientRepo.findById(id)
                 .orElseThrow(() -> new ClientNotFoundException(
                         String.format("There is no client with id: %s", id)));
         client.setStatus(Status.INACTIVE);
+        client.getAccounts()
+                .forEach(account -> account.setStatus(Status.INACTIVE));
         Client savedClient = clientRepo.save(client);
         return clientMapper.mapToDto(savedClient);
     }
