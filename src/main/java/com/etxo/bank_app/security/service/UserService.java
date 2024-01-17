@@ -17,20 +17,25 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username)
+            throws UsernameNotFoundException {
         return userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("No user with this name!"));
+                .orElseThrow(() -> new UsernameNotFoundException(
+                        "No user with this name!"));
     }
 
-    public String getEmailByUsername(String username) throws UsernameNotFoundException {
+    public String getEmailByUsername(String username)
+            throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("No user with this name!"));
+                .orElseThrow(() -> new UsernameNotFoundException(
+                        "No user with this name!"));
 
         return user.getEmail();
     }
 
     public boolean isOwner(String email){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Authentication auth = SecurityContextHolder
+                .getContext().getAuthentication();
         String username = auth.getName();
         return email.equals(getEmailByUsername(username));
     }
