@@ -2,24 +2,16 @@ package com.etxo.bank_app.controller;
 
 import com.etxo.bank_app.dto.ClientDto;
 import com.etxo.bank_app.dto.ClientDtoUpdate;
-import com.etxo.bank_app.security.entity.Role;
 import com.etxo.bank_app.security.service.UserService;
 import com.etxo.bank_app.service.ClientService;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.AuthenticatedPrincipal;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -37,6 +29,9 @@ public class ClientController {
         return ResponseEntity.ok(service.getClients());
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "400", description = "Invalid ID supplied"),
+            @ApiResponse(responseCode = "404", description = "Customer not found")})
     @GetMapping("/{id}")
     @Secured({"ADMIN", "MANAGER"})
     public ResponseEntity<ClientDto> getClientById(@PathVariable Long id){
