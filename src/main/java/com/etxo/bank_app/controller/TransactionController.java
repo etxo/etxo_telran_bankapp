@@ -26,9 +26,11 @@ public class TransactionController {
     @PostMapping
     @Secured("USER")
     public ResponseEntity<TransactionDto> execute(
-            @Valid @RequestBody TransactionDto dto) throws AccountNotFoundException {
+            @Valid @RequestBody TransactionDto dto)
+                    throws AccountNotFoundException {
 
-        if(userService.isOwner(clientService.getClientByAccountId(dto.getSender().getId()).getEmail())){
+        if(userService.isOwner(clientService.getClientByAccountId(dto
+                .getSender().getId()).getEmail())){
             return ResponseEntity.ok(service.execute(dto));
         }
         else return ResponseEntity.badRequest().body(null);

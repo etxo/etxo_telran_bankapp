@@ -4,13 +4,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.sql.Timestamp;
 
 @ControllerAdvice
-public class SmartExceptionHandler {
+public class SmartExceptionHandler
+        extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(ClientNotFoundException.class)
+    @ExceptionHandler
     public ResponseEntity<ErrorResponse> handleClientNotFound(
             ClientNotFoundException e){
 
