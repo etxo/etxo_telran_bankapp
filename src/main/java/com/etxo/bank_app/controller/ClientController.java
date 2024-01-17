@@ -5,7 +5,6 @@ import com.etxo.bank_app.dto.ClientDtoUpdate;
 import com.etxo.bank_app.security.service.UserService;
 import com.etxo.bank_app.service.ClientService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -29,9 +28,8 @@ public class ClientController {
         return ResponseEntity.ok(service.getClients());
     }
 
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "400", description = "Invalid ID supplied"),
-            @ApiResponse(responseCode = "404", description = "Customer not found")})
+    @ApiResponse(responseCode = "404",
+                    description = "no client with this id")
     @GetMapping("/{id}")
     @Secured({"ADMIN", "MANAGER"})
     public ResponseEntity<ClientDto> getClientById(@PathVariable Long id){
@@ -39,6 +37,8 @@ public class ClientController {
         return ResponseEntity.ok(service.getClientById(id));
     }
 
+    @ApiResponse(responseCode = "404",
+                    description = "no client with this email")
     @GetMapping("/by_email/{email}")
     //@PostAuthorize("returnObject.body.email == userService" +
     //      ".loadUserByUsername(principal.username).getEmail()")
@@ -52,18 +52,20 @@ public class ClientController {
         else return ResponseEntity.badRequest().body(null);
     }
 
-
-
+    @ApiResponse(responseCode = "404",
+                    description = "email exists already")
     @PostMapping
     @Secured("MANAGER")
-    public ResponseEntity<ClientDto> create(@RequestBody @Valid ClientDto client){
+    public ResponseEntity<ClientDto> create(
+                    @RequestBody @Valid ClientDto client){
+
         return ResponseEntity.ok(service.create(client));
     }
 
     @PutMapping("/update/{id}")
     @Secured("MANAGER")
-    public ResponseEntity<ClientDto> update(@PathVariable Long id,
-                                            @RequestBody ClientDtoUpdate dto){
+    public ResponseEntity<ClientDto> update(
+            @PathVariable Long id, @RequestBody ClientDtoUpdate dto){
 
         return ResponseEntity.ok(service.updateById(id, dto));
     }
