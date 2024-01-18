@@ -136,3 +136,23 @@
 2024-01-18T15:31:19.116+01:00  INFO 58346 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2024-01-18T15:31:19.122+01:00  INFO 58346 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2024-01-18T15:31:19.123+01:00  INFO 58346 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-01-18T18:04:17.360+01:00  INFO 88465 --- [main] c.e.b.s.repository.UserRepositoryTest    : Starting UserRepositoryTest using Java 17.0.9 with PID 88465 (started by etxo in /home/etxo/TelRan/bank_app)
+2024-01-18T18:04:17.362+01:00  INFO 88465 --- [main] c.e.b.s.repository.UserRepositoryTest    : No active profile set, falling back to 1 default profile: "default"
+2024-01-18T18:04:17.862+01:00  INFO 88465 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-01-18T18:04:17.950+01:00  INFO 88465 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 78 ms. Found 6 JPA repository interfaces.
+2024-01-18T18:04:18.014+01:00  INFO 88465 --- [main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-01-18T18:04:18.202+01:00  INFO 88465 --- [main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:bdc67c3e-9c48-49a2-bf5e-4fa4b344c870;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-01-18T18:04:18.525+01:00  INFO 88465 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-01-18T18:04:18.575+01:00  INFO 88465 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2024-01-18T18:04:18.608+01:00  INFO 88465 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-01-18T18:04:18.699+01:00  INFO 88465 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-01-18T18:04:18.740+01:00  WARN 88465 --- [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-01-18T18:04:19.618+01:00  INFO 88465 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-01-18T18:04:19.687+01:00  INFO 88465 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-01-18T18:04:20.142+01:00  INFO 88465 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-01-18T18:04:20.653+01:00  INFO 88465 --- [main] c.e.b.s.repository.UserRepositoryTest    : Started UserRepositoryTest in 3.662 seconds (process running for 8.881)
+2024-01-18T18:04:21.647+01:00  INFO 88465 --- [main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.etxo.bank_app.reposi.TransactionRepositoryTest]: TransactionRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-01-18T18:04:21.671+01:00  INFO 88465 --- [main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.etxo.bank_app.BankAppApplication for test class com.etxo.bank_app.reposi.TransactionRepositoryTest
+2024-01-18T18:04:21.731+01:00  INFO 88465 --- [main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.etxo.bank_app.reposi.ClientRepositoryTest]: ClientRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-01-18T18:04:21.744+01:00  INFO 88465 --- [main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.etxo.bank_app.BankAppApplication for test class com.etxo.bank_app.reposi.ClientRepositoryTest
+2024-01-18T18:04:21.824+01:00  INFO 88465 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
