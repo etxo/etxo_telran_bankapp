@@ -40,7 +40,9 @@ public class Client {
     private String email;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    @JoinColumn(
+            name = "address_id",
+            referencedColumnName = "id")
     private Address address;
 
     @Column(name = "phone")
