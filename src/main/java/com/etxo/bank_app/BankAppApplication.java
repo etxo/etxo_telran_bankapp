@@ -20,7 +20,7 @@ public class BankAppApplication {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(
+    CommandLineRunner initData(
             ManagerRepository managerRepo,
             ClientRepository clientRepo,
             AccountRepository accountRepo,
@@ -39,6 +39,8 @@ public class BankAppApplication {
             }
 
             data.generateAndSaveAdminAndManager(userRepo);
+
+            System.out.println("\n\u001B[33m The DATABASE is SUCCESSFULLY INITIALIZED!\u001B[0m");
         };
     }
 }
