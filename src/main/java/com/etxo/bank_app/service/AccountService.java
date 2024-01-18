@@ -43,7 +43,7 @@ public class AccountService {
                     .map(mapper::mapToDto).toList();
         }else {
             throw new ClientNotFoundException(
-                    String.format("No client with id: %s", clientId));
+                    String.format("NO CLIENT with ID: %s", clientId));
         }
     }
 
@@ -51,11 +51,10 @@ public class AccountService {
     public AccountDto create(AccountDto dto) throws ClientNotFoundException{
 
         Client client = clientRepo.getClientByEmail(dto.getClient().getEmail())
-                .orElseThrow(() -> new ClientNotFoundException("No client found!"));
+                .orElseThrow(() -> new ClientNotFoundException("NO CLIENT FOUND!"));
 
         Account account = mapper.mapToEntity(dto);
         account.setClient(client);
-        Account savedAccount = accountRepo.save(account);
-        return mapper.mapToDto(savedAccount);
+        return mapper.mapToDto(accountRepo.save(account));
     }
 }
