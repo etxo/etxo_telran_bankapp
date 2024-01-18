@@ -30,8 +30,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class TransactionServiceTest {
@@ -49,10 +48,6 @@ class TransactionServiceTest {
     private Account givenReceiver;
     private Transaction expectedTransaction;
     private TransactionDto expectedTransactionDto;
-    @Captor
-    private ArgumentCaptor<Account> senderCaptor;
-    @Captor
-    private ArgumentCaptor<Account> receiverCaptor;
 
     @BeforeEach
     void init() {
@@ -66,14 +61,14 @@ class TransactionServiceTest {
         givenSender.setBic(faker.finance().bic());
         givenSender.setAccountType(AccountType.DEBIT);
         givenSender.setStatus(Status.ACTIVE);
-        givenSender.setBalance(new BigDecimal(100));
+        givenSender.setBalance(new BigDecimal("100"));
         givenSender.setCurrencyCode(Currency.EUR);
 
-        AccountDto expectedSenderDto = new AccountDto();
-        expectedSenderDto.setId(1L);
-        expectedSenderDto.setIban(givenSender.getIban());
-        expectedSenderDto.setBic(givenSender.getBic());
-        expectedSenderDto.setBalance(givenSender.getBalance());
+        AccountDto givenSenderDto = new AccountDto();
+        givenSenderDto.setId(1L);
+        givenSenderDto.setIban(givenSender.getIban());
+        givenSenderDto.setBic(givenSender.getBic());
+        givenSenderDto.setBalance(givenSender.getBalance());
 
         givenReceiver = new Account();
         givenReceiver.setId(2L);
@@ -82,7 +77,7 @@ class TransactionServiceTest {
         givenReceiver.setBic(faker.finance().bic());
         givenReceiver.setAccountType(AccountType.DEBIT);
         givenReceiver.setStatus(Status.ACTIVE);
-        givenReceiver.setBalance(new BigDecimal(100));
+        givenReceiver.setBalance(new BigDecimal("100"));
         givenReceiver.setCurrencyCode(Currency.EUR);
 
         AccountDto givenReceiverDto = new AccountDto();
@@ -95,20 +90,17 @@ class TransactionServiceTest {
         expectedTransaction.setId(1L);
         expectedTransaction.setSender(givenSender);
         expectedTransaction.setReceiver(givenReceiver);
-        expectedTransaction.setAmount(new BigDecimal(25));
+        expectedTransaction.setAmount(new BigDecimal("25"));
 
         expectedTransactionDto = new TransactionDto();
         expectedTransactionDto.setId(1L);
-        expectedTransactionDto.setSender(expectedSenderDto);
+        expectedTransactionDto.setSender(givenSenderDto);
         expectedTransactionDto.setReceiver(givenReceiverDto);
-        expectedTransactionDto.setAmount(new BigDecimal(25));
+        expectedTransactionDto.setAmount(new BigDecimal("25"));
 
     }
-
-    @AfterEach
-    void tearDown() {
-    }
-
+    @Captor
+    ArgumentCaptor<Account> accountArgCaptor;
     @Test
     //@Disabled
     void itShouldExecuteTransaction() {
@@ -123,14 +115,12 @@ class TransactionServiceTest {
         when(mapper.mapToDto(expectedTransaction)).thenReturn(expectedTransactionDto);
 
         TransactionDto savedDto = service.execute(expectedTransactionDto);
-        //verify(accountRepo).save(senderCaptor.capture());
-        //Account savedSender = senderCaptor.getValue();
-        //verify(accountRepo).save(receiverCaptor.capture());
-        //Account savedReceiver = receiverCaptor.getValue();
+        verify(accountRepo, times(2)).save(accountArgCaptor.capture());
+        List<Account> capturedAccounts = accountArgCaptor.getAllValues();
 
         assertEquals(expectedTransactionDto, savedDto);
-        //assertEquals(new BigDecimal(75), savedSender.getBalance());
-        //assertEquals(new BigDecimal(125), savedReceiver.getBalance());
+        assertEquals(new BigDecimal("75"), capturedAccounts.get(0).getBalance());
+        assertEquals(new BigDecimal("125"), capturedAccounts.get(1).getBalance());
     }
 
     @Test
