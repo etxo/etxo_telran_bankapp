@@ -17,13 +17,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class AccountServiceTest {
@@ -71,6 +70,20 @@ class AccountServiceTest {
 
         service.create(dto);
         verify(accountRepo).save(accountArgCaptor.capture());
+        assertEquals(givenAccount, accountArgCaptor.getValue());
+    }
+
+    @Test
+    void itShouldGetAccountsByClientId(){
+
+        when(clientRepo.existsById(anyLong()))
+                .thenReturn(true);
+        when(accountRepo.getAccountsByClientId(anyLong()))
+                .thenReturn(List.of(givenAccount));
+        givenClient.setId(1L);
+        service.getAccountsByClientId(1L);
+        verify(mapper, times(1))
+                .mapToDto(accountArgCaptor.capture());
         assertEquals(givenAccount, accountArgCaptor.getValue());
     }
 }
