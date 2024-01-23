@@ -75,9 +75,10 @@ class AuthServiceTest {
 
         when(repository.existsByEmail(request.getEmail()))
                 .thenReturn(false);
+        when(encoder.encode(anyString()))
+                .thenReturn(encodedPassword);
         when(jwtService.generateToken(any(User.class)))
                 .thenReturn(expectedResponse.getToken());
-        when(encoder.encode(anyString())).thenReturn(encodedPassword);
 
         assertEquals(expectedResponse.getToken(),
                 authService.register(request).getToken());
