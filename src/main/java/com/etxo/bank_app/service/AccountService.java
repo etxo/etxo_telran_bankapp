@@ -28,14 +28,6 @@ public class AccountService {
     private final ClientRepository clientRepo;
     private final AccountMapping mapper;
 
-    /*public Set<AccountDto> getAccountsByClientId(Long clientId){
-
-        Set<Account> accounts = accountRepo.getAccountsByClientId(clientId);
-        accounts.stream().forEach(System.out::println);// just to test
-        return new HashSet<>(accounts.stream()
-                .map(mapping::mapToDto).toList());
-    }*/
-
     public List<AccountDto> getAccountsByClientId(Long clientId)
             throws ClientNotFoundException{
         if(clientRepo.existsById(clientId)) {
