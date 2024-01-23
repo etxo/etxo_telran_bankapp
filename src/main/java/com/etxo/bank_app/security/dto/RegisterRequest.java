@@ -1,23 +1,25 @@
 package com.etxo.bank_app.security.dto;
 
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.lang.NonNull;
 
 @Getter @Setter
 @NoArgsConstructor
 public class RegisterRequest {
 
 
-    @NonNull @Length(min = 3, max = 25)
+    @NotEmpty(message = "username may not be empty!")
+    @Length(min = 3, max = 25)
     private String username;
 
-    @Email
+    @Email(message = "this is not a valid email!")
     private String email;
 
-    @NonNull @Length(min = 6, max = 25)
+    @NotEmpty(message = "password may not be empty!")
+    @Length(min = 6, max = 25)
     private String password;
 }

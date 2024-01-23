@@ -22,7 +22,8 @@ public class AuthService {
     private final AuthenticationManager authManager;
     private final JwtService jwtService;
 
-    public AuthResponse register(RegisterRequest request) throws EmailExistsException{
+    public AuthResponse register(RegisterRequest request)
+            throws EmailExistsException {
 
         if(repository.existsByEmail(request.getEmail())){
             throw new EmailExistsException(

@@ -4,20 +4,14 @@ import com.etxo.bank_app.dto.AccountDto;
 
 import com.etxo.bank_app.entity.Account;
 import com.etxo.bank_app.entity.Client;
-import com.etxo.bank_app.entity.enums.AccountType;
-import com.etxo.bank_app.entity.enums.Currency;
-import com.etxo.bank_app.entity.enums.Status;
 import com.etxo.bank_app.exceptions.ClientNotFoundException;
-import com.etxo.bank_app.exceptions.ValidationException;
 import com.etxo.bank_app.mapping.AccountMapping;
 import com.etxo.bank_app.reposi.AccountRepository;
 import com.etxo.bank_app.reposi.ClientRepository;
-import com.github.javafaker.Faker;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.*;
 
 @Service

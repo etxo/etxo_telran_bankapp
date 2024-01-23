@@ -1,17 +1,16 @@
 package com.etxo.bank_app.security.dto;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.lang.NonNull;
 
 @Getter @Setter
 @NoArgsConstructor
 public class AuthRequest {
 
-    @NotNull
+    @NotEmpty(message = "enter your username please:")
     private String username;
-    @NonNull
+    @NotEmpty(message = "enter your password please:")
     private String password;
 }

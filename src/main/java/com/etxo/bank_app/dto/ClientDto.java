@@ -24,7 +24,7 @@ public class ClientDto {
     @NotNull @Length(min = 2, max = 22)
     private String firstName;
 
-    @NotNull @Length(min = 2, max = 32)
+    @NotNull @Length(min = 2, max = 25)
     private String lastName;
 
     @NotNull(message = "You need an email to open an account")
