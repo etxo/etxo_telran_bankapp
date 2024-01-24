@@ -1,5 +1,6 @@
 package com.etxo.bank_app.security.service;
 
+import com.etxo.bank_app.exceptions.NotOwnAccountException;
 import com.etxo.bank_app.security.entity.User;
 import com.etxo.bank_app.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

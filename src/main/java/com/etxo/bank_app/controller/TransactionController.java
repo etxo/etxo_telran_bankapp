@@ -3,6 +3,7 @@ package com.etxo.bank_app.controller;
 import com.etxo.bank_app.dto.TransactionDto;
 import com.etxo.bank_app.exceptions.AccountNotFoundException;
 import com.etxo.bank_app.exceptions.ClientNotFoundException;
+import com.etxo.bank_app.exceptions.NotOwnAccountException;
 import com.etxo.bank_app.security.service.UserService;
 import com.etxo.bank_app.service.ClientService;
 import com.etxo.bank_app.service.TransactionService;
@@ -27,13 +28,15 @@ public class TransactionController {
     @Secured("USER")
     public ResponseEntity<TransactionDto> execute(
             @Valid @RequestBody TransactionDto dto)
-                    throws AccountNotFoundException {
+                    throws AccountNotFoundException,
+                                NotOwnAccountException {
 
         if(userService.isOwner(clientService.getClientByAccountId(dto
                 .getSender().getId()).getEmail())){
             return ResponseEntity.ok(service.execute(dto));
         }
-        else return ResponseEntity.badRequest().body(null);
+        else throw new NotOwnAccountException(
+                        "YOU ARE NOT ALLOWED TO USE THIS ACCOUNT!");
     }
 
     @GetMapping("/client_id/{id}")
