@@ -26,8 +26,8 @@ public class TransactionController {
     private final ClientService clientService;
     private final UserService userService;
 
-    @Operation(summary = "executes transaction by sending account id" +
-                            "and receiving account id.",
+    @Operation(summary = "executes transaction by sender_account_id" +
+                            "and receiver_account_id.",
             description = "client should exist in the database")
     @ApiResponse(responseCode = "404",
             description = "account not found")
