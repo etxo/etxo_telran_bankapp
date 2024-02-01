@@ -20,7 +20,10 @@ import io.swagger.v3.oas.annotations.servers.Server;
         servers = {
                 @Server(
                         description = "Development ENV",
-                        url = "http://localhost:8080")},
+                        url = "http://localhost:8080"),
+                @Server(
+                        description = "Production ENV",
+                        url = "http://3.127.217.115")},
         security = {
                 @SecurityRequirement(name = "bearer")})
 @SecurityScheme(
