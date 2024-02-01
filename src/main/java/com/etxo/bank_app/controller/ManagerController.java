@@ -5,6 +5,8 @@ import com.etxo.bank_app.dto.ManagerDto;
 import com.etxo.bank_app.exceptions.ErrorResponse;
 import com.etxo.bank_app.exceptions.ManagerNotFoundException;
 import com.etxo.bank_app.service.ManagerService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +28,10 @@ public class ManagerController {
 
     private final ManagerService service;
 
+    @Operation(summary = "creates manager",
+            description = "the manager may not exist in the database")
+    @ApiResponse(responseCode = "404",
+            description = "manager already exists")
     @PostMapping
     @Secured("ADMIN")
     public ResponseEntity<ManagerDto> create(
@@ -34,6 +40,7 @@ public class ManagerController {
         return ResponseEntity.ok(service.create(manager));
     }
 
+    @Operation(summary = "gets all managers")
     @GetMapping
     @Secured({"ADMIN", "MANAGER"})
     public ResponseEntity<Set<ManagerDto>> getAll(){
@@ -41,15 +48,22 @@ public class ManagerController {
         return ResponseEntity.ok(service.getAll());
     }
 
+    @Operation(summary = "gets manager by ID",
+            description = "the manager should exist in the database")
+    @ApiResponse(responseCode = "404",
+            description = "manager not found")
     @GetMapping("/{id}")
     @Secured({"ADMIN", "MANAGER"})
-    //@PostAuthorize()
     public ResponseEntity<ManagerDto> getManagerById(
             @PathVariable Long id) {
 
             return ResponseEntity.ok(service.getManagerById(id));
     }
 
+    @Operation(summary = "updates manager by ID",
+            description = "the manager should exist in the database")
+    @ApiResponse(responseCode = "404",
+            description = "manager not found")
     @PutMapping("/{id}")
     @Secured("MANAGER")
     public ResponseEntity<ManagerDto> update(@PathVariable Long id, @RequestBody ManagerDto dto){

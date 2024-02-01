@@ -31,7 +31,8 @@ public class ClientController {
         return ResponseEntity.ok(service.getClients());
     }
 
-    @Operation(summary = "gets client by id")
+    @Operation(summary = "gets client by id",
+                description = "client should exist in the database")
     @ApiResponse(responseCode = "404",
                     description = "no client with this id")
     @GetMapping("/{id}")
@@ -41,13 +42,14 @@ public class ClientController {
         return ResponseEntity.ok(service.getClientById(id));
     }
 
-    @Operation(summary = "gets client by email")
+    @Operation(summary = "gets client by email",
+                description = "client should exist in the database")
     @ApiResponse(responseCode = "404",
                     description = "no client with this email")
     @GetMapping("/by_email/{email}")
     //@PostAuthorize("returnObject.body.email == userService" +
     //      ".loadUserByUsername(principal.username).getEmail()")
-    //@Secured("MANAGER")
+    @Secured("MANAGER")
     //@PreAuthorize("this.isOwner(#email)")
     public ResponseEntity<ClientDto> getClientByEmail(@PathVariable String email){
 
@@ -58,7 +60,7 @@ public class ClientController {
     }
 
     @Operation(summary = "creates client",
-                description = "client must not exist in the database")
+                description = "client may not exist in the database")
     @ApiResponse(responseCode = "404",
                     description = "email exists already")
     @PostMapping
@@ -70,7 +72,7 @@ public class ClientController {
     }
 
     @Operation(summary = "updates client by id",
-            description = "client should exist in the database")
+                description = "client should exist in the database")
     @ApiResponse(responseCode = "404",
             description = "client not found")
     @PutMapping("/update/{id}")
@@ -82,7 +84,7 @@ public class ClientController {
     }
 
     @Operation(summary = "deactivates client by id",
-            description = "client should exist in the database")
+                description = "client should exist in the database")
     @ApiResponse(responseCode = "404",
             description = "client not found")
     @DeleteMapping("/{id}")
