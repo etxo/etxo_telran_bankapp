@@ -30,7 +30,7 @@ public class ManagerController {
 
     @Operation(summary = "creates manager",
             description = "the manager may not exist in the database")
-    @ApiResponse(responseCode = "404",
+    @ApiResponse(responseCode = "226",
             description = "manager already exists")
     @PostMapping
     @Secured("ADMIN")

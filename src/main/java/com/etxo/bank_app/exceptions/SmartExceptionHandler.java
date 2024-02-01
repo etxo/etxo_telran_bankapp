@@ -44,10 +44,10 @@ public class SmartExceptionHandler
             NotOwnAccountException e){
 
         return new ResponseEntity<>(new ErrorResponse(
-                HttpStatus.SERVICE_UNAVAILABLE.value(),
+                HttpStatus.FORBIDDEN.value(),
                 e.getMessage(),
                 new Timestamp(System.currentTimeMillis())),
-                HttpStatus.SERVICE_UNAVAILABLE);
+                HttpStatus.FORBIDDEN);
     }
 
     @Override
