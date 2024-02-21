@@ -32,3 +32,113 @@
 2024-02-02T17:02:29.163+01:00  INFO 13222 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2024-02-02T17:02:29.172+01:00  INFO 13222 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2024-02-02T17:02:29.175+01:00  INFO 13222 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-02-21T13:50:45.527+01:00  INFO 33676 --- [main] com.etxo.bank_app.BankAppApplication     : Starting BankAppApplication using Java 17.0.9 with PID 33676 (/home/etxo/TelRan/bank_app/target/classes started by etxo in /home/etxo/TelRan/bank_app)
+2024-02-21T13:50:45.529+01:00  INFO 33676 --- [main] com.etxo.bank_app.BankAppApplication     : No active profile set, falling back to 1 default profile: "default"
+2024-02-21T13:50:46.333+01:00  INFO 33676 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-02-21T13:50:46.398+01:00  INFO 33676 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 58 ms. Found 6 JPA repository interfaces.
+2024-02-21T13:50:47.190+01:00  INFO 33676 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-02-21T13:50:47.198+01:00  INFO 33676 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-02-21T13:50:47.198+01:00  INFO 33676 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2024-02-21T13:50:47.248+01:00  INFO 33676 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-02-21T13:50:47.248+01:00  INFO 33676 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1670 ms
+2024-02-21T13:50:47.310+01:00  INFO 33676 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-02-21T13:50:47.491+01:00  INFO 33676 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:db_bank user=ETXO
+2024-02-21T13:50:47.493+01:00  INFO 33676 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-02-21T13:50:47.505+01:00  INFO 33676 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:db_bank'
+2024-02-21T13:50:47.656+01:00  INFO 33676 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-02-21T13:50:47.697+01:00  INFO 33676 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2024-02-21T13:50:47.730+01:00  INFO 33676 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-02-21T13:50:47.897+01:00  INFO 33676 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-02-21T13:50:47.933+01:00  WARN 33676 --- [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-02-21T13:50:48.753+01:00  INFO 33676 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-02-21T13:50:48.810+01:00  INFO 33676 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-02-21T13:50:49.443+01:00  INFO 33676 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-02-21T13:50:50.517+01:00  WARN 33676 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-02-21T13:50:51.105+01:00  INFO 33676 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@173a86ad, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@758e8b8d, org.springframework.security.web.context.SecurityContextHolderFilter@3f29e67e, org.springframework.security.web.header.HeaderWriterFilter@3dd4f91d, org.springframework.web.filter.CorsFilter@760dc63, org.springframework.security.web.authentication.logout.LogoutFilter@383b3357, com.etxo.bank_app.security.config.JwtAuthFilter@230e163b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6aa16117, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@295d1a45, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@29922188, org.springframework.security.web.session.SessionManagementFilter@655e024, org.springframework.security.web.access.ExceptionTranslationFilter@75b05ec7, org.springframework.security.web.access.intercept.AuthorizationFilter@56b4951a]
+2024-02-21T13:50:51.713+01:00  INFO 33676 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-02-21T13:50:51.723+01:00  INFO 33676 --- [main] com.etxo.bank_app.BankAppApplication     : Started BankAppApplication in 6.634 seconds (process running for 7.231)
+2024-02-21T13:51:10.512+01:00  INFO 33676 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-02-21T13:51:10.512+01:00  INFO 33676 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-02-21T13:51:10.514+01:00  INFO 33676 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-02-21T13:51:10.526+01:00  WARN 33676 --- [http-nio-8080-exec-1] o.s.w.s.h.HandlerMappingIntrospector     : Cache miss for REQUEST dispatch to '/swagger-ui/index.html' (previous null). Performing CorsConfiguration lookup. This is logged once only at WARN level, and every time at TRACE.
+2024-02-21T13:51:10.536+01:00  WARN 33676 --- [http-nio-8080-exec-1] o.s.w.s.h.HandlerMappingIntrospector     : Cache miss for REQUEST dispatch to '/swagger-ui/index.html' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
+2024-02-21T13:51:11.556+01:00  INFO 33676 --- [http-nio-8080-exec-9] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 533 ms
+2024-02-21T13:55:01.124+01:00  WARN 33676 --- [http-nio-8080-exec-9] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Empty encoded password
+2024-02-21T13:58:35.936+01:00  WARN 33676 --- [http-nio-8080-exec-4] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Empty encoded password
+2024-02-21T14:00:24.891+01:00  WARN 33676 --- [http-nio-8080-exec-7] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Empty encoded password
+2024-02-21T14:01:55.616+01:00  WARN 33676 --- [http-nio-8080-exec-10] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Empty encoded password
+2024-02-21T14:03:32.561+01:00  INFO 33676 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-02-21T14:03:32.567+01:00  INFO 33676 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-02-21T14:03:32.569+01:00  INFO 33676 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-02-21T14:06:00.591+01:00  INFO 35926 --- [main] com.etxo.bank_app.BankAppApplication     : Starting BankAppApplication using Java 17.0.9 with PID 35926 (/home/etxo/TelRan/bank_app/target/classes started by etxo in /home/etxo/TelRan/bank_app)
+2024-02-21T14:06:00.594+01:00  INFO 35926 --- [main] com.etxo.bank_app.BankAppApplication     : No active profile set, falling back to 1 default profile: "default"
+2024-02-21T14:06:01.443+01:00  INFO 35926 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-02-21T14:06:01.509+01:00  INFO 35926 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 59 ms. Found 6 JPA repository interfaces.
+2024-02-21T14:06:02.246+01:00  INFO 35926 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-02-21T14:06:02.253+01:00  INFO 35926 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-02-21T14:06:02.254+01:00  INFO 35926 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2024-02-21T14:06:02.299+01:00  INFO 35926 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-02-21T14:06:02.299+01:00  INFO 35926 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1663 ms
+2024-02-21T14:06:02.365+01:00  INFO 35926 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-02-21T14:06:02.542+01:00  INFO 35926 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:db_bank user=ETXO
+2024-02-21T14:06:02.543+01:00  INFO 35926 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-02-21T14:06:02.557+01:00  INFO 35926 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:db_bank'
+2024-02-21T14:06:02.729+01:00  INFO 35926 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-02-21T14:06:02.777+01:00  INFO 35926 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2024-02-21T14:06:02.807+01:00  INFO 35926 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-02-21T14:06:03.006+01:00  INFO 35926 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-02-21T14:06:03.040+01:00  WARN 35926 --- [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-02-21T14:06:03.903+01:00  INFO 35926 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-02-21T14:06:03.963+01:00  INFO 35926 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-02-21T14:06:04.664+01:00  INFO 35926 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-02-21T14:06:05.676+01:00  WARN 35926 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-02-21T14:06:06.174+01:00  INFO 35926 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@79059313, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@222e9ace, org.springframework.security.web.context.SecurityContextHolderFilter@36cd58e7, org.springframework.security.web.header.HeaderWriterFilter@5165783c, org.springframework.web.filter.CorsFilter@2ff9a06, org.springframework.security.web.authentication.logout.LogoutFilter@611c1f92, com.etxo.bank_app.security.config.JwtAuthFilter@6a827b0c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3a296643, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@50588ef6, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1ef8cf89, org.springframework.security.web.session.SessionManagementFilter@7194f5b, org.springframework.security.web.access.ExceptionTranslationFilter@3c320c8b, org.springframework.security.web.access.intercept.AuthorizationFilter@75daa568]
+2024-02-21T14:06:06.773+01:00  INFO 35926 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-02-21T14:06:06.783+01:00  INFO 35926 --- [main] com.etxo.bank_app.BankAppApplication     : Started BankAppApplication in 6.609 seconds (process running for 7.127)
+2024-02-21T14:06:14.232+01:00  WARN 35926 --- [http-nio-8080-exec-1] o.s.w.s.h.HandlerMappingIntrospector     : Cache miss for REQUEST dispatch to '/h2-console/login.do' (previous null). Performing CorsConfiguration lookup. This is logged once only at WARN level, and every time at TRACE.
+2024-02-21T14:06:31.935+01:00  INFO 35926 --- [http-nio-8080-exec-8] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-02-21T14:06:31.935+01:00  INFO 35926 --- [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-02-21T14:06:31.937+01:00  INFO 35926 --- [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-02-21T14:06:31.938+01:00  WARN 35926 --- [http-nio-8080-exec-8] o.s.w.s.h.HandlerMappingIntrospector     : Cache miss for REQUEST dispatch to '/swagger-ui/index.html' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
+2024-02-21T14:06:32.919+01:00  INFO 35926 --- [http-nio-8080-exec-1] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 526 ms
+2024-02-21T14:07:00.014+01:00  WARN 35926 --- [http-nio-8080-exec-6] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Empty encoded password
+2024-02-21T14:15:27.769+01:00  WARN 35926 --- [http-nio-8080-exec-1] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Empty encoded password
+2024-02-21T14:19:54.667+01:00  WARN 35926 --- [http-nio-8080-exec-7] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Empty encoded password
+2024-02-21T14:21:36.734+01:00  INFO 35926 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-02-21T14:21:36.740+01:00  INFO 35926 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-02-21T14:21:36.742+01:00  INFO 35926 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-02-21T14:23:48.947+01:00  INFO 38449 --- [main] com.etxo.bank_app.BankAppApplication     : Starting BankAppApplication using Java 17.0.9 with PID 38449 (/home/etxo/TelRan/bank_app/target/classes started by etxo in /home/etxo/TelRan/bank_app)
+2024-02-21T14:23:48.952+01:00  INFO 38449 --- [main] com.etxo.bank_app.BankAppApplication     : No active profile set, falling back to 1 default profile: "default"
+2024-02-21T14:23:49.779+01:00  INFO 38449 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-02-21T14:23:49.837+01:00  INFO 38449 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 52 ms. Found 6 JPA repository interfaces.
+2024-02-21T14:23:50.558+01:00  INFO 38449 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-02-21T14:23:50.565+01:00  INFO 38449 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-02-21T14:23:50.566+01:00  INFO 38449 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2024-02-21T14:23:50.614+01:00  INFO 38449 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-02-21T14:23:50.615+01:00  INFO 38449 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1598 ms
+2024-02-21T14:23:50.683+01:00  INFO 38449 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-02-21T14:23:50.860+01:00  INFO 38449 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:db_bank user=ETXO
+2024-02-21T14:23:50.862+01:00  INFO 38449 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-02-21T14:23:50.873+01:00  INFO 38449 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:db_bank'
+2024-02-21T14:23:51.011+01:00  INFO 38449 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-02-21T14:23:51.055+01:00  INFO 38449 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2024-02-21T14:23:51.087+01:00  INFO 38449 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-02-21T14:23:51.249+01:00  INFO 38449 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-02-21T14:23:51.279+01:00  WARN 38449 --- [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-02-21T14:23:52.076+01:00  INFO 38449 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-02-21T14:23:52.136+01:00  INFO 38449 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-02-21T14:23:52.850+01:00  INFO 38449 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-02-21T14:23:53.727+01:00  WARN 38449 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-02-21T14:23:54.353+01:00  INFO 38449 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4d92e9da, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1baef878, org.springframework.security.web.context.SecurityContextHolderFilter@75daa568, org.springframework.security.web.header.HeaderWriterFilter@f5b08d4, org.springframework.web.filter.CorsFilter@6208f81c, org.springframework.security.web.authentication.logout.LogoutFilter@42a5bdaf, com.etxo.bank_app.security.config.JwtAuthFilter@3cd758be, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@79059313, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1d9e511c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@67d4e8f7, org.springframework.security.web.session.SessionManagementFilter@2fc378cd, org.springframework.security.web.access.ExceptionTranslationFilter@5fb0c234, org.springframework.security.web.access.intercept.AuthorizationFilter@3479b4cd]
+2024-02-21T14:23:55.301+01:00  INFO 38449 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-02-21T14:23:55.310+01:00  INFO 38449 --- [main] com.etxo.bank_app.BankAppApplication     : Started BankAppApplication in 6.972 seconds (process running for 7.494)
+2024-02-21T14:24:07.034+01:00  WARN 38449 --- [http-nio-8080-exec-1] o.s.w.s.h.HandlerMappingIntrospector     : Cache miss for REQUEST dispatch to '/h2-console/login.do' (previous null). Performing CorsConfiguration lookup. This is logged once only at WARN level, and every time at TRACE.
+2024-02-21T14:24:34.756+01:00  INFO 38449 --- [http-nio-8080-exec-9] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-02-21T14:24:34.756+01:00  INFO 38449 --- [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-02-21T14:24:34.759+01:00  INFO 38449 --- [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2024-02-21T14:24:34.761+01:00  WARN 38449 --- [http-nio-8080-exec-9] o.s.w.s.h.HandlerMappingIntrospector     : Cache miss for REQUEST dispatch to '/swagger-ui/index.html' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
+2024-02-21T14:24:35.758+01:00  INFO 38449 --- [http-nio-8080-exec-1] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 526 ms
+2024-02-21T14:25:30.770+01:00  WARN 38449 --- [http-nio-8080-exec-7] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Empty encoded password
+2024-02-21T14:31:42.050+01:00  INFO 38449 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-02-21T14:31:42.059+01:00  INFO 38449 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-02-21T14:31:42.060+01:00  INFO 38449 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
